@@ -1,3 +1,10 @@
+import { CHARACTERS } from './data/characters';
+import { MTG_COLORS } from './data/colors';
+
+// Log character data for verification
+console.log('Characters loaded:', CHARACTERS);
+console.log('MTG Colors:', MTG_COLORS);
+
 function App() {
   return (
     <div className="min-h-screen bg-base-100 flex items-center justify-center p-4">
