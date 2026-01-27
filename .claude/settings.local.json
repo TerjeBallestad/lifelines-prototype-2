@@ -14,7 +14,8 @@
       "Bash(git -C /Users/godstemning/projects-local/lifelines-prototype-2 diff --no-color -- src/)",
       "Bash(ls:*)",
       "Bash(wc:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(npm run build:*)"
     ],
     "additionalDirectories": [
       "/Users/godstemning/projects-local/mental-sine-waves"
