@@ -13,7 +13,10 @@ interface OverskuddMeterProps {
 export function OverskuddMeter({ value }: OverskuddMeterProps) {
   // Spring-animated value for smooth transitions
   const springValue = useSpring(value, { stiffness: 100, damping: 30 });
-  const width = useTransform(springValue, (v) => `${Math.max(0, Math.min(100, v))}%`);
+  const width = useTransform(
+    springValue,
+    (v) => `${Math.max(0, Math.min(100, v))}%`
+  );
 
   // Determine color based on value (red < 33, yellow < 66, green >= 66)
   const getBarColor = (v: number): string => {
@@ -24,13 +27,13 @@ export function OverskuddMeter({ value }: OverskuddMeterProps) {
 
   return (
     <div className="flex items-center gap-3">
-      <div className="flex-1 h-4 bg-base-300 rounded-full overflow-hidden">
+      <div className="bg-base-300 h-4 flex-1 overflow-hidden rounded-full">
         <motion.div
           className={`h-full ${getBarColor(value)} rounded-full`}
           style={{ width }}
         />
       </div>
-      <span className="font-mono text-sm w-12 text-right">
+      <span className="w-12 text-right font-mono text-sm">
         {Math.round(value)}%
       </span>
     </div>

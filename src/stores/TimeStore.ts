@@ -33,7 +33,7 @@ export class TimeStore {
 
   get formattedTime(): string {
     const h = this.hour.toString().padStart(2, '0');
-    const m = this.minute.toString().padStart(2, '0');
+    const m = Math.floor(this.minute).toString().padStart(2, '0');
     return `${h}:${m}`;
   }
 

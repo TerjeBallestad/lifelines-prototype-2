@@ -17,7 +17,7 @@ export function ColorBadge({ color, intensity }: ColorBadgeProps) {
 
   return (
     <span
-      className={`badge ${config.bg} ${config.text} font-mono text-sm px-2 py-1`}
+      className={`badge ${config.bg} ${config.text} px-2 py-1 font-mono text-sm`}
     >
       {config.label} {intensity.toFixed(1)}
     </span>

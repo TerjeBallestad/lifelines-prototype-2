@@ -13,13 +13,13 @@ export const TimeDisplay = observer(function TimeDisplay() {
 
   return (
     <div className="flex items-center gap-4">
-      <div className="stats shadow bg-base-200">
-        <div className="stat py-2 px-4">
+      <div className="stats bg-base-200 shadow">
+        <div className="stat w-24 px-4 py-2">
           <div className="stat-title text-xs">Day</div>
           <div className="stat-value text-lg">{timeStore.day} of 10</div>
         </div>
 
-        <div className="stat py-2 px-4">
+        <div className="stat w-24 px-4 py-2">
           <div className="stat-title text-xs">Time</div>
           <div className="stat-value text-lg">{timeStore.formattedTime}</div>
           <div className="stat-desc capitalize">{timeStore.timeOfDay}</div>
@@ -32,9 +32,9 @@ export const TimeDisplay = observer(function TimeDisplay() {
         aria-label={timeStore.isPaused ? 'Resume game' : 'Pause game'}
       >
         {timeStore.isPaused ? (
-          <Play className="w-5 h-5" />
+          <Play className="h-5 w-5" />
         ) : (
-          <Pause className="w-5 h-5" />
+          <Pause className="h-5 w-5" />
         )}
       </button>
     </div>

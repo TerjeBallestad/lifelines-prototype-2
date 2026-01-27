@@ -30,27 +30,24 @@ export const CharacterSprite = observer(function CharacterSprite({
   return (
     <button
       onClick={onClick}
-      className={`
-        card bg-base-100 shadow-md hover:shadow-lg transition-all duration-200
-        cursor-pointer p-3 min-w-24
-        ${isSelected ? 'ring-2 ring-primary ring-offset-2 ring-offset-base-200' : ''}
-        hover:scale-105
-      `}
+      className={`card bg-base-100 min-w-24 cursor-pointer p-3 shadow-md transition-all duration-200 hover:shadow-lg ${isSelected ? 'ring-primary ring-offset-base-200 ring-2 ring-offset-2' : ''} hover:scale-105`}
     >
       {/* Character avatar placeholder */}
       <div className="avatar placeholder mb-2">
-        <div className="bg-neutral text-neutral-content rounded-full w-12">
+        <div className="bg-neutral text-neutral-content w-12 rounded-full">
           <span className="text-lg">{character.name.charAt(0)}</span>
         </div>
       </div>
 
       {/* Character name */}
-      <p className="font-medium text-sm text-center">{character.name}</p>
+      <p className="text-center text-sm font-medium">{character.name}</p>
 
       {/* Overskudd indicator */}
-      <div className="flex items-center justify-center gap-1 mt-1">
-        <div className={`w-2 h-2 rounded-full ${getIndicatorColor()}`} />
-        <span className="text-xs text-base-content/70">{Math.round(overskudd)}%</span>
+      <div className="mt-1 flex items-center justify-center gap-1">
+        <div className={`h-2 w-2 rounded-full ${getIndicatorColor()}`} />
+        <span className="text-base-content/70 text-xs">
+          {Math.round(overskudd)}%
+        </span>
       </div>
     </button>
   );
