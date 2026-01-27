@@ -123,7 +123,7 @@ export const CharacterPanel = observer(function CharacterPanel() {
             <div className="mt-4 pt-4 border-t border-base-300">
               <span className="text-sm text-base-content/70">Activity: </span>
               <span className="text-sm font-medium">
-                {character.currentActivity ?? 'Idle'}
+                {character.currentActivity?.name ?? 'Idle'}
               </span>
             </div>
           </div>
