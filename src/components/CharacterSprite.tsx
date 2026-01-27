@@ -56,13 +56,51 @@ export const CharacterSprite = observer(function CharacterSprite({
       className="absolute z-10"
       style={{ x: springX, y: springY }}
     >
-      {/* ThoughtBubble when deciding */}
+      {/* ThoughtBubble when deciding, Activity progress when performing */}
       <AnimatePresence>
         {isDeciding && character.pendingScores.length > 0 && (
           <ThoughtBubble
             scores={character.pendingScores}
             duration={character.decisionDuration}
           />
+        )}
+        {isPerforming && character.currentActivity && (
+          <motion.div
+            className="absolute -top-16 left-1/2 z-20"
+            initial={{ opacity: 0, scale: 0.5, x: '-50%' }}
+            animate={{ opacity: 1, scale: 1, x: '-50%' }}
+            exit={{ opacity: 0, scale: 0.5, x: '-50%' }}
+            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+          >
+            {/* Activity bubble container */}
+            <div className="bg-base-100 rounded-2xl shadow-lg px-4 py-2 min-w-24">
+              {/* Activity icon and name */}
+              <div className="flex items-center justify-center gap-2 mb-1">
+                <span className="text-lg">
+                  {character.currentActivity.icon || character.currentActivity.name.charAt(0)}
+                </span>
+                <span className="text-xs text-base-content/70">
+                  {character.currentActivity.name}
+                </span>
+              </div>
+              {/* Progress bar */}
+              <div className="h-1.5 w-full bg-base-300 rounded-full overflow-hidden">
+                <motion.div
+                  className="h-full bg-primary"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${character.activityProgress * 100}%` }}
+                  transition={{ duration: 0.2 }}
+                />
+              </div>
+            </div>
+            {/* Bubble tail pointing down */}
+            <div className="flex justify-center">
+              <div
+                className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent"
+                style={{ borderTopColor: 'oklch(var(--b1))' }}
+              />
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
 
@@ -95,22 +133,6 @@ export const CharacterSprite = observer(function CharacterSprite({
             {Math.round(overskudd)}%
           </span>
         </div>
-
-        {/* Activity indicator when performing */}
-        {isPerforming && character.currentActivity && (
-          <div className="mt-2 text-center">
-            <span className="text-xs text-base-content/60">
-              {character.currentActivity.icon || character.currentActivity.name.charAt(0)}
-            </span>
-            {/* Progress bar */}
-            <div className="mt-1 h-1 w-full bg-base-300 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-primary transition-all duration-200"
-                style={{ width: `${character.activityProgress * 100}%` }}
-              />
-            </div>
-          </div>
-        )}
       </button>
     </motion.div>
   );
