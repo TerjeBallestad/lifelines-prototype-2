@@ -3,11 +3,11 @@
 ## Current Status
 
 **Phase:** 1 of 5 (Foundation)
-**Plan:** 1 of 3 complete
+**Plan:** 2 of 3 complete
 **Status:** In progress
-**Last activity:** 2026-01-27 - Completed 01-01-PLAN.md
+**Last activity:** 2026-01-27 - Completed 01-02-PLAN.md
 
-**Progress:** [===-------] 1/3 phase plans (33%)
+**Progress:** [======----] 2/3 phase plans (67%)
 
 ## Project Reference
 
@@ -20,7 +20,7 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 
 | Phase | Status | Plans | Progress |
 |-------|--------|-------|----------|
-| 1 - Foundation | In Progress | 1/3 | 33% |
+| 1 - Foundation | In Progress | 2/3 | 67% |
 | 2 - Autonomous Behavior | Pending | 0/? | 0% |
 | 3 - Activity Loop | Pending | 0/? | 0% |
 | 4 - Quest System | Pending | 0/? | 0% |
@@ -37,6 +37,9 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 01-01 | 10 game-minutes per real-second | Allows ~2 real-minutes per game-hour for 30-45 min playthrough |
 | 01-01 | Needs decay: energy 1/hr, social 0.5/hr, purpose 0.3/hr | Energy depletes fastest, purpose most stable |
 | 01-01 | Elling Blue 1.0, Mother White 0.7 | Elling's color exaggerated per research for distinct behavior |
+| 01-02 | Fixed timestep at 60fps (16.67ms) | Deterministic simulation regardless of frame rate |
+| 01-02 | maxFrameTime = 250ms | Prevents spiral of death after tab unfocus |
+| 01-02 | useCallback for tick handler | Prevents useGameLoop effect from re-running unnecessarily |
 
 ### Open Questions
 
@@ -49,9 +52,9 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 
 ## Session Continuity
 
-**Last session:** 2026-01-27T17:35:23Z
-**Stopped at:** Completed 01-01-PLAN.md
-**Resume file:** .planning/phases/01-foundation/01-02-PLAN.md
+**Last session:** 2026-01-27T17:39:31Z
+**Stopped at:** Completed 01-02-PLAN.md
+**Resume file:** .planning/phases/01-foundation/01-03-PLAN.md
 
 ---
 *Last updated: 2026-01-27*
