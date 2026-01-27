@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import type { Character } from '../stores/CharacterStore';
+import clsx from 'clsx';
 
 interface CharacterSpriteProps {
   character: Character;
@@ -30,11 +31,14 @@ export const CharacterSprite = observer(function CharacterSprite({
   return (
     <button
       onClick={onClick}
-      className={`card bg-base-100 min-w-24 cursor-pointer p-3 shadow-md transition-all duration-200 hover:shadow-lg ${isSelected ? 'ring-primary ring-offset-base-200 ring-2 ring-offset-2' : ''} hover:scale-105`}
+      className={clsx(
+        'card bg-base-100 min-w-24 cursor-pointer p-3 shadow-md transition-all duration-200 hover:scale-105 hover:shadow-lg',
+        { 'ring-primary ring-offset-base-200 ring-2 ring-offset-2': isSelected }
+      )}
     >
       {/* Character avatar placeholder */}
       <div className="avatar placeholder mb-2">
-        <div className="bg-neutral text-neutral-content w-12 rounded-full">
+        <div className="bg-neutral text-neutral-content flex w-12 items-center justify-center rounded-full">
           <span className="text-lg">{character.name.charAt(0)}</span>
         </div>
       </div>
