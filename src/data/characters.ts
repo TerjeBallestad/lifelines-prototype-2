@@ -24,6 +24,7 @@ export const CHARACTERS: CharacterData[] = [
       social: 60,
       purpose: 50,
     },
+    initialPosition: { x: 100, y: 150 }, // Near desk/reading area
   },
   {
     id: 'mother',
@@ -37,6 +38,7 @@ export const CHARACTERS: CharacterData[] = [
       social: 60,
       purpose: 50,
     },
+    initialPosition: { x: 280, y: 180 }, // Near kitchen area
   },
 ];
 

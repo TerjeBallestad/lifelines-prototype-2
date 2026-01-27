@@ -21,6 +21,7 @@ export interface CharacterData {
   name: string;
   colors: MTGColorProfile;
   initialNeeds: Needs;
+  initialPosition?: { x: number; y: number }; // Starting position in game world
 }
 
 export type TimeOfDay = 'morning' | 'afternoon' | 'evening' | 'night';
