@@ -58,9 +58,9 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Activity types, data definitions, Utility AI scoring
-- [ ] 02-02-PLAN.md — Character state machine and autonomous decision-making
-- [ ] 02-03-PLAN.md — UI components, movement animation, visual verification
+- [x] 02-01-PLAN.md — Activity types, data definitions, Utility AI scoring
+- [x] 02-02-PLAN.md — Character state machine and autonomous decision-making
+- [x] 02-03-PLAN.md — UI components, movement animation, visual verification
 
 **Requirements:**
 - CHAR-02: Characters act autonomously based on color preferences
@@ -156,7 +156,7 @@ Plans:
 | Phase | Status | Progress |
 |-------|--------|----------|
 | 1 - Foundation | Complete | 100% |
-| 2 - Autonomous Behavior | In Progress | 0% |
+| 2 - Autonomous Behavior | Complete | 100% |
 | 3 - Activity Loop | Pending | 0% |
 | 4 - Quest System | Pending | 0% |
 | 5 - Crisis Sequence | Pending | 0% |
@@ -164,4 +164,4 @@ Plans:
 ---
 *Roadmap created: 2026-01-27*
 *Phase 1 completed: 2026-01-27*
-*Phase 2 planned: 2026-01-27*
+*Phase 2 completed: 2026-01-27*

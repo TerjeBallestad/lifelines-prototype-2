@@ -10,17 +10,17 @@ Requirements for initial prototype. Each maps to roadmap phases.
 ### Character System
 
 - [ ] **CHAR-01**: Each character has 2 MTG colors with intensity values (0.0-1.0)
-- [ ] **CHAR-02**: Characters act autonomously based on color preferences
-- [ ] **CHAR-03**: Color profile determines activity affinity (Blue prefers reading)
+- [x] **CHAR-02**: Characters act autonomously based on color preferences
+- [x] **CHAR-03**: Color profile determines activity affinity (Blue prefers reading)
 - [ ] **CHAR-04**: Shadow state flips behavior when color health drops (Blue -> paralysis)
 - [ ] **CHAR-05**: Overskudd (capacity) meter gates what characters can/will do
 - [ ] **CHAR-06**: Needs (energy, etc.) affect overskudd regeneration
-- [ ] **CHAR-07**: Characters with low overskudd refuse activities or retreat to comfort
+- [x] **CHAR-07**: Characters with low overskudd refuse activities or retreat to comfort
 
 ### Activity System
 
-- [ ] **ACT-01**: 6-8 activities available (reading, cooking, cleaning, etc.)
-- [ ] **ACT-02**: Activities have color affinities that affect character preference
+- [x] **ACT-01**: 6-8 activities available (reading, cooking, cleaning, etc.)
+- [x] **ACT-02**: Activities have color affinities that affect character preference
 - [ ] **ACT-03**: Activities produce resources (creativity, food, cleanliness)
 - [ ] **ACT-04**: Skills improve through activity repetition
 - [ ] **ACT-05**: Skill level affects activity success/output
@@ -102,14 +102,14 @@ Deferred to future iteration. Tracked but not in current roadmap.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | CHAR-01 | Phase 1 | ✓ Complete |
-| CHAR-02 | Phase 2 | Pending |
-| CHAR-03 | Phase 2 | Pending |
+| CHAR-02 | Phase 2 | ✓ Complete |
+| CHAR-03 | Phase 2 | ✓ Complete |
 | CHAR-04 | Phase 5 | Pending |
 | CHAR-05 | Phase 1 | ✓ Complete |
 | CHAR-06 | Phase 1 | ✓ Complete |
-| CHAR-07 | Phase 2 | Pending |
-| ACT-01 | Phase 2 | Pending |
-| ACT-02 | Phase 2 | Pending |
+| CHAR-07 | Phase 2 | ✓ Complete |
+| ACT-01 | Phase 2 | ✓ Complete |
+| ACT-02 | Phase 2 | ✓ Complete |
 | ACT-03 | Phase 3 | Pending |
 | ACT-04 | Phase 3 | Pending |
 | ACT-05 | Phase 3 | Pending |
@@ -139,4 +139,4 @@ Deferred to future iteration. Tracked but not in current roadmap.
 
 ---
 *Requirements defined: 2026-01-27*
-*Last updated: 2026-01-27 after roadmap creation*
+*Last updated: 2026-01-27 after Phase 2 completion*
