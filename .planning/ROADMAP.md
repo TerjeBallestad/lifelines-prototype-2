@@ -21,6 +21,13 @@
 
 **Goal:** Game loop and character state run and are observable
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Project scaffolding, types, MobX stores
+- [ ] 01-02-PLAN.md — Game loop and time display
+- [ ] 01-03-PLAN.md — Character UI and visual verification
+
 **Requirements:**
 - TIME-01: Day/time progression with ~10 in-game days
 - TIME-02: Consistent game loop tick rate
@@ -141,7 +148,7 @@
 
 | Phase | Status | Progress |
 |-------|--------|----------|
-| 1 - Foundation | Pending | 0% |
+| 1 - Foundation | Planned | 0% |
 | 2 - Autonomous Behavior | Pending | 0% |
 | 3 - Activity Loop | Pending | 0% |
 | 4 - Quest System | Pending | 0% |
