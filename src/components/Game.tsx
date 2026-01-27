@@ -11,11 +11,11 @@ import { CharacterPanel } from './CharacterPanel';
  * Subtle emojis at low opacity to indicate where activities happen
  */
 const LOCATION_MARKERS = [
-  { x: 100, y: 150, icon: '~', title: 'Desk' },
-  { x: 200, y: 100, icon: '~', title: 'Window' },
-  { x: 300, y: 200, icon: '~', title: 'Kitchen' },
-  { x: 200, y: 180, icon: '~', title: 'Living' },
-  { x: 180, y: 220, icon: '~', title: 'Rest' },
+  { x: 100, y: 150, icon: '📖', title: 'Desk' },
+  { x: 200, y: 100, icon: '🪟', title: 'Window' },
+  { x: 300, y: 200, icon: '🍳', title: 'Kitchen' },
+  { x: 200, y: 180, icon: '📺', title: 'Living' },
+  { x: 180, y: 220, icon: '😌', title: 'Rest' },
 ] as const;
 
 /**
@@ -45,26 +45,28 @@ export const Game = observer(function Game() {
   });
 
   return (
-    <div className="min-h-screen bg-base-100 p-4">
-      <div className="max-w-4xl mx-auto">
+    <div className="bg-base-100 min-h-screen p-4">
+      <div className="mx-auto max-w-4xl">
         {/* Header with time display */}
         <header className="mb-6">
-          <h1 className="text-2xl font-bold mb-4">Before the Fall</h1>
+          <h1 className="mb-4 text-2xl font-bold">Before the Fall</h1>
           <TimeDisplay />
         </header>
 
         {/* Spatial game world - apartment view */}
-        <main className="card bg-base-200 shadow-xl mb-6">
+        <main className="card bg-base-200 mb-6 shadow-xl">
           <div className="card-body">
-            <h3 className="text-sm font-medium text-base-content/70 mb-4">Apartment</h3>
+            <h3 className="text-base-content/70 mb-4 text-sm font-medium">
+              Apartment
+            </h3>
 
             {/* Spatial game world - relative container for absolute positioned children */}
-            <div className="relative h-80 w-full bg-base-300 rounded-lg overflow-hidden">
+            <div className="bg-base-300 relative h-80 w-full overflow-hidden rounded-lg">
               {/* Activity location markers (subtle background hints) */}
               {LOCATION_MARKERS.map((marker) => (
                 <div
                   key={marker.title}
-                  className="absolute text-xl opacity-20 select-none pointer-events-none"
+                  className="pointer-events-none absolute min-h-5 min-w-5 text-xl opacity-20 select-none"
                   style={{ left: marker.x - 10, top: marker.y - 10 }}
                   title={marker.title}
                 >
@@ -77,7 +79,9 @@ export const Game = observer(function Game() {
                 <CharacterSprite
                   key={character.id}
                   character={character}
-                  isSelected={interactionStore.selectedCharacterId === character.id}
+                  isSelected={
+                    interactionStore.selectedCharacterId === character.id
+                  }
                   onClick={() => interactionStore.selectCharacter(character.id)}
                 />
               ))}
@@ -87,6 +91,37 @@ export const Game = observer(function Game() {
 
         {/* Character info panel */}
         <CharacterPanel />
+
+        {/* Debug panel for testing */}
+        <div className="card bg-base-200 mt-6 shadow-xl">
+          <div className="card-body">
+            <h3 className="text-base-content/70 mb-4 text-sm font-medium">
+              Debug Controls
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {characterStore.allCharacters.map((character) => (
+                <div key={character.id} className="flex items-center gap-2">
+                  <span className="text-sm font-medium">{character.name}:</span>
+                  <button
+                    className="btn btn-xs btn-warning"
+                    onClick={() => character.drainNeeds()}
+                  >
+                    Drain Needs
+                  </button>
+                  <button
+                    className="btn btn-xs btn-success"
+                    onClick={() => character.restoreNeeds()}
+                  >
+                    Restore
+                  </button>
+                </div>
+              ))}
+            </div>
+            <p className="text-base-content/50 mt-2 text-xs">
+              Use "Drain Needs" to test low overskudd comfort behaviors
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

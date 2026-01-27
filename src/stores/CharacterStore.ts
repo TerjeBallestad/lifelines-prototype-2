@@ -274,6 +274,25 @@ export class Character {
     this.state = 'idle';
     this.idleCooldown = 2; // 2 game-minutes until next decision
   }
+
+  /**
+   * Debug: Drain all needs to trigger low overskudd behavior
+   * Sets each need to a low value to test comfort/refusal behaviors
+   */
+  drainNeeds(): void {
+    this.needs.energy = 15;
+    this.needs.social = 15;
+    this.needs.purpose = 15;
+  }
+
+  /**
+   * Debug: Restore all needs to healthy levels
+   */
+  restoreNeeds(): void {
+    this.needs.energy = 80;
+    this.needs.social = 80;
+    this.needs.purpose = 80;
+  }
 }
 
 /**
