@@ -3,25 +3,25 @@
 ## Current Status
 
 **Phase:** 2 of 5 (Autonomous Behavior) - IN PROGRESS
-**Plan:** 1 of 3 complete
+**Plan:** 2 of 3 complete
 **Status:** In progress
-**Last activity:** 2026-01-27 - Completed 02-01-PLAN.md (Utility AI & Activity System)
+**Last activity:** 2026-01-27 - Completed 02-02-PLAN.md (Character State Machine)
 
-**Progress:** [====------] 4/6+ phase plans (~40%)
+**Progress:** [=====-----] 5/6+ phase plans (~50%)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-01-27)
 
 **Core value:** Validate that MTG colors + minimal config create distinct, interesting character behavior
-**Current focus:** Phase 2: Autonomous Behavior - Utility AI scoring complete, next: Thought Bubble UI
+**Current focus:** Phase 2: Autonomous Behavior - State machine complete, next: Thought Bubble UI
 
 ## Phase Status
 
 | Phase | Status | Plans | Progress |
 |-------|--------|-------|----------|
 | 1 - Foundation | Complete | 3/3 | 100% |
-| 2 - Autonomous Behavior | In Progress | 1/3 | 33% |
+| 2 - Autonomous Behavior | In Progress | 2/3 | 67% |
 | 3 - Activity Loop | Pending | 0/? | 0% |
 | 4 - Quest System | Pending | 0/? | 0% |
 | 5 - Crisis Sequence | Pending | 0/? | 0% |
@@ -47,6 +47,11 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 02-01 | Weighted random from top 3 within 80% | Adds variety without sacrificing quality |
 | 02-01 | Comfort behaviors scored separately | Reserved for low overskudd fallback |
 | 02-01 | Need normalization: energy/20, social/10, purpose/20 | Scales effects to 0-1 for fair comparison |
+| 02-02 | Blue deliberates 2000ms, others 800ms | Creates observable personality difference in decision time |
+| 02-02 | Blue walks 30 px/min, others 50 px/min | Slower movement reflects contemplative nature |
+| 02-02 | Walk speed scales with overskudd | Low wellbeing = slower movement (overskudd/100 * base) |
+| 02-02 | Refusal: <20 always, 20-40 gradual | Clear threshold for comfort behavior activation |
+| 02-02 | 2 game-minute decision cooldown | Prevents instant re-decision loop |
 
 ### Patterns Established
 
@@ -58,6 +63,9 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 - **Utility AI scoring:** Calculate colorMatch and needSatisfaction separately, combine with weights
 - **Activity data:** colorAffinities as Partial<Record<MTGColor, number>> for sparse definitions
 - **Comfort behaviors:** isComfortBehavior flag for low-overskudd fallback activities
+- **State machine pattern:** idle -> deciding -> walking -> performing -> idle cycle
+- **Async MobX updates:** setTimeout with runInAction for safe state mutations
+- **Character.update():** Called each tick for state machine processing
 
 ### Open Questions
 
@@ -70,9 +78,9 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 
 ## Session Continuity
 
-**Last session:** 2026-01-27T21:26:40Z
-**Stopped at:** Completed 02-01-PLAN.md - Utility AI & Activity System
-**Resume file:** Ready for 02-02-PLAN.md (Thought Bubble UI)
+**Last session:** 2026-01-27
+**Stopped at:** Completed 02-02-PLAN.md - Character State Machine
+**Resume file:** Ready for 02-03-PLAN.md (Thought Bubble UI)
 
 ---
 *Last updated: 2026-01-27*
