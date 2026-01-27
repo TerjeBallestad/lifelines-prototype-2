@@ -12,7 +12,7 @@ Requirements for initial prototype. Each maps to roadmap phases.
 - [ ] **CHAR-01**: Each character has 2 MTG colors with intensity values (0.0-1.0)
 - [ ] **CHAR-02**: Characters act autonomously based on color preferences
 - [ ] **CHAR-03**: Color profile determines activity affinity (Blue prefers reading)
-- [ ] **CHAR-04**: Shadow state flips behavior when color health drops (Blue → paralysis)
+- [ ] **CHAR-04**: Shadow state flips behavior when color health drops (Blue -> paralysis)
 - [ ] **CHAR-05**: Overskudd (capacity) meter gates what characters can/will do
 - [ ] **CHAR-06**: Needs (energy, etc.) affect overskudd regeneration
 - [ ] **CHAR-07**: Characters with low overskudd refuse activities or retreat to comfort
@@ -104,39 +104,39 @@ Deferred to future iteration. Tracked but not in current roadmap.
 | CHAR-01 | Phase 1 | Pending |
 | CHAR-02 | Phase 2 | Pending |
 | CHAR-03 | Phase 2 | Pending |
-| CHAR-04 | Phase 3 | Pending |
+| CHAR-04 | Phase 5 | Pending |
 | CHAR-05 | Phase 1 | Pending |
 | CHAR-06 | Phase 1 | Pending |
 | CHAR-07 | Phase 2 | Pending |
 | ACT-01 | Phase 2 | Pending |
 | ACT-02 | Phase 2 | Pending |
-| ACT-03 | Phase 2 | Pending |
-| ACT-04 | Phase 2 | Pending |
-| ACT-05 | Phase 2 | Pending |
-| ACT-06 | Phase 2 | Pending |
-| ACT-07 | Phase 2 | Pending |
+| ACT-03 | Phase 3 | Pending |
+| ACT-04 | Phase 3 | Pending |
+| ACT-05 | Phase 3 | Pending |
+| ACT-06 | Phase 3 | Pending |
+| ACT-07 | Phase 3 | Pending |
 | TIME-01 | Phase 1 | Pending |
 | TIME-02 | Phase 1 | Pending |
 | TIME-03 | Phase 1 | Pending |
 | TIME-04 | Phase 1 | Pending |
-| QUEST-01 | Phase 3 | Pending |
-| QUEST-02 | Phase 3 | Pending |
-| QUEST-03 | Phase 3 | Pending |
-| QUEST-04 | Phase 3 | Pending |
-| CRISIS-01 | Phase 4 | Pending |
-| CRISIS-02 | Phase 4 | Pending |
-| CRISIS-03 | Phase 4 | Pending |
-| CRISIS-04 | Phase 4 | Pending |
+| QUEST-01 | Phase 4 | Pending |
+| QUEST-02 | Phase 4 | Pending |
+| QUEST-03 | Phase 4 | Pending |
+| QUEST-04 | Phase 4 | Pending |
+| CRISIS-01 | Phase 5 | Pending |
+| CRISIS-02 | Phase 5 | Pending |
+| CRISIS-03 | Phase 5 | Pending |
+| CRISIS-04 | Phase 5 | Pending |
 | UI-01 | Phase 1 | Pending |
-| UI-02 | Phase 2 | Pending |
-| UI-03 | Phase 2 | Pending |
+| UI-02 | Phase 3 | Pending |
+| UI-03 | Phase 3 | Pending |
 | UI-04 | Phase 1 | Pending |
 
 **Coverage:**
 - v1 requirements: 24 total
 - Mapped to phases: 24
-- Unmapped: 0 ✓
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-01-27*
-*Last updated: 2026-01-27 after initial definition*
+*Last updated: 2026-01-27 after roadmap creation*
