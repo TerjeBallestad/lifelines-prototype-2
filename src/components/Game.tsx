@@ -3,6 +3,8 @@ import { observer } from 'mobx-react-lite';
 import { useGameStore } from '../stores/RootStore';
 import { useGameLoop } from '../hooks/useGameLoop';
 import { TimeDisplay } from './TimeDisplay';
+import { CharacterSprite } from './CharacterSprite';
+import { CharacterPanel } from './CharacterPanel';
 
 /**
  * Main Game component that runs the game loop and renders game UI
@@ -13,7 +15,7 @@ import { TimeDisplay } from './TimeDisplay';
  */
 export const Game = observer(function Game() {
   const store = useGameStore();
-  const { timeStore } = store;
+  const { timeStore, characterStore, interactionStore } = store;
 
   // Memoize tick handler to prevent useGameLoop effect from re-running
   const handleTick = useCallback(
@@ -38,12 +40,25 @@ export const Game = observer(function Game() {
           <TimeDisplay />
         </header>
 
-        {/* Game world area - placeholder for future content */}
-        <main className="card bg-base-200 shadow-xl">
-          <div className="card-body min-h-96 flex items-center justify-center">
-            <p className="text-base-content/50 text-lg">Game World Area</p>
+        {/* Game world area with characters */}
+        <main className="card bg-base-200 shadow-xl mb-6">
+          <div className="card-body min-h-64">
+            <h3 className="text-sm font-medium text-base-content/70 mb-4">Game World</h3>
+            <div className="relative flex gap-8 justify-center items-start py-4">
+              {characterStore.allCharacters.map((character) => (
+                <CharacterSprite
+                  key={character.id}
+                  character={character}
+                  isSelected={interactionStore.selectedCharacterId === character.id}
+                  onClick={() => interactionStore.selectCharacter(character.id)}
+                />
+              ))}
+            </div>
           </div>
         </main>
+
+        {/* Character info panel */}
+        <CharacterPanel />
       </div>
     </div>
   );
