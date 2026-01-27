@@ -101,12 +101,12 @@ Deferred to future iteration. Tracked but not in current roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CHAR-01 | Phase 1 | Pending |
+| CHAR-01 | Phase 1 | ✓ Complete |
 | CHAR-02 | Phase 2 | Pending |
 | CHAR-03 | Phase 2 | Pending |
 | CHAR-04 | Phase 5 | Pending |
-| CHAR-05 | Phase 1 | Pending |
-| CHAR-06 | Phase 1 | Pending |
+| CHAR-05 | Phase 1 | ✓ Complete |
+| CHAR-06 | Phase 1 | ✓ Complete |
 | CHAR-07 | Phase 2 | Pending |
 | ACT-01 | Phase 2 | Pending |
 | ACT-02 | Phase 2 | Pending |
@@ -115,10 +115,10 @@ Deferred to future iteration. Tracked but not in current roadmap.
 | ACT-05 | Phase 3 | Pending |
 | ACT-06 | Phase 3 | Pending |
 | ACT-07 | Phase 3 | Pending |
-| TIME-01 | Phase 1 | Pending |
-| TIME-02 | Phase 1 | Pending |
-| TIME-03 | Phase 1 | Pending |
-| TIME-04 | Phase 1 | Pending |
+| TIME-01 | Phase 1 | ✓ Complete |
+| TIME-02 | Phase 1 | ✓ Complete |
+| TIME-03 | Phase 1 | ✓ Complete |
+| TIME-04 | Phase 1 | ✓ Complete |
 | QUEST-01 | Phase 4 | Pending |
 | QUEST-02 | Phase 4 | Pending |
 | QUEST-03 | Phase 4 | Pending |
@@ -127,10 +127,10 @@ Deferred to future iteration. Tracked but not in current roadmap.
 | CRISIS-02 | Phase 5 | Pending |
 | CRISIS-03 | Phase 5 | Pending |
 | CRISIS-04 | Phase 5 | Pending |
-| UI-01 | Phase 1 | Pending |
+| UI-01 | Phase 1 | ✓ Complete |
 | UI-02 | Phase 3 | Pending |
 | UI-03 | Phase 3 | Pending |
-| UI-04 | Phase 1 | Pending |
+| UI-04 | Phase 1 | ✓ Complete |
 
 **Coverage:**
 - v1 requirements: 24 total

@@ -24,9 +24,9 @@
 **Plans:** 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Project scaffolding, types, MobX stores
-- [ ] 01-02-PLAN.md — Game loop and time display
-- [ ] 01-03-PLAN.md — Character UI and visual verification
+- [x] 01-01-PLAN.md — Project scaffolding, types, MobX stores
+- [x] 01-02-PLAN.md — Game loop and time display
+- [x] 01-03-PLAN.md — Character UI and visual verification
 
 **Requirements:**
 - TIME-01: Day/time progression with ~10 in-game days
@@ -148,7 +148,7 @@ Plans:
 
 | Phase | Status | Progress |
 |-------|--------|----------|
-| 1 - Foundation | Planned | 0% |
+| 1 - Foundation | ✓ Complete | 100% |
 | 2 - Autonomous Behavior | Pending | 0% |
 | 3 - Activity Loop | Pending | 0% |
 | 4 - Quest System | Pending | 0% |
@@ -156,3 +156,4 @@ Plans:
 
 ---
 *Roadmap created: 2026-01-27*
+*Phase 1 completed: 2026-01-27*
