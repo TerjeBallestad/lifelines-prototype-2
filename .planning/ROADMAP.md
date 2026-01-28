@@ -151,10 +151,10 @@ Plans:
 **Plans:** 4 plans
 
 Plans:
-- [ ] 05-01-PLAN.md — CrisisStore, types, and crisis data definitions
-- [ ] 05-02-PLAN.md — Shadow state and warning signs for characters
-- [ ] 05-03-PLAN.md — Crisis modal UI with action selection
-- [ ] 05-04-PLAN.md — Epilogue screen and game reset
+- [x] 05-01-PLAN.md — CrisisStore, types, and crisis data definitions
+- [x] 05-02-PLAN.md — Shadow state and warning signs for characters
+- [x] 05-03-PLAN.md — Crisis modal UI with action selection
+- [x] 05-04-PLAN.md — Epilogue screen and game reset
 
 **Requirements:**
 - CHAR-04: Shadow state flips behavior when color health drops (Blue -> paralysis)
@@ -183,7 +183,7 @@ Plans:
 | 2 - Autonomous Behavior | Complete | 100% |
 | 3 - Activity Loop | Complete | 100% |
 | 4 - Quest System | Complete | 100% |
-| 5 - Crisis Sequence | Pending | 0% |
+| 5 - Crisis Sequence | Complete | 100% |
 
 ---
 *Roadmap created: 2026-01-27*
@@ -191,3 +191,4 @@ Plans:
 *Phase 2 completed: 2026-01-27*
 *Phase 3 completed: 2026-01-28*
 *Phase 4 completed: 2026-01-28*
+*Phase 5 completed: 2026-01-28*
