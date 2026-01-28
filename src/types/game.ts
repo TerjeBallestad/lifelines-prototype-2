@@ -1,5 +1,31 @@
 export type MTGColor = 'white' | 'blue' | 'black' | 'red' | 'green';
 
+// Skill categories - each MTG color has affinity for certain categories
+export type SkillCategory = 'Practical' | 'Creative' | 'Social' | 'Technical';
+
+// Resources produced by activities
+export type ResourceType =
+  | 'creativity'   // Blue-adjacent, from reading/thinking
+  | 'food'         // Green/White, from cooking
+  | 'cleanliness'  // White, from cleaning
+  | 'comfort'      // Green, from resting
+  | 'connection'   // Social activities
+  | 'progress';    // General accomplishment feeling
+
+// Output produced when completing an activity
+export interface ActivityOutput {
+  resource: ResourceType;
+  baseAmount: number;
+}
+
+// Skill definition for the skill system
+export interface SkillData {
+  id: string;
+  name: string;
+  category: SkillCategory;
+  description: string;
+}
+
 export interface ColorIntensity {
   color: MTGColor;
   intensity: number; // 0.0 - 1.0
@@ -43,6 +69,9 @@ export interface Activity {
     purpose?: number;
   };
   isComfortBehavior?: boolean;                      // For low-overskudd fallback
+  skillCategory?: SkillCategory;                    // Which skill this activity trains
+  outputs?: ActivityOutput[];                       // Resources produced on completion
+  difficulty?: number;                              // 1-3, default 1
 }
 
 // Result of scoring an activity for a character
