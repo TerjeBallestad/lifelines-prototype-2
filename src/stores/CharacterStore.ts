@@ -3,6 +3,7 @@ import type { MTGColorProfile, Needs, CharacterData, Activity, ActivityScore, Ch
 import { CHARACTERS } from '../data/characters';
 import { ACTIVITIES } from '../data/activities';
 import { scoreActivities, selectActivity } from '../systems/UtilityAI';
+import { processActivityCompletion, type ActivityResult } from '../systems/SkillSystem';
 import type { RootStore } from './RootStore';
 
 /**
@@ -28,6 +29,9 @@ export class Character {
   position: { x: number; y: number };
   currentActivity: Activity | null = null;
   activityProgress: number = 0; // 0-1 completion
+
+  // Activity result (for UI feedback)
+  lastActivityResult: ActivityResult | null = null;
 
   // Decision state
   pendingScores: ActivityScore[] = []; // Top 3 for thought bubble display
@@ -250,14 +254,53 @@ export class Character {
   }
 
   /**
-   * Complete activity and apply effects
+   * Complete activity with skill/resource integration
+   *
+   * Processes activity through SkillSystem to determine:
+   * - Success/failure based on skill level vs difficulty
+   * - Output amounts modified by skill level
+   * - XP gained for the relevant skill category
+   *
+   * Then applies need effects and adds resources to global pool.
    */
   completeActivity(): void {
     if (!this.currentActivity) return;
 
-    const effects = this.currentActivity.effects;
+    const activity = this.currentActivity;
+
+    // Get skill level if activity has a skill category
+    let skillLevel = 1;
+    if (activity.skillCategory) {
+      const skill = this.characterStore.rootStore.skillStore.getSkill(
+        this.id,
+        activity.skillCategory
+      );
+      skillLevel = skill?.level ?? 1;
+    }
+
+    // Process activity with skill system
+    const result = processActivityCompletion(activity, skillLevel);
+    this.lastActivityResult = result;
+
+    // Grant XP if skill was involved
+    if (result.skillCategory && result.xpGained > 0) {
+      this.characterStore.rootStore.skillStore.grantXP(
+        this.id,
+        result.skillCategory,
+        result.xpGained
+      );
+    }
+
+    // Add resources to global pool
+    for (const output of result.outputs) {
+      this.characterStore.rootStore.resourceStore.addResource(
+        output.resource,
+        output.amount
+      );
+    }
 
     // Apply effects to needs (clamp 0-100)
+    const effects = activity.effects;
     if (effects.energy) {
       this.needs.energy = Math.max(0, Math.min(100, this.needs.energy + effects.energy));
     }
@@ -273,6 +316,13 @@ export class Character {
     this.activityProgress = 0;
     this.state = 'idle';
     this.idleCooldown = 2; // 2 game-minutes until next decision
+  }
+
+  /**
+   * Clear last activity result (for UI to call after displaying feedback)
+   */
+  clearLastActivityResult(): void {
+    this.lastActivityResult = null;
   }
 
   /**
