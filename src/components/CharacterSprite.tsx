@@ -3,6 +3,7 @@ import { motion, useSpring, AnimatePresence } from 'motion/react';
 import { useEffect } from 'react';
 import type { Character } from '../stores/CharacterStore';
 import { ThoughtBubble } from './ThoughtBubble';
+import { RefusalMessage } from './RefusalMessage';
 import clsx from 'clsx';
 
 interface CharacterSpriteProps {
@@ -103,6 +104,9 @@ export const CharacterSprite = observer(function CharacterSprite({
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Refusal message when player forces reluctant activity */}
+      <RefusalMessage character={character} />
 
       {/* Character card */}
       <button
