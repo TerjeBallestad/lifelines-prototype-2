@@ -1,5 +1,7 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
+import { motion, AnimatePresence } from 'motion/react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useGameStore } from '../stores/RootStore';
 import { useGameLoop } from '../hooks/useGameLoop';
 import { TimeDisplay } from './TimeDisplay';
@@ -38,6 +40,7 @@ const LOCATION_MARKERS = [
 export const Game = observer(function Game() {
   const store = useGameStore();
   const { timeStore, characterStore, interactionStore } = store;
+  const [debugOpen, setDebugOpen] = useState(false);
 
   // Memoize tick handler to prevent useGameLoop effect from re-running
   const handleTick = useCallback(
@@ -139,34 +142,56 @@ export const Game = observer(function Game() {
           </main>
         </div>
 
-        {/* Debug panel for testing */}
+        {/* Debug panel for testing - collapsible by default */}
         <div className="card bg-base-200 mt-6 shadow-xl">
-          <div className="card-body">
-            <h3 className="text-base-content/70 mb-4 text-sm font-medium">
-              Debug Controls
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {characterStore.allCharacters.map((character) => (
-                <div key={character.id} className="flex items-center gap-2">
-                  <span className="text-sm font-medium">{character.name}:</span>
-                  <button
-                    className="btn btn-xs btn-warning"
-                    onClick={() => character.drainNeeds()}
-                  >
-                    Drain Needs
-                  </button>
-                  <button
-                    className="btn btn-xs btn-success"
-                    onClick={() => character.restoreNeeds()}
-                  >
-                    Restore
-                  </button>
-                </div>
-              ))}
-            </div>
-            <p className="text-base-content/50 mt-2 text-xs">
-              Use "Drain Needs" to test low overskudd comfort behaviors
-            </p>
+          <div className="card-body py-3">
+            <button
+              className="flex w-full items-center justify-between cursor-pointer"
+              onClick={() => setDebugOpen(!debugOpen)}
+            >
+              <h3 className="text-base-content/70 text-sm font-medium">
+                Debug Controls
+              </h3>
+              {debugOpen ? (
+                <ChevronUp className="h-4 w-4 text-base-content/50" />
+              ) : (
+                <ChevronDown className="h-4 w-4 text-base-content/50" />
+              )}
+            </button>
+            <AnimatePresence>
+              {debugOpen && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="overflow-hidden"
+                >
+                  <div className="flex flex-wrap gap-2 pt-4">
+                    {characterStore.allCharacters.map((character) => (
+                      <div key={character.id} className="flex items-center gap-2">
+                        <span className="text-sm font-medium">{character.name}:</span>
+                        <button
+                          className="btn btn-xs btn-warning"
+                          onClick={() => character.drainNeeds()}
+                        >
+                          Drain Needs
+                        </button>
+                        <button
+                          className="btn btn-xs btn-success"
+                          onClick={() => character.restoreNeeds()}
+                        >
+                          Restore
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-base-content/50 mt-2 text-xs">
+                    Use "Drain Needs" to test low overskudd comfort behaviors
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </div>
