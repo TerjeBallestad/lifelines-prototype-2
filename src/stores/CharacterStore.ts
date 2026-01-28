@@ -110,6 +110,31 @@ export class Character {
   }
 
   /**
+   * Is character in shadow state?
+   * Blue shadow = paralysis under extreme stress
+   * Triggers when: Blue primary color + crisis active + overskudd < 30
+   */
+  get inShadowState(): boolean {
+    // Only Blue primary characters have shadow state
+    if (this.colors.primary.color !== 'blue') return false;
+
+    // Only during active crisis
+    const crisisState = this.characterStore.rootStore.crisisStore?.crisisState;
+    if (crisisState !== 'active') return false;
+
+    // Shadow threshold: overskudd below 30
+    return this.overskudd < 30;
+  }
+
+  /**
+   * Shadow state penalty applied to crisis action success
+   * -20% when in shadow state
+   */
+  get shadowPenalty(): number {
+    return this.inShadowState ? 20 : 0;
+  }
+
+  /**
    * Base walking speed (pixels per game-minute)
    * Blue personality = slower (30 px/min), others = faster (50 px/min)
    */
