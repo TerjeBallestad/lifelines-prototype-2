@@ -12,6 +12,7 @@ import { QuestCelebration } from './QuestCelebration';
 import { QuestIntroduction } from './QuestIntroduction';
 import { QuestPanel } from './QuestPanel';
 import { ActivityModal } from './ActivityModal';
+import { CrisisModal } from './CrisisModal';
 
 /**
  * Activity location markers for visual hints in the game world
@@ -57,6 +58,20 @@ export const Game = observer(function Game() {
       store.questStore.completeCurrentQuest();
     }
   }, [store.questStore.isQuestComplete, store]);
+
+  // Crisis detection - warning phase
+  useEffect(() => {
+    if (store.crisisStore.shouldStartWarning) {
+      store.crisisStore.startWarning();
+    }
+  }, [store.crisisStore.shouldStartWarning, store]);
+
+  // Crisis detection - active phase (Mother collapses)
+  useEffect(() => {
+    if (store.crisisStore.shouldTrigger) {
+      store.crisisStore.triggerCrisis();
+    }
+  }, [store.crisisStore.shouldTrigger, store]);
 
   return (
     <div className="bg-base-100 min-h-screen p-4">
@@ -169,6 +184,9 @@ export const Game = observer(function Game() {
 
       {/* Quest panel (right side) */}
       <QuestPanel />
+
+      {/* Crisis modal */}
+      <CrisisModal />
     </div>
   );
 });
