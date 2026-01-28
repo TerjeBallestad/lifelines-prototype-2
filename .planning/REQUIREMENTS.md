@@ -21,11 +21,11 @@ Requirements for initial prototype. Each maps to roadmap phases.
 
 - [x] **ACT-01**: 6-8 activities available (reading, cooking, cleaning, etc.)
 - [x] **ACT-02**: Activities have color affinities that affect character preference
-- [ ] **ACT-03**: Activities produce resources (creativity, food, cleanliness)
-- [ ] **ACT-04**: Skills improve through activity repetition
-- [ ] **ACT-05**: Skill level affects activity success/output
-- [ ] **ACT-06**: Characters refuse activities with personality-flavored responses
-- [ ] **ACT-07**: Low-skill attempts can fail or produce reduced output
+- [x] **ACT-03**: Activities produce resources (creativity, food, cleanliness)
+- [x] **ACT-04**: Skills improve through activity repetition
+- [x] **ACT-05**: Skill level affects activity success/output
+- [x] **ACT-06**: Characters refuse activities with personality-flavored responses
+- [x] **ACT-07**: Low-skill attempts can fail or produce reduced output
 
 ### Time & Progression
 
@@ -51,8 +51,8 @@ Requirements for initial prototype. Each maps to roadmap phases.
 ### Interaction & UI
 
 - [ ] **UI-01**: Player can click characters to view stats/skills
-- [ ] **UI-02**: Player can assign activities to characters (intervention)
-- [ ] **UI-03**: Visual feedback when activities complete
+- [x] **UI-02**: Player can assign activities to characters (intervention)
+- [x] **UI-03**: Visual feedback when activities complete
 - [ ] **UI-04**: Character state visible (overskudd meter, current activity)
 
 ## v2 Requirements
@@ -110,11 +110,11 @@ Deferred to future iteration. Tracked but not in current roadmap.
 | CHAR-07 | Phase 2 | ✓ Complete |
 | ACT-01 | Phase 2 | ✓ Complete |
 | ACT-02 | Phase 2 | ✓ Complete |
-| ACT-03 | Phase 3 | Pending |
-| ACT-04 | Phase 3 | Pending |
-| ACT-05 | Phase 3 | Pending |
-| ACT-06 | Phase 3 | Pending |
-| ACT-07 | Phase 3 | Pending |
+| ACT-03 | Phase 3 | ✓ Complete |
+| ACT-04 | Phase 3 | ✓ Complete |
+| ACT-05 | Phase 3 | ✓ Complete |
+| ACT-06 | Phase 3 | ✓ Complete |
+| ACT-07 | Phase 3 | ✓ Complete |
 | TIME-01 | Phase 1 | ✓ Complete |
 | TIME-02 | Phase 1 | ✓ Complete |
 | TIME-03 | Phase 1 | ✓ Complete |
@@ -128,8 +128,8 @@ Deferred to future iteration. Tracked but not in current roadmap.
 | CRISIS-03 | Phase 5 | Pending |
 | CRISIS-04 | Phase 5 | Pending |
 | UI-01 | Phase 1 | ✓ Complete |
-| UI-02 | Phase 3 | Pending |
-| UI-03 | Phase 3 | Pending |
+| UI-02 | Phase 3 | ✓ Complete |
+| UI-03 | Phase 3 | ✓ Complete |
 | UI-04 | Phase 1 | ✓ Complete |
 
 **Coverage:**
@@ -139,4 +139,4 @@ Deferred to future iteration. Tracked but not in current roadmap.
 
 ---
 *Requirements defined: 2026-01-27*
-*Last updated: 2026-01-27 after Phase 2 completion*
+*Last updated: 2026-01-28 after Phase 3 completion*
