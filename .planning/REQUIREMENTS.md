@@ -36,10 +36,10 @@ Requirements for initial prototype. Each maps to roadmap phases.
 
 ### Quest System
 
-- [ ] **QUEST-01**: Simple objectives tracking ("Produce 300 creativity")
-- [ ] **QUEST-02**: Quest completion triggers next quest
-- [ ] **QUEST-03**: Visual quest panel showing active objectives
-- [ ] **QUEST-04**: Progress indicators for resource-gathering quests
+- [x] **QUEST-01**: Simple objectives tracking ("Produce 300 creativity")
+- [x] **QUEST-02**: Quest completion triggers next quest
+- [x] **QUEST-03**: Visual quest panel showing active objectives
+- [x] **QUEST-04**: Progress indicators for resource-gathering quests
 
 ### Crisis Sequence
 
@@ -119,10 +119,10 @@ Deferred to future iteration. Tracked but not in current roadmap.
 | TIME-02 | Phase 1 | ✓ Complete |
 | TIME-03 | Phase 1 | ✓ Complete |
 | TIME-04 | Phase 1 | ✓ Complete |
-| QUEST-01 | Phase 4 | Pending |
-| QUEST-02 | Phase 4 | Pending |
-| QUEST-03 | Phase 4 | Pending |
-| QUEST-04 | Phase 4 | Pending |
+| QUEST-01 | Phase 4 | ✓ Complete |
+| QUEST-02 | Phase 4 | ✓ Complete |
+| QUEST-03 | Phase 4 | ✓ Complete |
+| QUEST-04 | Phase 4 | ✓ Complete |
 | CRISIS-01 | Phase 5 | Pending |
 | CRISIS-02 | Phase 5 | Pending |
 | CRISIS-03 | Phase 5 | Pending |
@@ -139,4 +139,4 @@ Deferred to future iteration. Tracked but not in current roadmap.
 
 ---
 *Requirements defined: 2026-01-27*
-*Last updated: 2026-01-28 after Phase 3 completion*
+*Last updated: 2026-01-28 after Phase 4 completion*

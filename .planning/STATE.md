@@ -124,6 +124,7 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 - **Fixed-position collapsible panels:** AnimatePresence mode='wait' with width animation
 - **Quest celebration flow:** completion -> pause -> celebration modal -> dismiss -> introduction popup -> resume
 - **Auto-dismiss popup:** Shrinking progress bar indicates countdown to auto-close
+- **Always-visible character panels:** Left sidebar shows both characters, click opens activity modal
 
 ### Open Questions
 

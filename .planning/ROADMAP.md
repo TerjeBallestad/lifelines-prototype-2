@@ -123,9 +123,9 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 04-01-PLAN.md — Quest types, data definitions, QuestStore
-- [ ] 04-02-PLAN.md — Quest panel UI with collapsible sidebar
-- [ ] 04-03-PLAN.md — Quest completion celebration and auto-chaining
+- [x] 04-01-PLAN.md — Quest types, data definitions, QuestStore
+- [x] 04-02-PLAN.md — Quest panel UI with collapsible sidebar
+- [x] 04-03-PLAN.md — Quest completion celebration and auto-chaining
 
 **Requirements:**
 - QUEST-01: Simple objectives tracking ("Produce 300 creativity")
@@ -174,7 +174,7 @@ Plans:
 | 1 - Foundation | Complete | 100% |
 | 2 - Autonomous Behavior | Complete | 100% |
 | 3 - Activity Loop | Complete | 100% |
-| 4 - Quest System | Pending | 0% |
+| 4 - Quest System | Complete | 100% |
 | 5 - Crisis Sequence | Pending | 0% |
 
 ---
@@ -182,3 +182,4 @@ Plans:
 *Phase 1 completed: 2026-01-27*
 *Phase 2 completed: 2026-01-27*
 *Phase 3 completed: 2026-01-28*
+*Phase 4 completed: 2026-01-28*
