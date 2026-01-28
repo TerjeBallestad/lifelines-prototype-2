@@ -2,21 +2,44 @@ import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { motion, AnimatePresence } from 'motion/react';
 import { useGameStore } from '../stores/RootStore';
-import type { SkillCategory } from '../types/game';
+import type { SkillCategory, MTGColor } from '../types/game';
 
-// Character celebration messages based on personality
-const CELEBRATION_MESSAGES: Record<string, Record<SkillCategory, string[]>> = {
-  elling: {
+// Character celebration messages based on MTG color personality
+const CELEBRATION_MESSAGES: Record<MTGColor, Record<SkillCategory, string[]>> = {
+  blue: {
+    // Blue: Analytical, introverted, contemplative, self-doubting but insightful
     Practical: ["I... I did it?", "Maybe I'm not so useless..."],
     Creative: ["The patterns are clearer now.", "I understand more."],
     Social: ["That wasn't so bad...", "People aren't all terrible."],
     Technical: ["Fascinating mechanism.", "I see how it works now."],
   },
-  mother: {
+  white: {
+    // White: Orderly, community-focused, encouraging
     Practical: ["Practice makes perfect!", "Getting better every day."],
     Creative: ["How delightful!", "The mind stays sharp."],
     Social: ["Connection is important.", "We all need each other."],
     Technical: ["These old hands still work!", "Learning new tricks."],
+  },
+  red: {
+    // Red: Impulsive, passionate, excited, spontaneous
+    Practical: ["Yes! I knew I could do it!", "That felt amazing!"],
+    Creative: ["The passion flows through me!", "Pure inspiration!"],
+    Social: ["What a rush!", "That was exhilarating!"],
+    Technical: ["Ha! I figured it out!", "Nothing can stop me now!"],
+  },
+  green: {
+    // Green: Natural, growth-focused, accepting, patient
+    Practical: ["Everything in its time.", "Growth happens naturally."],
+    Creative: ["Life finds a way.", "Beauty in simplicity."],
+    Social: ["We're all connected.", "Part of something bigger."],
+    Technical: ["Working with nature.", "Harmony achieved."],
+  },
+  black: {
+    // Black: Ambitious, self-focused, proud, determined
+    Practical: ["Another step toward greatness.", "Power through progress."],
+    Creative: ["My vision takes shape.", "Excellence demands sacrifice."],
+    Social: ["Useful connections made.", "They'll remember this."],
+    Technical: ["Knowledge is power.", "One more secret uncovered."],
   },
 };
 
@@ -40,7 +63,8 @@ export const LevelUpCelebration = observer(function LevelUpCelebration() {
   const character = characterStore.getCharacter(levelUp.characterId);
   if (!character) return null;
 
-  const messages = CELEBRATION_MESSAGES[levelUp.characterId]?.[levelUp.skill] ?? ["Level up!"];
+  const primaryColor = character.colors.primary.color;
+  const messages = CELEBRATION_MESSAGES[primaryColor]?.[levelUp.skill] ?? ["Level up!"];
   const message = messages[Math.floor(Math.random() * messages.length)];
 
   return (
