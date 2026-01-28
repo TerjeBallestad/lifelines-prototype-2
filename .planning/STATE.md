@@ -2,19 +2,19 @@
 
 ## Current Status
 
-**Phase:** 3 of 5 (Activity Loop)
-**Plan:** 5 of 5 complete
-**Status:** Phase complete
-**Last activity:** 2026-01-28 - Completed 03-05-PLAN.md (Skill Progress & Level-Up)
+**Phase:** 4 of 5 (Quest System)
+**Plan:** 1 of 3 complete
+**Status:** In progress
+**Last activity:** 2026-01-28 - Completed 04-01-PLAN.md (Quest Data Model)
 
-**Progress:** [===========] 11/11 phase plans (100%)
+**Progress:** [============] 12/14 phase plans (86%)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-01-27)
 
 **Core value:** Validate that MTG colors + minimal config create distinct, interesting character behavior
-**Current focus:** Phase 3 COMPLETE - Ready for Phase 4: Quest System
+**Current focus:** Phase 4: Quest System - Quest data model complete, UI next
 
 ## Phase Status
 
@@ -23,7 +23,7 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 1 - Foundation | Complete | 3/3 | 100% |
 | 2 - Autonomous Behavior | Complete | 3/3 | 100% |
 | 3 - Activity Loop | Complete | 5/5 | 100% |
-| 4 - Quest System | Pending | 0/? | 0% |
+| 4 - Quest System | In Progress | 1/3 | 33% |
 | 5 - Crisis Sequence | Pending | 0/? | 0% |
 
 ## Accumulated Context
@@ -76,6 +76,9 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 03-05 | Level-up tracked with pendingLevelUp observable | Enables reactive level-up detection across components |
 | 03-05 | Activity queuing during level-up | Better UX than disabling - player intent isn't lost |
 | 03-05 | Game pauses during celebration | Focuses attention on achievement moment |
+| 04-01 | Quest progress computed reactively | Changes in ResourceStore/SkillStore automatically update quest progress |
+| 04-01 | Composite quests average condition progress | Each condition capped at 1.0, averaged for overall progress |
+| 04-01 | pendingCompletion separates detection from celebration | Quest complete detection vs "showing modal" state are distinct |
 
 ### Patterns Established
 
@@ -110,6 +113,7 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 - **Event tracking pattern:** pendingLevelUp observable with anyPendingLevelUp computed for reactive detection
 - **Activity queuing:** queuedActivity field on Character for deferred action execution
 - **Game state coupling:** UI modals can control game pause state for focused experiences
+- **Quest progress computed from existing stores:** QuestStore observes ResourceStore/SkillStore for reactive progress
 
 ### Open Questions
 
@@ -122,8 +126,8 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 ## Session Continuity
 
 **Last session:** 2026-01-28
-**Stopped at:** Phase 3 Activity Loop complete and verified
-**Resume file:** Ready for Phase 4 Quest System planning
+**Stopped at:** Completed 04-01-PLAN.md (Quest Data Model)
+**Resume file:** Ready for 04-02-PLAN.md (Quest UI)
 
 ---
 *Last updated: 2026-01-28*
