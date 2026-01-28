@@ -29,6 +29,7 @@ export class Character {
   position: { x: number; y: number };
   currentActivity: Activity | null = null;
   activityProgress: number = 0; // 0-1 completion
+  queuedActivity: Activity | null = null; // Player-queued activity to perform next
 
   // Activity result (for UI feedback)
   lastActivityResult: ActivityResult | null = null;
@@ -320,6 +321,13 @@ export class Character {
     this.activityProgress = 0;
     this.state = 'idle';
     this.idleCooldown = 2; // 2 game-minutes until next decision
+
+    // Check for queued activity from player
+    if (this.queuedActivity) {
+      const queued = this.queuedActivity;
+      this.queuedActivity = null;
+      this.forceActivity(queued);
+    }
   }
 
   /**
@@ -332,13 +340,9 @@ export class Character {
   /**
    * Get character's attitude toward an activity
    * Returns: 'eager' | 'neutral' | 'reluctant' | 'refusing'
+   * Note: Busy state no longer returns 'refusing' since activities can be queued
    */
   getAttitudeToward(activity: Activity): 'eager' | 'neutral' | 'reluctant' | 'refusing' {
-    // Can't do anything if performing
-    if (this.state === 'walking' || this.state === 'performing') {
-      return 'refusing';
-    }
-
     // Low overskudd = reluctant or refusing
     if (this.overskudd < 20) return 'refusing';
     if (this.overskudd < 40) return 'reluctant';
@@ -377,9 +381,16 @@ export class Character {
 
   /**
    * Force character to do an activity (player intervention)
-   * May cause refusal message based on context
+   * If character is busy, queues the activity instead.
+   * May cause refusal message based on context.
    */
   forceActivity(activity: Activity): void {
+    // If busy, queue instead of refusing
+    if (this.state === 'walking' || this.state === 'performing') {
+      this.queuedActivity = activity;
+      return;
+    }
+
     const attitude = this.getAttitudeToward(activity);
 
     // Generate refusal message based on personality and reason
@@ -388,12 +399,6 @@ export class Character {
     } else {
       this.refusalMessage = null;
       this.refusalIcon = null;
-    }
-
-    // Still do the activity even if reluctant (that's what forcing means)
-    // Only truly refuse if already busy
-    if (this.state === 'walking' || this.state === 'performing') {
-      return;
     }
 
     // Set activity and start walking

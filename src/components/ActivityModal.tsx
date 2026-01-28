@@ -74,6 +74,18 @@ export const ActivityModal = observer(function ActivityModal() {
             <span>Overskudd: <strong>{Math.round(character.overskudd)}</strong></span>
             <span>State: <strong>{character.state}</strong></span>
           </div>
+          {/* Queue indicator when character is busy */}
+          {(character.state === 'walking' || character.state === 'performing') && (
+            <div className="text-xs text-info mt-2">
+              Activities selected will be queued after current activity completes
+            </div>
+          )}
+          {/* Show queued activity if any */}
+          {character.queuedActivity && (
+            <div className="text-xs text-secondary mt-1">
+              Queued: {character.queuedActivity.icon} {character.queuedActivity.name}
+            </div>
+          )}
         </div>
 
         {/* Activity list */}
@@ -88,10 +100,6 @@ export const ActivityModal = observer(function ActivityModal() {
               activity.difficulty ?? 1
             );
 
-            const isDisabled = attitude === 'refusing' && (
-              character.state === 'walking' || character.state === 'performing'
-            );
-
             return (
               <button
                 key={activity.id}
@@ -101,7 +109,6 @@ export const ActivityModal = observer(function ActivityModal() {
                   attitude === 'refusing' ? 'btn-error' : ''
                 }`}
                 onClick={() => handleSelectActivity(activity)}
-                disabled={isDisabled}
               >
                 <div className="flex items-center w-full gap-3">
                   {/* Activity icon */}

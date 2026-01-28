@@ -54,7 +54,8 @@ export class InteractionStore {
 
   /**
    * Force assign an activity to the currently selected character
-   * Returns true if successful, false if character is in a state that can't be interrupted
+   * If character is busy, the activity gets queued instead
+   * Returns true if successful (assigned or queued)
    */
   forceAssignActivity(activityId: string): boolean {
     if (!this.assigningCharacterId) return false;
@@ -62,16 +63,11 @@ export class InteractionStore {
     const character = this.rootStore.characterStore.getCharacter(this.assigningCharacterId);
     if (!character) return false;
 
-    // Can't interrupt if character is walking or performing
-    if (character.state === 'walking' || character.state === 'performing') {
-      return false;
-    }
-
     // Find activity
     const activity = ACTIVITIES.find(a => a.id === activityId);
     if (!activity) return false;
 
-    // Force the activity
+    // Force the activity (will queue if busy)
     character.forceActivity(activity);
 
     this.closeActivityModal();
