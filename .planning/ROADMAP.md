@@ -120,6 +120,13 @@ Plans:
 
 **Goal:** Player has direction through objectives
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 04-01-PLAN.md — Quest types, data definitions, QuestStore
+- [ ] 04-02-PLAN.md — Quest panel UI with collapsible sidebar
+- [ ] 04-03-PLAN.md — Quest completion celebration and auto-chaining
+
 **Requirements:**
 - QUEST-01: Simple objectives tracking ("Produce 300 creativity")
 - QUEST-02: Quest completion triggers next quest
