@@ -5,6 +5,8 @@ import { useGameLoop } from '../hooks/useGameLoop';
 import { TimeDisplay } from './TimeDisplay';
 import { CharacterSprite } from './CharacterSprite';
 import { CharacterPanel } from './CharacterPanel';
+import { ResourceBar } from './ResourceBar';
+import { FloatingNumberPool } from './FloatingNumberPool';
 
 /**
  * Activity location markers for visual hints in the game world
@@ -51,6 +53,9 @@ export const Game = observer(function Game() {
         <header className="mb-6">
           <h1 className="mb-4 text-2xl font-bold">Before the Fall</h1>
           <TimeDisplay />
+          <div className="mt-4">
+            <ResourceBar />
+          </div>
         </header>
 
         {/* Spatial game world - apartment view */}
@@ -85,6 +90,9 @@ export const Game = observer(function Game() {
                   onClick={() => interactionStore.selectCharacter(character.id)}
                 />
               ))}
+
+              {/* Floating numbers overlay */}
+              <FloatingNumberPool />
             </div>
           </div>
         </main>
