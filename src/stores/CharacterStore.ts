@@ -33,6 +33,10 @@ export class Character {
   // Activity result (for UI feedback)
   lastActivityResult: ActivityResult | null = null;
 
+  // Refusal state (for player intervention feedback)
+  refusalMessage: string | null = null;
+  refusalIcon: string | null = null;
+
   // Decision state
   pendingScores: ActivityScore[] = []; // Top 3 for thought bubble display
   decisionDuration: number; // Elling: 2000ms, Mother: 800ms
@@ -323,6 +327,128 @@ export class Character {
    */
   clearLastActivityResult(): void {
     this.lastActivityResult = null;
+  }
+
+  /**
+   * Get character's attitude toward an activity
+   * Returns: 'eager' | 'neutral' | 'reluctant' | 'refusing'
+   */
+  getAttitudeToward(activity: Activity): 'eager' | 'neutral' | 'reluctant' | 'refusing' {
+    // Can't do anything if performing
+    if (this.state === 'walking' || this.state === 'performing') {
+      return 'refusing';
+    }
+
+    // Low overskudd = reluctant or refusing
+    if (this.overskudd < 20) return 'refusing';
+    if (this.overskudd < 40) return 'reluctant';
+
+    // Check color affinity
+    const colorMatch = this.calculateColorMatch(activity);
+    if (colorMatch > 0.6) return 'eager';
+    if (colorMatch < 0.3) return 'reluctant';
+    return 'neutral';
+  }
+
+  /**
+   * Helper to calculate color match (reuse Utility AI logic)
+   */
+  private calculateColorMatch(activity: Activity): number {
+    const affinities = activity.colorAffinities;
+    if (Object.keys(affinities).length === 0) return 0.5; // Neutral
+
+    let totalMatch = 0;
+    let totalWeight = 0;
+
+    // Check primary color
+    const primaryAffinity = affinities[this.colors.primary.color] ?? 0;
+    totalMatch += primaryAffinity * this.colors.primary.intensity;
+    totalWeight += this.colors.primary.intensity;
+
+    // Check secondary if exists
+    if (this.colors.secondary) {
+      const secondaryAffinity = affinities[this.colors.secondary.color] ?? 0;
+      totalMatch += secondaryAffinity * this.colors.secondary.intensity;
+      totalWeight += this.colors.secondary.intensity;
+    }
+
+    return totalWeight > 0 ? totalMatch / totalWeight : 0.5;
+  }
+
+  /**
+   * Force character to do an activity (player intervention)
+   * May cause refusal message based on context
+   */
+  forceActivity(activity: Activity): void {
+    const attitude = this.getAttitudeToward(activity);
+
+    // Generate refusal message based on personality and reason
+    if (attitude === 'refusing' || attitude === 'reluctant') {
+      this.generateRefusalMessage(activity, attitude);
+    } else {
+      this.refusalMessage = null;
+      this.refusalIcon = null;
+    }
+
+    // Still do the activity even if reluctant (that's what forcing means)
+    // Only truly refuse if already busy
+    if (this.state === 'walking' || this.state === 'performing') {
+      return;
+    }
+
+    // Set activity and start walking
+    this.currentActivity = activity;
+    this.state = 'walking';
+    this.pendingScores = [];
+
+    // Clear decision state
+    this.decisionStartTime = 0;
+  }
+
+  /**
+   * Generate personality-flavored refusal/reluctance message
+   */
+  private generateRefusalMessage(activity: Activity, _attitude: 'refusing' | 'reluctant'): void {
+    const isBlue = this.colors.primary.color === 'blue';
+    const isWhite = this.colors.primary.color === 'white';
+
+    if (this.overskudd < 20) {
+      // Exhaustion refusal
+      this.refusalIcon = '😫';
+      this.refusalMessage = isBlue
+        ? "I can't... I just can't right now."
+        : "I'm too tired for this.";
+    } else if (this.overskudd < 40) {
+      // Low energy reluctance
+      this.refusalIcon = '😓';
+      this.refusalMessage = isBlue
+        ? "Must I? I'm not sure I have it in me..."
+        : "I suppose I can try...";
+    } else if (this.calculateColorMatch(activity) < 0.3) {
+      // Personality mismatch
+      this.refusalIcon = '😕';
+      this.refusalMessage = isBlue
+        ? "That's not really my thing..."
+        : isWhite
+          ? "If you think it's important..."
+          : "I'd rather not.";
+    }
+
+    // Auto-clear after 3 seconds
+    setTimeout(() => {
+      runInAction(() => {
+        this.refusalMessage = null;
+        this.refusalIcon = null;
+      });
+    }, 3000);
+  }
+
+  /**
+   * Clear refusal message manually
+   */
+  clearRefusal(): void {
+    this.refusalMessage = null;
+    this.refusalIcon = null;
   }
 
   /**
