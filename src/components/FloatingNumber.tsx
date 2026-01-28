@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { motion, useMotionValue, animate } from 'motion/react';
 import { useEffect } from 'react';
 
@@ -13,13 +14,19 @@ interface FloatingNumberProps {
  * Animated floating number that rises and fades
  * Uses motion values to avoid React re-renders during animation
  */
-export function FloatingNumber({ value, x, y, critical, onComplete }: FloatingNumberProps) {
+export function FloatingNumber({
+  value,
+  x,
+  y,
+  critical,
+  onComplete,
+}: FloatingNumberProps) {
   const opacity = useMotionValue(1);
-  const posY = useMotionValue(0);
+  const posY = useMotionValue(-50);
 
   useEffect(() => {
-    // Animate upward 60px over 1 second
-    const yControls = animate(posY, -60, {
+    // Animate upward 100px over 1 second
+    const yControls = animate(posY, -100, {
       duration: 1,
       ease: 'easeOut',
     });
@@ -52,7 +59,7 @@ export function FloatingNumber({ value, x, y, critical, onComplete }: FloatingNu
 
   return (
     <motion.div
-      className={`floating-number ${colorClass} absolute`}
+      className={clsx('floating-number absolute z-10', colorClass)}
       style={{
         left: x,
         top: y,

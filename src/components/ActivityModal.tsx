@@ -32,7 +32,9 @@ export const ActivityModal = observer(function ActivityModal() {
 
   const isOpen = interactionStore.activityModalOpen;
   const characterId = interactionStore.assigningCharacterId;
-  const character = characterId ? characterStore.getCharacter(characterId) : null;
+  const character = characterId
+    ? characterStore.getCharacter(characterId)
+    : null;
 
   // Open/close modal based on state
   useEffect(() => {
@@ -58,42 +60,46 @@ export const ActivityModal = observer(function ActivityModal() {
   const activities = getRegularActivities();
 
   return (
-    <dialog
-      ref={dialogRef}
-      className="modal"
-      onClose={handleClose}
-    >
+    <dialog ref={dialogRef} className="modal" onClose={handleClose}>
       <div className="modal-box max-w-2xl">
-        <h3 className="text-lg font-bold mb-4">
+        <h3 className="mb-4 text-lg font-bold">
           Assign Activity to {character.name}
         </h3>
 
         {/* Character status summary */}
-        <div className="mb-4 p-3 bg-base-200 rounded-lg">
+        <div className="bg-base-200 mb-4 h-18 rounded-lg p-3">
           <div className="flex gap-4 text-sm">
-            <span>Overskudd: <strong>{Math.round(character.overskudd)}</strong></span>
-            <span>State: <strong>{character.state}</strong></span>
+            <span>
+              Overskudd: <strong>{Math.round(character.overskudd)}</strong>
+            </span>
+            <span>
+              State: <strong>{character.state}</strong>
+            </span>
           </div>
           {/* Queue indicator when character is busy */}
-          {(character.state === 'walking' || character.state === 'performing') && (
-            <div className="text-xs text-info mt-2">
-              Activities selected will be queued after current activity completes
+          {(character.state === 'walking' ||
+            character.state === 'performing') && (
+            <div className="text-info mt-2 text-xs">
+              Activities selected will be queued after current activity
+              completes
             </div>
           )}
           {/* Show queued activity if any */}
           {character.queuedActivity && (
-            <div className="text-xs text-secondary mt-1">
-              Queued: {character.queuedActivity.icon} {character.queuedActivity.name}
+            <div className="text-secondary mt-1 text-xs">
+              Queued: {character.queuedActivity.icon}{' '}
+              {character.queuedActivity.name}
             </div>
           )}
         </div>
 
         {/* Activity list */}
-        <div className="grid gap-2 max-h-96 overflow-y-auto">
-          {activities.map(activity => {
+        <div className="grid max-h-96 gap-2 overflow-y-auto">
+          {activities.map((activity) => {
             const attitude = character.getAttitudeToward(activity);
             const skillLevel = activity.skillCategory
-              ? (skillStore.getSkill(character.id, activity.skillCategory)?.level ?? 1)
+              ? (skillStore.getSkill(character.id, activity.skillCategory)
+                  ?.level ?? 1)
               : 1;
             const successChance = calculateSuccessChance(
               skillLevel,
@@ -103,14 +109,18 @@ export const ActivityModal = observer(function ActivityModal() {
             return (
               <button
                 key={activity.id}
-                className={`btn btn-outline justify-start h-auto py-3 ${
-                  attitude === 'eager' ? 'btn-success' :
-                  attitude === 'reluctant' ? 'btn-warning' :
-                  attitude === 'refusing' ? 'btn-error' : ''
+                className={`btn btn-outline h-auto justify-start py-3 ${
+                  attitude === 'eager'
+                    ? 'btn-success'
+                    : attitude === 'reluctant'
+                      ? 'btn-warning'
+                      : attitude === 'refusing'
+                        ? 'btn-error'
+                        : ''
                 }`}
                 onClick={() => handleSelectActivity(activity)}
               >
-                <div className="flex items-center w-full gap-3">
+                <div className="flex w-full items-center gap-3">
                   {/* Activity icon */}
                   <span className="text-2xl">{activity.icon}</span>
 
@@ -123,7 +133,7 @@ export const ActivityModal = observer(function ActivityModal() {
                           {activity.skillCategory} (Lv.{skillLevel})
                         </span>
                       )}
-                      {activity.outputs?.map(o => (
+                      {activity.outputs?.map((o) => (
                         <span key={o.resource} className="mr-2">
                           +{o.baseAmount} {o.resource}
                         </span>
@@ -151,7 +161,8 @@ export const ActivityModal = observer(function ActivityModal() {
         {character.overskudd < 40 && (
           <div className="alert alert-warning mt-4">
             <span>
-              {character.name} is low on energy. Forcing activities may cause frustration.
+              {character.name} is low on energy. Forcing activities may cause
+              frustration.
             </span>
           </div>
         )}
@@ -159,7 +170,9 @@ export const ActivityModal = observer(function ActivityModal() {
         {/* Modal actions */}
         <div className="modal-action">
           <form method="dialog">
-            <button className="btn" onClick={handleClose}>Cancel</button>
+            <button className="btn" onClick={handleClose}>
+              Cancel
+            </button>
           </form>
         </div>
       </div>
