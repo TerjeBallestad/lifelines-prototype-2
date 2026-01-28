@@ -13,6 +13,7 @@ import { QuestIntroduction } from './QuestIntroduction';
 import { QuestPanel } from './QuestPanel';
 import { ActivityModal } from './ActivityModal';
 import { CrisisModal } from './CrisisModal';
+import { CrisisEpilogue } from './CrisisEpilogue';
 
 /**
  * Activity location markers for visual hints in the game world
@@ -187,6 +188,9 @@ export const Game = observer(function Game() {
 
       {/* Crisis modal */}
       <CrisisModal />
+
+      {/* Crisis epilogue (ending screen) */}
+      <CrisisEpilogue />
     </div>
   );
 });
