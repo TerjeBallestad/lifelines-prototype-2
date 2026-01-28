@@ -1,4 +1,44 @@
+/* Pixel font for game feedback */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 @import "tailwindcss";
 @plugin "daisyui" {
   themes: dark;
+}
+
+/* Utility class for pixel font */
+.font-pixel {
+  font-family: 'Press Start 2P', cursive;
+}
+
+/* Floating number styles */
+.floating-number {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  user-select: none;
+}
+
+.floating-number-positive {
+  color: #ffd700; /* Gold for positive */
+}
+
+.floating-number-negative {
+  color: #ff4444; /* Red for negative */
+}
+
+.floating-number-critical {
+  color: #00ff88; /* Bright green for critical */
+  font-size: 18px;
+}
+
+/* Resource counter pulse animation */
+@keyframes resource-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.resource-pulse {
+  animation: resource-pulse 0.3s ease-out;
 }
