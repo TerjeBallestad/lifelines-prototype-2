@@ -38,8 +38,10 @@ export class InteractionStore {
 
   /**
    * Open activity modal for a character
+   * Also selects the character to show info panel
    */
   openActivityModal(characterId: string): void {
+    this.selectedCharacterId = characterId;
     this.assigningCharacterId = characterId;
     this.activityModalOpen = true;
   }
