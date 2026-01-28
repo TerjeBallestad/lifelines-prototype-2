@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useGameStore } from '../stores/RootStore';
 import { useGameLoop } from '../hooks/useGameLoop';
@@ -8,6 +8,9 @@ import { CharacterPanel } from './CharacterPanel';
 import { ResourceBar } from './ResourceBar';
 import { FloatingNumberPool } from './FloatingNumberPool';
 import { LevelUpCelebration } from './LevelUpCelebration';
+import { QuestCelebration } from './QuestCelebration';
+import { QuestIntroduction } from './QuestIntroduction';
+import { QuestPanel } from './QuestPanel';
 import { ActivityModal } from './ActivityModal';
 
 /**
@@ -47,6 +50,13 @@ export const Game = observer(function Game() {
     paused: timeStore.isPaused,
     targetFps: 60,
   });
+
+  // Detect quest completion and trigger celebration
+  useEffect(() => {
+    if (store.questStore.isQuestComplete) {
+      store.questStore.completeCurrentQuest();
+    }
+  }, [store.questStore.isQuestComplete, store]);
 
   return (
     <div className="bg-base-100 min-h-screen p-4">
@@ -137,8 +147,17 @@ export const Game = observer(function Game() {
       {/* Level up celebration overlay */}
       <LevelUpCelebration />
 
+      {/* Quest completion celebration */}
+      <QuestCelebration />
+
+      {/* Quest introduction popup */}
+      <QuestIntroduction />
+
       {/* Activity assignment modal */}
       <ActivityModal />
+
+      {/* Quest panel (right side) */}
+      <QuestPanel />
     </div>
   );
 });
