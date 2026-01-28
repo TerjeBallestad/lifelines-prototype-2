@@ -3,18 +3,18 @@
 ## Current Status
 
 **Phase:** 5 of 5 (Crisis Sequence)
-**Plan:** 3 of 4 in current phase
-**Status:** In progress
-**Last activity:** 2026-01-28 - Completed 05-03-PLAN.md (Crisis Modal UI)
+**Plan:** 4 of 4 in current phase
+**Status:** Complete
+**Last activity:** 2026-01-28 - Completed 05-04-PLAN.md (Crisis Epilogue)
 
-**Progress:** [=================] 17/18 phase plans (94%)
+**Progress:** [==================] 18/18 phase plans (100%)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-01-27)
 
 **Core value:** Validate that MTG colors + minimal config create distinct, interesting character behavior
-**Current focus:** Phase 5 in progress - Crisis Sequence
+**Current focus:** All phases complete - Crisis Sequence finished
 
 ## Phase Status
 
@@ -24,7 +24,7 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 2 - Autonomous Behavior | Complete | 3/3 | 100% |
 | 3 - Activity Loop | Complete | 5/5 | 100% |
 | 4 - Quest System | Complete | 3/3 | 100% |
-| 5 - Crisis Sequence | In progress | 3/4 | 75% |
+| 5 - Crisis Sequence | Complete | 4/4 | 100% |
 
 ## Accumulated Context
 
@@ -96,6 +96,11 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 05-03 | 2.5 second auto-clear for action results | Long enough to read but short enough to maintain urgency |
 | 05-03 | Color-coded success chance thresholds | >=60% green, >=40% yellow, <40% red for quick risk assessment |
 | 05-03 | Retry badge shows attempt number | "Retry #N" clearly indicates penalty accumulation |
+| 05-04 | Max 3 total attempts before Mother dies | Creates genuine tension - player can't indefinitely retry |
+| 05-04 | -25% crisis panic penalty | Combined with difficulty 3 for phone, makes crisis genuinely difficult |
+| 05-04 | Mother deterioration on Day 10: 3x/6x/10x decay | Rapid overskudd decay makes warning signs unmistakable |
+| 05-04 | Mother slowdown on Day 10: 0.4/0.2/0.05 | Dramatic speed reduction amplifies warning visibility |
+| 05-04 | Store reset pattern | Each store has reset() method, RootStore.resetGame() coordinates |
 
 ### Patterns Established
 
@@ -144,20 +149,23 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 - **Crisis UI overlay:** Full-screen modal with pulsing red background for urgency
 - **Skill check display:** Category badge + level + color-coded success percentage
 - **Result feedback pattern:** Animated roll vs chance comparison with auto-clear
+- **Store reset pattern:** Each store has reset() method, RootStore.resetGame() coordinates all resets
+- **Epilogue outcome pattern:** Conditional rendering based on store outcome state (saved/lost)
+- **Attempts-remaining indicator:** Visual countdown bars for crisis urgency
 
 ### Open Questions
 
-(None - shadow state threshold resolved: overskudd < 30 during active crisis = shadow penalty)
+(None - all phases complete)
 
 ### Blockers
 
-(None)
+(None - project complete)
 
 ## Session Continuity
 
 **Last session:** 2026-01-28
-**Stopped at:** Completed 05-03-PLAN.md (Crisis Modal UI)
-**Resume file:** Ready for 05-04-PLAN.md
+**Stopped at:** Completed 05-04-PLAN.md (Crisis Epilogue) - All phases complete
+**Resume file:** None - project finished
 
 ---
 *Last updated: 2026-01-28*
