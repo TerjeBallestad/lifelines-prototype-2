@@ -11,6 +11,9 @@ export class CharacterSkill {
   category: SkillCategory;
   xp: number = 0;
 
+  // Observable for pending level-up notification
+  pendingLevelUp: { skill: SkillCategory; newLevel: number } | null = null;
+
   constructor(category: SkillCategory, startingXP: number = 0) {
     this.category = category;
     this.xp = startingXP;
@@ -41,9 +44,23 @@ export class CharacterSkill {
 
   /**
    * Action: grant XP to this skill
+   * Detects level-ups and sets pendingLevelUp for UI celebration
    */
   grantXP(amount: number): void {
+    const oldLevel = this.level;
     this.xp += amount;
+    const newLevel = this.level;
+
+    if (newLevel > oldLevel) {
+      this.pendingLevelUp = { skill: this.category, newLevel };
+    }
+  }
+
+  /**
+   * Clear level-up notification after celebration displayed
+   */
+  clearLevelUp(): void {
+    this.pendingLevelUp = null;
   }
 }
 
@@ -124,6 +141,35 @@ export class SkillStore {
     const skill = this.getSkill(characterId, category);
     if (skill) {
       skill.grantXP(amount);
+    }
+  }
+
+  /**
+   * Computed: check if any character has pending level-up
+   * Returns first found level-up for UI to display
+   */
+  get anyPendingLevelUp(): { characterId: string; skill: SkillCategory; newLevel: number } | null {
+    for (const [characterId, skills] of this.characterSkills) {
+      for (const [category, skill] of skills) {
+        if (skill.pendingLevelUp) {
+          return {
+            characterId,
+            skill: category,
+            newLevel: skill.pendingLevelUp.newLevel,
+          };
+        }
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Clear specific character's level-up notification
+   */
+  clearLevelUp(characterId: string, category: SkillCategory): void {
+    const skill = this.getSkill(characterId, category);
+    if (skill) {
+      skill.clearLevelUp();
     }
   }
 }
