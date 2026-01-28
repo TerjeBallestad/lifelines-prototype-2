@@ -1,8 +1,8 @@
 /* Pixel font for game feedback */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-@import "tailwindcss";
-@plugin "daisyui" {
+@import 'tailwindcss';
+@plugin 'daisyui' {
   themes: dark;
 }
 
@@ -35,8 +35,13 @@
 
 /* Resource counter pulse animation */
 @keyframes resource-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
 }
 
 .resource-pulse {

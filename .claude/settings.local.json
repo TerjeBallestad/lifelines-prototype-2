@@ -1,24 +1,25 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git add:*)",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\ndocs: initialize project\n\nWeb prototype testing MTG color personality system for Lifelines \"Before the Fall\" demo\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\nchore: add project config\n\nMode: yolo\nDepth: standard\nParallelization: enabled\nWorkflow agents: research=on, plan_check=on, verifier=on\nModel profile: quality\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
-      "WebSearch",
-      "Bash(git check-ignore:*)",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\ndocs: complete project research synthesis\n\nResearch files:\n- STACK.md: React 19 + MobX + Vite stack with game-specific tools\n- FEATURES.md: Table stakes, differentiators, and anti-features\n- ARCHITECTURE.md: MobX root store pattern with 6-phase build order\n- PITFALLS.md: 10 pitfalls with user-specific over-engineering guardrails\n- SUMMARY.md: Executive synthesis with roadmap implications\n\nKey findings:\n- Stack: Existing mental-sine-waves base + Motion + use-sound + custom game loop\n- Architecture: MobX observable classes as pseudo-ECS, unidirectional data flow\n- Critical pitfall: Simulation fidelity trap - must prioritize observable over realistic behavior\n- Recommended phases: 6 phases from foundation to validation\n\nCore thesis: MTG colors create distinct, watchable character behavior\nSuccess criteria: External players can distinguish personalities by observation alone\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
-      "Bash(git commit:*)",
-      "Bash(git -C /Users/godstemning/projects-local/lifelines-prototype-2 status --porcelain)",
-      "Bash(git -C /Users/godstemning/projects-local/lifelines-prototype-2 diff --stat)",
-      "Bash(git -C /Users/godstemning/projects-local/lifelines-prototype-2 diff src/ --no-color)",
-      "Bash(git -C /Users/godstemning/projects-local/lifelines-prototype-2 diff --no-color -- src/)",
+      "Bash(date:*)",
+      "Bash(echo:*)",
+      "Bash(cat:*)",
       "Bash(ls:*)",
+      "Bash(mkdir:*)",
       "Bash(wc:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(sort:*)",
       "Bash(grep:*)",
-      "Bash(npm run build:*)"
-    ],
-    "additionalDirectories": [
-      "/Users/godstemning/projects-local/mental-sine-waves"
+      "Bash(tr:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git tag:*)",
+      "Bash(npx tsc:*)",
+      "WebSearch"
     ]
   }
 }
