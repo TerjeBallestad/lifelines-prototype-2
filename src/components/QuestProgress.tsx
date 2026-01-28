@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { motion, useSpring, useTransform } from 'motion/react';
 import clsx from 'clsx';
@@ -20,10 +21,16 @@ export const QuestProgress = observer(function QuestProgress({
   target,
   compact = false,
 }: QuestProgressProps) {
-  const springProgress = useSpring(progress, {
+  const springProgress = useSpring(0, {
     stiffness: 100,
     damping: 20,
   });
+
+  // Update spring when progress changes
+  useEffect(() => {
+    springProgress.set(progress);
+  }, [progress, springProgress]);
+
   const widthPercent = useTransform(springProgress, (v) =>
     `${Math.min(100, v * 100)}%`
   );
