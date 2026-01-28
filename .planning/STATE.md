@@ -3,11 +3,11 @@
 ## Current Status
 
 **Phase:** 3 of 5 (Activity Loop)
-**Plan:** 1 of 5 complete
+**Plan:** 2 of 5 complete
 **Status:** In progress
-**Last activity:** 2026-01-28 - Completed 03-01-PLAN.md (Skills and Resources Types)
+**Last activity:** 2026-01-28 - Completed 03-02-PLAN.md (Skill Integration)
 
-**Progress:** [=======---] 7/11 phase plans (~64%)
+**Progress:** [========--] 8/11 phase plans (~73%)
 
 ## Project Reference
 
@@ -22,7 +22,7 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 |-------|--------|-------|----------|
 | 1 - Foundation | Complete | 3/3 | 100% |
 | 2 - Autonomous Behavior | Complete | 3/3 | 100% |
-| 3 - Activity Loop | In progress | 1/5 | 20% |
+| 3 - Activity Loop | In progress | 2/5 | 40% |
 | 4 - Quest System | Pending | 0/? | 0% |
 | 5 - Crisis Sequence | Pending | 0/? | 0% |
 
@@ -60,6 +60,10 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 03-01 | Output modifiers [1.0, 1.0, 1.2, 1.5, 1.8, 2.0] | Level 1-2 same output, scaling after |
 | 03-01 | MTG color to skill mapping | Blue->Creative, White/Green->Practical, Red->Social, Black->Technical |
 | 03-01 | Starting skill bonus = 100 XP | Characters start at level 2 in color-associated skill |
+| 03-02 | Success formula: 50 + (level*10) - ((difficulty-1)*15) | Base 50%, +10%/level, -15%/difficulty tier, clamped 10-95 |
+| 03-02 | Failed = 50% output, 50% XP | Failure isn't total loss, learning from failure encouraged |
+| 03-02 | Critical: 5 + (level*5)% chance, 150% output | Higher skill = more crits, meaningful but not OP reward |
+| 03-02 | lastActivityResult on Character | Stores completion result for UI feedback display |
 
 ### Patterns Established
 
@@ -81,6 +85,9 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 - **CharacterSkill class:** MobX observable with computed level from XP thresholds
 - **Color-based skill initialization:** MTG primary color determines starting skill bonus
 - **Resource tracking:** Map<ResourceType, number> pattern in ResourceStore
+- **SkillSystem pure functions:** Calculation functions exported for testability (calculateSuccessChance, calculateOutput, etc.)
+- **processActivityCompletion:** Pure orchestration function for activity result generation
+- **Activity completion integration:** completeActivity() calls SkillSystem, SkillStore, and ResourceStore
 
 ### Open Questions
 
@@ -93,8 +100,8 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 ## Session Continuity
 
 **Last session:** 2026-01-28
-**Stopped at:** Completed 03-01-PLAN.md (Skills and Resources Types)
-**Resume file:** .planning/phases/03-activity-loop/03-02-PLAN.md
+**Stopped at:** Completed 03-02-PLAN.md (Skill Integration)
+**Resume file:** .planning/phases/03-activity-loop/03-03-PLAN.md
 
 ---
 *Last updated: 2026-01-28*
