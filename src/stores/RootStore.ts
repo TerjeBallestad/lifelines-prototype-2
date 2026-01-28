@@ -5,6 +5,7 @@ import { InteractionStore } from './InteractionStore';
 import { SkillStore } from './SkillStore';
 import { ResourceStore } from './ResourceStore';
 import { QuestStore } from './QuestStore';
+import { CrisisStore } from './CrisisStore';
 
 /**
  * RootStore is the central store that creates and connects all other stores
@@ -21,6 +22,7 @@ export class RootStore {
   skillStore: SkillStore;
   resourceStore: ResourceStore;
   questStore: QuestStore;
+  crisisStore: CrisisStore;
 
   constructor() {
     this.timeStore = new TimeStore(this);
@@ -29,6 +31,7 @@ export class RootStore {
     this.skillStore = new SkillStore(this);
     this.resourceStore = new ResourceStore(this);
     this.questStore = new QuestStore(this);
+    this.crisisStore = new CrisisStore(this);
 
     // Initialize skills for all characters based on their MTG colors
     for (const character of this.characterStore.allCharacters) {
