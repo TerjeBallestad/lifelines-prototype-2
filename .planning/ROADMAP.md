@@ -148,6 +148,14 @@ Plans:
 
 **Goal:** Day 10 crisis reveals skill gap consequences
 
+**Plans:** 4 plans
+
+Plans:
+- [ ] 05-01-PLAN.md — CrisisStore, types, and crisis data definitions
+- [ ] 05-02-PLAN.md — Shadow state and warning signs for characters
+- [ ] 05-03-PLAN.md — Crisis modal UI with action selection
+- [ ] 05-04-PLAN.md — Epilogue screen and game reset
+
 **Requirements:**
 - CHAR-04: Shadow state flips behavior when color health drops (Blue -> paralysis)
 - CRISIS-01: Day 10 crisis trigger (Mother collapses)
