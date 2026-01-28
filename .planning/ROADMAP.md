@@ -85,6 +85,15 @@ Plans:
 
 **Goal:** Activities produce resources and train skills
 
+**Plans:** 5 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Types, skills store, resource store (foundation)
+- [ ] 03-02-PLAN.md — Character skills integration, success/failure logic
+- [ ] 03-03-PLAN.md — Floating number feedback, resource bar UI
+- [ ] 03-04-PLAN.md — Player intervention modal, refusal messaging
+- [ ] 03-05-PLAN.md — Skill progress display, level-up celebration
+
 **Requirements:**
 - ACT-03: Activities produce resources (creativity, food, cleanliness)
 - ACT-04: Skills improve through activity repetition
@@ -157,7 +166,7 @@ Plans:
 |-------|--------|----------|
 | 1 - Foundation | Complete | 100% |
 | 2 - Autonomous Behavior | Complete | 100% |
-| 3 - Activity Loop | Pending | 0% |
+| 3 - Activity Loop | Planned | 0% |
 | 4 - Quest System | Pending | 0% |
 | 5 - Crisis Sequence | Pending | 0% |
 
