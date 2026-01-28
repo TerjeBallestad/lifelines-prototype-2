@@ -3,11 +3,11 @@
 ## Current Status
 
 **Phase:** 5 of 5 (Crisis Sequence)
-**Plan:** 2 of 4 in current phase
+**Plan:** 3 of 4 in current phase
 **Status:** In progress
-**Last activity:** 2026-01-28 - Completed 05-02-PLAN.md (Character Crisis Behaviors)
+**Last activity:** 2026-01-28 - Completed 05-03-PLAN.md (Crisis Modal UI)
 
-**Progress:** [================] 16/18 phase plans (89%)
+**Progress:** [=================] 17/18 phase plans (94%)
 
 ## Project Reference
 
@@ -24,7 +24,7 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 2 - Autonomous Behavior | Complete | 3/3 | 100% |
 | 3 - Activity Loop | Complete | 5/5 | 100% |
 | 4 - Quest System | Complete | 3/3 | 100% |
-| 5 - Crisis Sequence | In progress | 2/4 | 50% |
+| 5 - Crisis Sequence | In progress | 3/4 | 75% |
 
 ## Accumulated Context
 
@@ -93,6 +93,9 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 05-02 | Shadow state at overskudd < 30 during active crisis | Consistent with 05-01 decision, now in Character class |
 | 05-02 | Mother slowdown progressive: 80%, 60%, 30% | Hour thresholds (8, 11, 13) for clear visual steps |
 | 05-02 | Elling worry detection at hour >= 11 | Tied to when Mother becomes visibly slower |
+| 05-03 | 2.5 second auto-clear for action results | Long enough to read but short enough to maintain urgency |
+| 05-03 | Color-coded success chance thresholds | >=60% green, >=40% yellow, <40% red for quick risk assessment |
+| 05-03 | Retry badge shows attempt number | "Retry #N" clearly indicates penalty accumulation |
 
 ### Patterns Established
 
@@ -138,6 +141,9 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 - **Hope bonus accumulation:** Limited modifier system for supporting actions
 - **Character-level crisis awareness:** Computed properties observe CrisisStore state
 - **Warning signs as behavioral changes:** currentWalkSpeed modifier based on time progression
+- **Crisis UI overlay:** Full-screen modal with pulsing red background for urgency
+- **Skill check display:** Category badge + level + color-coded success percentage
+- **Result feedback pattern:** Animated roll vs chance comparison with auto-clear
 
 ### Open Questions
 
@@ -150,8 +156,8 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 ## Session Continuity
 
 **Last session:** 2026-01-28
-**Stopped at:** Completed 05-02-PLAN.md (Character Crisis Behaviors)
-**Resume file:** Ready for 05-03-PLAN.md
+**Stopped at:** Completed 05-03-PLAN.md (Crisis Modal UI)
+**Resume file:** Ready for 05-04-PLAN.md
 
 ---
 *Last updated: 2026-01-28*
