@@ -2,19 +2,19 @@
 
 ## Current Status
 
-**Phase:** 4 of 5 (Quest System)
-**Plan:** 3 of 3 complete
-**Status:** Phase complete
-**Last activity:** 2026-01-28 - Completed 04-03-PLAN.md (Quest Celebration Flow)
+**Phase:** 5 of 5 (Crisis Sequence)
+**Plan:** 1 of 4 in current phase
+**Status:** In progress
+**Last activity:** 2026-01-28 - Completed 05-01-PLAN.md (Crisis Store Foundation)
 
-**Progress:** [==============] 14/14 phase plans (100%)
+**Progress:** [===============] 15/18 phase plans (83%)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-01-27)
 
 **Core value:** Validate that MTG colors + minimal config create distinct, interesting character behavior
-**Current focus:** Phase 4 complete - Ready for Phase 5: Crisis Sequence
+**Current focus:** Phase 5 in progress - Crisis Sequence
 
 ## Phase Status
 
@@ -24,7 +24,7 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 2 - Autonomous Behavior | Complete | 3/3 | 100% |
 | 3 - Activity Loop | Complete | 5/5 | 100% |
 | 4 - Quest System | Complete | 3/3 | 100% |
-| 5 - Crisis Sequence | Pending | 0/? | 0% |
+| 5 - Crisis Sequence | In progress | 1/4 | 25% |
 
 ## Accumulated Context
 
@@ -85,6 +85,11 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 04-03 | QuestCelebration pauses, QuestIntroduction resumes | Focused celebration moment then seamless continuation |
 | 04-03 | 3-second auto-dismiss for introduction popup | Long enough to read, short enough not to block play |
 | 04-03 | Trophy icon with spring animation | Satisfying visual impact for achievement |
+| 05-01 | Phone action is critical path | call-emergency success saves Mother, other actions support |
+| 05-01 | Hope bonus from helpers: +10% max +20% | Rewards diverse strategy before critical phone call |
+| 05-01 | Retry penalty: -15% per attempt | Creates urgency without making retries useless |
+| 05-01 | Shadow penalty at overskudd < 30 | Blue character's paralysis when overwhelmed |
+| 05-01 | Social skill for phone calls | Communication/phone skills align with social training |
 
 ### Patterns Established
 
@@ -125,10 +130,13 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 - **Quest celebration flow:** completion -> pause -> celebration modal -> dismiss -> introduction popup -> resume
 - **Auto-dismiss popup:** Shrinking progress bar indicates countdown to auto-close
 - **Always-visible character panels:** Left sidebar shows both characters, click opens activity modal
+- **Crisis state machine:** inactive -> warning -> active -> resolved with state-dependent triggers
+- **Action attempt tracking:** Map<string, number> for retry penalty calculations
+- **Hope bonus accumulation:** Limited modifier system for supporting actions
 
 ### Open Questions
 
-- Shadow state threshold: At what color health percentage does shadow trigger?
+(None - shadow state threshold resolved: overskudd < 30 during active crisis = shadow penalty)
 
 ### Blockers
 
@@ -137,8 +145,8 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 ## Session Continuity
 
 **Last session:** 2026-01-28
-**Stopped at:** Completed 04-03-PLAN.md (Quest Celebration Flow) - Phase 4 complete
-**Resume file:** Ready for Phase 5: Crisis Sequence
+**Stopped at:** Completed 05-01-PLAN.md (Crisis Store Foundation)
+**Resume file:** Ready for 05-02-PLAN.md
 
 ---
 *Last updated: 2026-01-28*
