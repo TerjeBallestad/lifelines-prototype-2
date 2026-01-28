@@ -3,18 +3,18 @@
 ## Current Status
 
 **Phase:** 6 of 6 (Polish)
-**Plan:** 0 of 1 in current phase
-**Status:** Ready to plan
-**Last activity:** 2026-01-28 - Added Phase 6 for tech debt polish
+**Plan:** 1 of 1 in current phase
+**Status:** Project complete
+**Last activity:** 2026-01-28 - Completed 06-01-PLAN.md (Tech Debt Polish)
 
-**Progress:** [=================.] 18/19 phase plans (95%)
+**Progress:** [==================] 19/19 phase plans (100%)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-01-27)
 
 **Core value:** Validate that MTG colors + minimal config create distinct, interesting character behavior
-**Current focus:** Phase 6 - Polish tech debt items from audit
+**Current focus:** All phases complete - ready for validation testing
 
 ## Phase Status
 
@@ -25,7 +25,7 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 3 - Activity Loop | Complete | 5/5 | 100% |
 | 4 - Quest System | Complete | 3/3 | 100% |
 | 5 - Crisis Sequence | Complete | 4/4 | 100% |
-| 6 - Polish | Pending | 0/1 | 0% |
+| 6 - Polish | Complete | 1/1 | 100% |
 
 ## Accumulated Context
 
@@ -102,6 +102,9 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 05-04 | Mother deterioration on Day 10: 3x/6x/10x decay | Rapid overskudd decay makes warning signs unmistakable |
 | 05-04 | Mother slowdown on Day 10: 0.4/0.2/0.05 | Dramatic speed reduction amplifies warning visibility |
 | 05-04 | Store reset pattern | Each store has reset() method, RootStore.resetGame() coordinates |
+| 06-01 | 500ms delay for first quest intro | Lets game UI render before popup appears |
+| 06-01 | Debug controls collapsed by default | Reduces visual noise during normal gameplay |
+| 06-01 | MTG color-keyed celebration messages | Generalizes to any character with any primary color |
 
 ### Patterns Established
 
@@ -153,6 +156,9 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 - **Store reset pattern:** Each store has reset() method, RootStore.resetGame() coordinates all resets
 - **Epilogue outcome pattern:** Conditional rendering based on store outcome state (saved/lost)
 - **Attempts-remaining indicator:** Visual countdown bars for crisis urgency
+- **hasShownFirst ref pattern:** Track one-time initial display with reset detection
+- **Collapsible debug panel:** Header toggles content with ChevronUp/Down icons
+- **MTG color-keyed messages:** Personality text lookup by primary color, not character ID
 
 ### Open Questions
 
@@ -165,8 +171,8 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 ## Session Continuity
 
 **Last session:** 2026-01-28
-**Stopped at:** Added Phase 6 (Polish) for tech debt items
-**Resume file:** .planning/phases/06-polish/06-01-PLAN.md (to be created)
+**Stopped at:** Completed 06-01-PLAN.md - Project complete
+**Resume file:** None - all phases complete
 
 ---
 *Last updated: 2026-01-28*
