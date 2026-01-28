@@ -135,6 +135,31 @@ export class Character {
   }
 
   /**
+   * Should Elling show concern about Mother?
+   * On Day 10 warning phase, occasionally true for thought bubble
+   */
+  get isWorriedAboutMother(): boolean {
+    if (this.id !== 'elling') return false;
+
+    const crisisState = this.characterStore.rootStore.crisisStore?.crisisState;
+    if (crisisState !== 'warning') return false;
+
+    // During warning phase, check if Mother is moving slowly
+    const mother = this.characterStore.getCharacter('mother');
+    if (!mother) return false;
+
+    // Worried when Mother's speed modifier is below 70%
+    const timeStore = this.characterStore.rootStore.timeStore;
+    if (timeStore.day === 10) {
+      const hour = timeStore.hour;
+      // Elling notices something is wrong when Mother is visibly slower
+      return hour >= 11;
+    }
+
+    return false;
+  }
+
+  /**
    * Base walking speed (pixels per game-minute)
    * Blue personality = slower (30 px/min), others = faster (50 px/min)
    */
