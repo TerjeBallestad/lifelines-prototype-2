@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { ChevronLeft, ChevronRight, Target, CheckCircle } from 'lucide-react';
 import { useGameStore } from '../stores/RootStore';
 import { QuestProgress } from './QuestProgress';
@@ -67,72 +67,61 @@ export const QuestPanel = observer(function QuestPanel() {
 
   return (
     <div className="fixed right-4 top-1/2 z-40 -translate-y-1/2">
-      <AnimatePresence mode="wait">
+      <motion.div
+        animate={{ width: isExpanded ? 288 : 64 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+        className="overflow-hidden rounded-lg bg-base-200 shadow-lg"
+      >
         {isExpanded ? (
           // Expanded view
-          <motion.div
-            key="expanded"
-            initial={{ width: 64, opacity: 0 }}
-            animate={{ width: 288, opacity: 1 }}
-            exit={{ width: 64, opacity: 0 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="overflow-hidden rounded-lg bg-base-200 shadow-lg"
-          >
-            <div className="p-4">
-              {/* Header with collapse button */}
-              <div className="mb-3 flex items-start justify-between">
-                <div className="flex items-center gap-2">
-                  <Target className="h-5 w-5 text-primary" />
-                  <span className="text-xs uppercase tracking-wide text-base-content/60">
-                    Quest {questStore.currentQuestIndex + 1}/{questStore.totalQuests}
-                  </span>
-                </div>
-                <button
-                  onClick={() => setIsExpanded(false)}
-                  className="btn btn-circle btn-ghost btn-xs"
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </button>
+          <div className="p-4" style={{ width: 288 }}>
+            {/* Header with collapse button */}
+            <div className="mb-3 flex items-start justify-between">
+              <div className="flex items-center gap-2">
+                <Target className="h-5 w-5 text-primary" />
+                <span className="text-xs uppercase tracking-wide text-base-content/60">
+                  Quest {questStore.currentQuestIndex + 1}/{questStore.totalQuests}
+                </span>
               </div>
-
-              {/* Quest title and description */}
-              <h3 className="mb-1 text-lg font-bold">{quest.title}</h3>
-              <p className="mb-4 text-sm text-base-content/70">{quest.description}</p>
-
-              {/* Progress bar */}
-              <QuestProgress
-                progress={progress}
-                current={progressValues?.current}
-                target={progressValues?.target}
-              />
+              <button
+                onClick={() => setIsExpanded(false)}
+                className="btn btn-circle btn-ghost btn-xs"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
             </div>
-          </motion.div>
+
+            {/* Quest title and description */}
+            <h3 className="mb-1 text-lg font-bold">{quest.title}</h3>
+            <p className="mb-4 text-sm text-base-content/70">{quest.description}</p>
+
+            {/* Progress bar */}
+            <QuestProgress
+              progress={progress}
+              current={progressValues?.current}
+              target={progressValues?.target}
+            />
+          </div>
         ) : (
           // Collapsed view
-          <motion.div
-            key="collapsed"
-            initial={{ width: 288, opacity: 0 }}
-            animate={{ width: 64, opacity: 1 }}
-            exit={{ width: 288, opacity: 0 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="cursor-pointer rounded-lg bg-base-200 shadow-lg"
+          <div
+            className="flex cursor-pointer flex-col items-center gap-2 p-3"
+            style={{ width: 64 }}
             onClick={() => setIsExpanded(true)}
           >
-            <div className="flex flex-col items-center gap-2 p-3">
-              {/* Quest icon */}
-              <Target className="h-6 w-6 text-primary" />
+            {/* Quest icon */}
+            <Target className="h-6 w-6 text-primary" />
 
-              {/* Mini progress */}
-              <div className="w-full">
-                <QuestProgress progress={progress} compact />
-              </div>
-
-              {/* Expand hint */}
-              <ChevronLeft className="h-4 w-4 text-base-content/40" />
+            {/* Mini progress */}
+            <div className="w-full">
+              <QuestProgress progress={progress} compact />
             </div>
-          </motion.div>
+
+            {/* Expand hint */}
+            <ChevronLeft className="h-4 w-4 text-base-content/40" />
+          </div>
         )}
-      </AnimatePresence>
+      </motion.div>
     </div>
   );
 });
