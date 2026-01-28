@@ -70,47 +70,58 @@ export const Game = observer(function Game() {
           </div>
         </header>
 
-        {/* Spatial game world - apartment view */}
-        <main className="card bg-base-200 mb-6 shadow-xl">
-          <div className="card-body">
-            <h3 className="text-base-content/70 mb-4 text-sm font-medium">
-              Apartment
-            </h3>
+        {/* Main game area with sidebar */}
+        <div className="flex gap-4 mb-6">
+          {/* Left sidebar - Character panels */}
+          <aside className="w-56 flex-shrink-0 space-y-3">
+            {characterStore.allCharacters.map((character) => (
+              <CharacterPanel
+                key={character.id}
+                character={character}
+                onClick={() => interactionStore.openActivityModal(character.id)}
+              />
+            ))}
+          </aside>
 
-            {/* Spatial game world - relative container for absolute positioned children */}
-            <div className="bg-base-300 relative h-80 w-full overflow-hidden rounded-lg">
-              {/* Activity location markers (subtle background hints) */}
-              {LOCATION_MARKERS.map((marker) => (
-                <div
-                  key={marker.title}
-                  className="pointer-events-none absolute min-h-5 min-w-5 text-xl opacity-20 select-none"
-                  style={{ left: marker.x - 10, top: marker.y - 10 }}
-                  title={marker.title}
-                >
-                  {marker.icon}
-                </div>
-              ))}
+          {/* Spatial game world - apartment view */}
+          <main className="card bg-base-200 flex-1 shadow-xl">
+            <div className="card-body">
+              <h3 className="text-base-content/70 mb-4 text-sm font-medium">
+                Apartment
+              </h3>
 
-              {/* Characters with absolute positioning via CharacterSprite */}
-              {characterStore.allCharacters.map((character) => (
-                <CharacterSprite
-                  key={character.id}
-                  character={character}
-                  isSelected={
-                    interactionStore.selectedCharacterId === character.id
-                  }
-                  onClick={() => interactionStore.openActivityModal(character.id)}
-                />
-              ))}
+              {/* Spatial game world - relative container for absolute positioned children */}
+              <div className="bg-base-300 relative h-80 w-full overflow-hidden rounded-lg">
+                {/* Activity location markers (subtle background hints) */}
+                {LOCATION_MARKERS.map((marker) => (
+                  <div
+                    key={marker.title}
+                    className="pointer-events-none absolute min-h-5 min-w-5 text-xl opacity-20 select-none"
+                    style={{ left: marker.x - 10, top: marker.y - 10 }}
+                    title={marker.title}
+                  >
+                    {marker.icon}
+                  </div>
+                ))}
 
-              {/* Floating numbers overlay */}
-              <FloatingNumberPool />
+                {/* Characters with absolute positioning via CharacterSprite */}
+                {characterStore.allCharacters.map((character) => (
+                  <CharacterSprite
+                    key={character.id}
+                    character={character}
+                    isSelected={
+                      interactionStore.selectedCharacterId === character.id
+                    }
+                    onClick={() => interactionStore.openActivityModal(character.id)}
+                  />
+                ))}
+
+                {/* Floating numbers overlay */}
+                <FloatingNumberPool />
+              </div>
             </div>
-          </div>
-        </main>
-
-        {/* Character info panel */}
-        <CharacterPanel />
+          </main>
+        </div>
 
         {/* Debug panel for testing */}
         <div className="card bg-base-200 mt-6 shadow-xl">
