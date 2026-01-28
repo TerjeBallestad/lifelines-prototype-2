@@ -3,11 +3,11 @@
 ## Current Status
 
 **Phase:** 3 of 5 (Activity Loop)
-**Plan:** 4 of 5 complete
-**Status:** In progress
-**Last activity:** 2026-01-28 - Completed 03-04-PLAN.md (Player Intervention)
+**Plan:** 5 of 5 complete
+**Status:** Phase complete
+**Last activity:** 2026-01-28 - Completed 03-05-PLAN.md (Skill Progress & Level-Up)
 
-**Progress:** [==========] 10/11 phase plans (~91%)
+**Progress:** [===========] 11/11 phase plans (100%)
 
 ## Project Reference
 
@@ -22,7 +22,7 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 |-------|--------|-------|----------|
 | 1 - Foundation | Complete | 3/3 | 100% |
 | 2 - Autonomous Behavior | Complete | 3/3 | 100% |
-| 3 - Activity Loop | In progress | 4/5 | 80% |
+| 3 - Activity Loop | Complete | 5/5 | 100% |
 | 4 - Quest System | Pending | 0/? | 0% |
 | 5 - Crisis Sequence | Pending | 0/? | 0% |
 
@@ -72,6 +72,10 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 03-04 | Attitude thresholds: <20 refusing, <40 reluctant | Consistent with existing refusal thresholds |
 | 03-04 | colorMatch >0.6 eager, <0.3 reluctant | Activity affinity affects willingness |
 | 03-04 | 3-second auto-clear for refusal messages | Keeps UI uncluttered |
+| 03-05 | XP bar uses useSpring for smooth fill animation | Spring physics creates satisfying visual feedback |
+| 03-05 | Level-up tracked with pendingLevelUp observable | Enables reactive level-up detection across components |
+| 03-05 | Activity queuing during level-up | Better UX than disabling - player intent isn't lost |
+| 03-05 | Game pauses during celebration | Focuses attention on achievement moment |
 
 ### Patterns Established
 
@@ -103,6 +107,9 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 - **Modal state pattern:** observable open/characterId in store, dialog ref in component
 - **Attitude calculation:** combine overskudd thresholds with color affinity match
 - **Personality-flavored text:** switch on primary color for different responses
+- **Event tracking pattern:** pendingLevelUp observable with anyPendingLevelUp computed for reactive detection
+- **Activity queuing:** queuedActivity field on Character for deferred action execution
+- **Game state coupling:** UI modals can control game pause state for focused experiences
 
 ### Open Questions
 
@@ -115,8 +122,8 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 ## Session Continuity
 
 **Last session:** 2026-01-28
-**Stopped at:** Completed 03-04-PLAN.md (Player Intervention)
-**Resume file:** .planning/phases/03-activity-loop/03-05-PLAN.md
+**Stopped at:** Completed 03-05-PLAN.md (Skill Progress & Level-Up) - Phase 3 complete
+**Resume file:** .planning/phases/04-quest-system/ (pending phase planning)
 
 ---
 *Last updated: 2026-01-28*
