@@ -81,3 +81,24 @@ export interface ActivityScore {
   colorMatch: number;   // How well activity colors match character
   needSatisfaction: number; // How much activity helps current needs
 }
+
+// Quest types for tracking player objectives
+export type QuestType = 'resource' | 'skill' | 'composite';
+
+export interface Quest {
+  id: string;
+  title: string;
+  description: string;
+  type: QuestType;
+  // For resource quests
+  resourceType?: ResourceType;
+  targetAmount?: number;
+  // For skill quests
+  characterId?: string;
+  skillCategory?: SkillCategory;
+  targetLevel?: number;
+  // For composite quests - custom completion check
+  compositeConditions?: {
+    resources?: { type: ResourceType; amount: number }[];
+  };
+}
