@@ -2,19 +2,19 @@
 
 ## Current Status
 
-**Phase:** 2 of 5 (Autonomous Behavior) - COMPLETE
-**Plan:** 3 of 3 complete
-**Status:** Phase complete - ready for Phase 3
-**Last activity:** 2026-01-27 - Completed 02-03-PLAN.md (Thought Bubble UI)
+**Phase:** 3 of 5 (Activity Loop)
+**Plan:** 1 of 5 complete
+**Status:** In progress
+**Last activity:** 2026-01-28 - Completed 03-01-PLAN.md (Skills and Resources Types)
 
-**Progress:** [======----] 6/6+ phase plans (~60%)
+**Progress:** [=======---] 7/11 phase plans (~64%)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-01-27)
 
 **Core value:** Validate that MTG colors + minimal config create distinct, interesting character behavior
-**Current focus:** Phase 2 COMPLETE - Ready for Phase 3: Activity Loop
+**Current focus:** Phase 3: Activity Loop - Building skill/resource progression system
 
 ## Phase Status
 
@@ -22,7 +22,7 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 |-------|--------|-------|----------|
 | 1 - Foundation | Complete | 3/3 | 100% |
 | 2 - Autonomous Behavior | Complete | 3/3 | 100% |
-| 3 - Activity Loop | Pending | 0/? | 0% |
+| 3 - Activity Loop | In progress | 1/5 | 20% |
 | 4 - Quest System | Pending | 0/? | 0% |
 | 5 - Crisis Sequence | Pending | 0/? | 0% |
 
@@ -56,6 +56,10 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 02-03 | Activity progress bar above sprite | Visible during performing state when thought bubble hidden |
 | 02-03 | Debug controls pattern: collapsible gear icon | Essential for testing autonomous behavior |
 | 02-03 | Winner highlight at 80% duration | Gives player time to see deliberation before decision |
+| 03-01 | XP thresholds [0, 100, 300, 600, 1000] | Exponential curve with achievable early levels |
+| 03-01 | Output modifiers [1.0, 1.0, 1.2, 1.5, 1.8, 2.0] | Level 1-2 same output, scaling after |
+| 03-01 | MTG color to skill mapping | Blue->Creative, White/Green->Practical, Red->Social, Black->Technical |
+| 03-01 | Starting skill bonus = 100 XP | Characters start at level 2 in color-associated skill |
 
 ### Patterns Established
 
@@ -74,6 +78,9 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 - **Thought bubble decision viz:** Show top 3 candidates, highlight winner at 80% duration
 - **Debug controls:** Collapsible panel for time speed and overskudd manipulation
 - **Spatial game world:** Relative container with absolute-positioned children
+- **CharacterSkill class:** MobX observable with computed level from XP thresholds
+- **Color-based skill initialization:** MTG primary color determines starting skill bonus
+- **Resource tracking:** Map<ResourceType, number> pattern in ResourceStore
 
 ### Open Questions
 
@@ -85,9 +92,9 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 
 ## Session Continuity
 
-**Last session:** 2026-01-27
-**Stopped at:** Completed Phase 2 (Autonomous Behavior) - all 3 plans done
-**Resume file:** Ready for Phase 3 planning
+**Last session:** 2026-01-28
+**Stopped at:** Completed 03-01-PLAN.md (Skills and Resources Types)
+**Resume file:** .planning/phases/03-activity-loop/03-02-PLAN.md
 
 ---
-*Last updated: 2026-01-27*
+*Last updated: 2026-01-28*
