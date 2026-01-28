@@ -22,21 +22,18 @@ const CELEBRATION_MESSAGES: Record<string, Record<SkillCategory, string[]>> = {
 
 /**
  * Full-screen celebration overlay when character levels up
- * Auto-dismisses after 3 seconds or on click/tap
+ * Pauses game while displayed, resumes when user dismisses
  */
 export const LevelUpCelebration = observer(function LevelUpCelebration() {
-  const { skillStore, characterStore } = useGameStore();
+  const { skillStore, characterStore, timeStore } = useGameStore();
   const levelUp = skillStore.anyPendingLevelUp;
 
-  // Auto-dismiss after 3 seconds
+  // Pause game when level-up modal appears
   useEffect(() => {
     if (levelUp) {
-      const timer = setTimeout(() => {
-        skillStore.clearLevelUp(levelUp.characterId, levelUp.skill);
-      }, 3000);
-      return () => clearTimeout(timer);
+      timeStore.pause();
     }
-  }, [levelUp, skillStore]);
+  }, [levelUp, timeStore]);
 
   if (!levelUp) return null;
 
@@ -53,7 +50,10 @@ export const LevelUpCelebration = observer(function LevelUpCelebration() {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
-        onClick={() => skillStore.clearLevelUp(levelUp.characterId, levelUp.skill)}
+        onClick={() => {
+          skillStore.clearLevelUp(levelUp.characterId, levelUp.skill);
+          timeStore.resume();
+        }}
       >
         <motion.div
           initial={{ scale: 0.5, y: 50 }}
@@ -96,7 +96,7 @@ export const LevelUpCelebration = observer(function LevelUpCelebration() {
 
           {/* Tap to dismiss hint */}
           <div className="text-xs opacity-50 mt-4">
-            Tap anywhere to continue
+            Game paused - tap anywhere to continue
           </div>
         </motion.div>
       </motion.div>
