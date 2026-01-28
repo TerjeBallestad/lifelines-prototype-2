@@ -2,19 +2,19 @@
 
 ## Current Status
 
-**Phase:** 5 of 5 (Crisis Sequence)
-**Plan:** 4 of 4 in current phase
-**Status:** Complete
-**Last activity:** 2026-01-28 - Completed 05-04-PLAN.md (Crisis Epilogue)
+**Phase:** 6 of 6 (Polish)
+**Plan:** 0 of 1 in current phase
+**Status:** Ready to plan
+**Last activity:** 2026-01-28 - Added Phase 6 for tech debt polish
 
-**Progress:** [==================] 18/18 phase plans (100%)
+**Progress:** [=================.] 18/19 phase plans (95%)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-01-27)
 
 **Core value:** Validate that MTG colors + minimal config create distinct, interesting character behavior
-**Current focus:** All phases complete - Crisis Sequence finished
+**Current focus:** Phase 6 - Polish tech debt items from audit
 
 ## Phase Status
 
@@ -25,6 +25,7 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 3 - Activity Loop | Complete | 5/5 | 100% |
 | 4 - Quest System | Complete | 3/3 | 100% |
 | 5 - Crisis Sequence | Complete | 4/4 | 100% |
+| 6 - Polish | Pending | 0/1 | 0% |
 
 ## Accumulated Context
 
@@ -155,17 +156,17 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 
 ### Open Questions
 
-(None - all phases complete)
+(None)
 
 ### Blockers
 
-(None - project complete)
+(None)
 
 ## Session Continuity
 
 **Last session:** 2026-01-28
-**Stopped at:** Completed 05-04-PLAN.md (Crisis Epilogue) - All phases complete
-**Resume file:** None - project finished
+**Stopped at:** Added Phase 6 (Polish) for tech debt items
+**Resume file:** .planning/phases/06-polish/06-01-PLAN.md (to be created)
 
 ---
 *Last updated: 2026-01-28*

@@ -2,7 +2,7 @@
 
 **Created:** 2026-01-27
 **Depth:** Standard
-**Phases:** 5
+**Phases:** 6
 **Requirements:** 24
 
 ## Phase Overview
@@ -14,6 +14,7 @@
 | 3 | Activity Loop | Activities produce resources and train skills | ACT-03, ACT-04, ACT-05, ACT-06, ACT-07, UI-02, UI-03 | 5 |
 | 4 | Quest System | Player has direction through objectives | QUEST-01, QUEST-02, QUEST-03, QUEST-04 | 3 |
 | 5 | Crisis Sequence | Day 10 crisis reveals skill gap consequences | CHAR-04, CRISIS-01, CRISIS-02, CRISIS-03, CRISIS-04 | 4 |
+| 6 | Polish | Close tech debt items from milestone audit | (tech debt) | 3 |
 
 ## Phase Details
 
@@ -175,6 +176,31 @@ Plans:
 
 ---
 
+### Phase 6: Polish
+
+**Goal:** Close tech debt items identified in milestone audit
+
+**Plans:** 1 plan
+
+Plans:
+- [ ] 06-01-PLAN.md — Tech debt cleanup (first quest intro, debug controls, generalized celebrations)
+
+**Tech Debt Items:**
+- QuestIntroduction popup doesn't show for first quest on initial load/reset (Phase 4)
+- Debug controls visible by default (Phase 2)
+- Celebration messages hardcoded for 'elling' and 'mother' (Phase 3)
+
+**Success Criteria:**
+1. On game start or reset, first quest shows introduction popup
+2. Debug controls are collapsed/hidden by default
+3. Celebration messages work for any character name (generalized)
+
+**Dependencies:** Phase 5 (all core functionality complete)
+
+**Research notes:** Non-blocking polish items. These don't affect core functionality but improve the player experience and code quality.
+
+---
+
 ## Progress
 
 | Phase | Status | Progress |
@@ -184,6 +210,7 @@ Plans:
 | 3 - Activity Loop | Complete | 100% |
 | 4 - Quest System | Complete | 100% |
 | 5 - Crisis Sequence | Complete | 100% |
+| 6 - Polish | Pending | 0% |
 
 ---
 *Roadmap created: 2026-01-27*
