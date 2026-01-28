@@ -3,11 +3,11 @@
 ## Current Status
 
 **Phase:** 5 of 5 (Crisis Sequence)
-**Plan:** 1 of 4 in current phase
+**Plan:** 2 of 4 in current phase
 **Status:** In progress
-**Last activity:** 2026-01-28 - Completed 05-01-PLAN.md (Crisis Store Foundation)
+**Last activity:** 2026-01-28 - Completed 05-02-PLAN.md (Character Crisis Behaviors)
 
-**Progress:** [===============] 15/18 phase plans (83%)
+**Progress:** [================] 16/18 phase plans (89%)
 
 ## Project Reference
 
@@ -24,7 +24,7 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 2 - Autonomous Behavior | Complete | 3/3 | 100% |
 | 3 - Activity Loop | Complete | 5/5 | 100% |
 | 4 - Quest System | Complete | 3/3 | 100% |
-| 5 - Crisis Sequence | In progress | 1/4 | 25% |
+| 5 - Crisis Sequence | In progress | 2/4 | 50% |
 
 ## Accumulated Context
 
@@ -90,6 +90,9 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 05-01 | Retry penalty: -15% per attempt | Creates urgency without making retries useless |
 | 05-01 | Shadow penalty at overskudd < 30 | Blue character's paralysis when overwhelmed |
 | 05-01 | Social skill for phone calls | Communication/phone skills align with social training |
+| 05-02 | Shadow state at overskudd < 30 during active crisis | Consistent with 05-01 decision, now in Character class |
+| 05-02 | Mother slowdown progressive: 80%, 60%, 30% | Hour thresholds (8, 11, 13) for clear visual steps |
+| 05-02 | Elling worry detection at hour >= 11 | Tied to when Mother becomes visibly slower |
 
 ### Patterns Established
 
@@ -133,6 +136,8 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 - **Crisis state machine:** inactive -> warning -> active -> resolved with state-dependent triggers
 - **Action attempt tracking:** Map<string, number> for retry penalty calculations
 - **Hope bonus accumulation:** Limited modifier system for supporting actions
+- **Character-level crisis awareness:** Computed properties observe CrisisStore state
+- **Warning signs as behavioral changes:** currentWalkSpeed modifier based on time progression
 
 ### Open Questions
 
@@ -145,8 +150,8 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 ## Session Continuity
 
 **Last session:** 2026-01-28
-**Stopped at:** Completed 05-01-PLAN.md (Crisis Store Foundation)
-**Resume file:** Ready for 05-02-PLAN.md
+**Stopped at:** Completed 05-02-PLAN.md (Character Crisis Behaviors)
+**Resume file:** Ready for 05-03-PLAN.md
 
 ---
 *Last updated: 2026-01-28*
