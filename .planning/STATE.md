@@ -3,11 +3,11 @@
 ## Current Status
 
 **Phase:** 3 of 5 (Activity Loop)
-**Plan:** 3 of 5 complete
+**Plan:** 4 of 5 complete
 **Status:** In progress
-**Last activity:** 2026-01-28 - Completed 03-03-PLAN.md (Visual Feedback System)
+**Last activity:** 2026-01-28 - Completed 03-04-PLAN.md (Player Intervention)
 
-**Progress:** [=========~] 9/11 phase plans (~82%)
+**Progress:** [==========] 10/11 phase plans (~91%)
 
 ## Project Reference
 
@@ -22,7 +22,7 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 |-------|--------|-------|----------|
 | 1 - Foundation | Complete | 3/3 | 100% |
 | 2 - Autonomous Behavior | Complete | 3/3 | 100% |
-| 3 - Activity Loop | In progress | 3/5 | 60% |
+| 3 - Activity Loop | In progress | 4/5 | 80% |
 | 4 - Quest System | Pending | 0/? | 0% |
 | 5 - Crisis Sequence | Pending | 0/? | 0% |
 
@@ -68,6 +68,10 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 03-03 | MobX reaction for cross-component observation | Watches all characters' lastActivityResult |
 | 03-03 | 100ms stagger for multiple outputs | Visual clarity when activity produces multiple resources |
 | 03-03 | Resource pulse 0.3s duration | Visible but not distracting feedback |
+| 03-04 | Click opens modal (not selection) | More direct player intervention UX |
+| 03-04 | Attitude thresholds: <20 refusing, <40 reluctant | Consistent with existing refusal thresholds |
+| 03-04 | colorMatch >0.6 eager, <0.3 reluctant | Activity affinity affects willingness |
+| 03-04 | 3-second auto-clear for refusal messages | Keeps UI uncluttered |
 
 ### Patterns Established
 
@@ -96,6 +100,9 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 - **Pool pattern:** Spawn/remove with crypto.randomUUID for unique keys
 - **Cross-component observation:** MobX reaction in useEffect with cleanup disposers
 - **Value-change detection:** useRef to track previous value for pulse trigger
+- **Modal state pattern:** observable open/characterId in store, dialog ref in component
+- **Attitude calculation:** combine overskudd thresholds with color affinity match
+- **Personality-flavored text:** switch on primary color for different responses
 
 ### Open Questions
 
@@ -108,8 +115,8 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 ## Session Continuity
 
 **Last session:** 2026-01-28
-**Stopped at:** Completed 03-03-PLAN.md (Visual Feedback System)
-**Resume file:** .planning/phases/03-activity-loop/03-04-PLAN.md
+**Stopped at:** Completed 03-04-PLAN.md (Player Intervention)
+**Resume file:** .planning/phases/03-activity-loop/03-05-PLAN.md
 
 ---
 *Last updated: 2026-01-28*
