@@ -143,6 +143,32 @@ export class Character {
   }
 
   /**
+   * Current walking speed with modifiers
+   * On Day 10, Mother progressively slows as warning sign
+   */
+  get currentWalkSpeed(): number {
+    let speed = this.baseWalkSpeed;
+
+    // Warning sign: Mother slows down on Day 10
+    if (this.id === 'mother') {
+      const timeStore = this.characterStore.rootStore.timeStore;
+      if (timeStore.day === 10) {
+        const hour = timeStore.hour;
+        // Progressive slowdown: 80% at 8am, 60% at 11am, 30% at 13pm
+        if (hour >= 13) {
+          speed *= 0.3;
+        } else if (hour >= 11) {
+          speed *= 0.6;
+        } else if (hour >= 8) {
+          speed *= 0.8;
+        }
+      }
+    }
+
+    return speed;
+  }
+
+  /**
    * Update needs based on time passing
    * Needs decay slowly over time (base rate: 1 point per game-hour)
    */
@@ -254,7 +280,7 @@ export class Character {
 
     // Move toward target
     // Speed scales with overskudd (low overskudd = slower)
-    const speed = (this.overskudd / 100) * this.baseWalkSpeed * gameMinutes;
+    const speed = (this.overskudd / 100) * this.currentWalkSpeed * gameMinutes;
 
     // Normalize direction and move
     const dirX = dx / distance;
