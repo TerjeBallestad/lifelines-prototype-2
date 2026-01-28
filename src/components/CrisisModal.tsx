@@ -62,18 +62,35 @@ export const CrisisModal = observer(function CrisisModal() {
           className="relative z-10 mx-4 max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-base-100 p-6 shadow-2xl"
         >
           {/* Header with alert */}
-          <div className="mb-6 text-center">
+          <div className="mb-4 text-center">
             <motion.div
               animate={{ scale: [1, 1.1, 1] }}
               transition={{ repeat: Infinity, duration: 1 }}
-              className="mb-3 inline-block"
+              className="mb-2 inline-block"
             >
-              <AlertTriangle className="h-16 w-16 text-error" />
+              <AlertTriangle className="h-12 w-12 text-error" />
             </motion.div>
             <h2 className="text-2xl font-bold text-error">CRISIS!</h2>
-            <p className="mt-2 text-base-content/80">
-              Mother has collapsed on the floor. She's not responding.
+            <p className="mt-1 text-sm text-base-content/80">
+              Mother has collapsed. She's not responding.
             </p>
+          </div>
+
+          {/* Attempts remaining - urgent indicator */}
+          <div className="mb-4 flex justify-center gap-2">
+            {Array.from({ length: crisisStore.maxAttempts }).map((_, i) => (
+              <motion.div
+                key={i}
+                initial={{ scale: 1 }}
+                animate={i >= crisisStore.attemptsRemaining ? { scale: [1, 0.8], opacity: 0.3 } : {}}
+                className={`h-3 w-8 rounded-full ${
+                  i < crisisStore.attemptsRemaining ? 'bg-error' : 'bg-base-300'
+                }`}
+              />
+            ))}
+          </div>
+          <div className="mb-4 text-center text-xs text-error/80">
+            {crisisStore.attemptsRemaining} attempt{crisisStore.attemptsRemaining !== 1 ? 's' : ''} remaining
           </div>
 
           {/* Shadow state warning */}

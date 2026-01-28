@@ -37,40 +37,39 @@ export const CrisisActionButton = observer(function CrisisActionButton({
     <motion.button
       whileHover={{ scale: disabled ? 1 : 1.02 }}
       whileTap={{ scale: disabled ? 1 : 0.98 }}
-      className={`btn btn-lg w-full justify-start gap-4 ${
-        disabled ? 'btn-disabled opacity-50' : 'btn-outline btn-error'
+      className={`flex h-auto min-h-[4rem] w-full items-center gap-3 rounded-lg border-2 p-3 text-left transition-colors ${
+        disabled
+          ? 'cursor-not-allowed border-base-300 opacity-50'
+          : 'cursor-pointer border-error/50 hover:border-error hover:bg-error/10'
       }`}
       onClick={() => !disabled && onSelect(action)}
       disabled={disabled}
     >
       {/* Icon */}
-      <span className="text-3xl">{action.icon}</span>
+      <span className="shrink-0 text-2xl">{action.icon}</span>
 
       {/* Action info */}
-      <div className="flex-1 text-left">
-        <div className="font-bold">{action.name}</div>
-        <div className="text-sm opacity-70">{action.description}</div>
-        <div className="mt-1 flex items-center gap-2 text-xs">
-          <span className="badge badge-sm badge-ghost">
+      <div className="min-w-0 flex-1">
+        <div className="truncate font-bold">{action.name}</div>
+        <div className="truncate text-xs opacity-70">{action.description}</div>
+        <div className="mt-1 flex flex-wrap items-center gap-1 text-xs">
+          <span className="badge badge-xs badge-ghost">
             {action.skillCategory} Lv.{skillLevel}
           </span>
           {attempts > 0 && (
-            <span className="badge badge-sm badge-warning">
-              Retry #{attempts}
-            </span>
+            <span className="badge badge-xs badge-warning">#{attempts}</span>
           )}
           {action.givesHopeBonus && (
-            <span className="badge badge-sm badge-info">+Hope</span>
+            <span className="badge badge-xs badge-info">+Hope</span>
           )}
         </div>
       </div>
 
       {/* Success chance */}
-      <div className="text-right">
-        <div className={`text-2xl font-bold ${chanceColor}`}>
+      <div className="shrink-0 text-right">
+        <div className={`text-xl font-bold ${chanceColor}`}>
           {successChance}%
         </div>
-        <div className="text-xs opacity-60">success</div>
       </div>
     </motion.button>
   );

@@ -8,28 +8,28 @@ import type { CrisisAction } from '../types/game';
 export const CRISIS_ACTIONS: CrisisAction[] = [
   {
     id: 'call-emergency',
-    name: 'Call Emergency Services',
+    name: 'Call Emergency',
     icon: '📞',
-    description: 'Dial 113 and explain the situation',
+    description: 'Dial 113 for help',
     skillCategory: 'Social',  // Phone skill is Social category
-    baseDifficulty: 2,
+    baseDifficulty: 3,  // Highest difficulty - this is the critical action
   },
   {
     id: 'help-mother',
     name: 'Help Mother',
     icon: '🤲',
-    description: 'Try to make her comfortable',
+    description: 'Make her comfortable',
     skillCategory: 'Practical',
-    baseDifficulty: 1,
+    baseDifficulty: 2,  // Moderate difficulty
     givesHopeBonus: true,
   },
   {
     id: 'run-neighbor',
-    name: 'Run to Neighbor',
+    name: 'Get Neighbor',
     icon: '🏃',
-    description: 'Get help from next door',
+    description: 'Run for help next door',
     skillCategory: 'Social',
-    baseDifficulty: 1,
+    baseDifficulty: 2,  // Moderate difficulty
     givesHopeBonus: true,
   },
 ];

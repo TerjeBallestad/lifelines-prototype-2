@@ -169,23 +169,23 @@ export class Character {
 
   /**
    * Current walking speed with modifiers
-   * On Day 10, Mother progressively slows as warning sign
+   * On Day 10, Mother progressively slows dramatically as warning sign
    */
   get currentWalkSpeed(): number {
     let speed = this.baseWalkSpeed;
 
-    // Warning sign: Mother slows down on Day 10
+    // Warning sign: Mother slows down dramatically on Day 10
     if (this.id === 'mother') {
       const timeStore = this.characterStore.rootStore.timeStore;
       if (timeStore.day === 10) {
         const hour = timeStore.hour;
-        // Progressive slowdown: 80% at 8am, 60% at 11am, 30% at 13pm
+        // Progressive slowdown: 40% at 8am, 20% at 11am, barely moving at 13pm
         if (hour >= 13) {
-          speed *= 0.3;
+          speed *= 0.05;
         } else if (hour >= 11) {
-          speed *= 0.6;
+          speed *= 0.2;
         } else if (hour >= 8) {
-          speed *= 0.8;
+          speed *= 0.4;
         }
       }
     }
@@ -196,10 +196,27 @@ export class Character {
   /**
    * Update needs based on time passing
    * Needs decay slowly over time (base rate: 1 point per game-hour)
+   * On Day 10, Mother's needs decay rapidly as she deteriorates
    */
   updateNeeds(gameMinutes: number): void {
     const decayPerMinute = 1 / 60; // 1 point per hour = 1/60 per minute
-    const decay = gameMinutes * decayPerMinute;
+    let decay = gameMinutes * decayPerMinute;
+
+    // Mother deteriorates rapidly on Day 10
+    if (this.id === 'mother') {
+      const timeStore = this.characterStore.rootStore.timeStore;
+      if (timeStore.day === 10) {
+        const hour = timeStore.hour;
+        // Accelerating decay: 3x at 8am, 6x at 11am, 10x at 13pm
+        if (hour >= 13) {
+          decay *= 10;
+        } else if (hour >= 11) {
+          decay *= 6;
+        } else if (hour >= 8) {
+          decay *= 3;
+        }
+      }
+    }
 
     this.needs.energy = Math.max(0, this.needs.energy - decay);
     this.needs.social = Math.max(0, this.needs.social - decay * 0.5); // Social decays slower

@@ -25,6 +25,10 @@ export class CrisisStore {
   // Track attempts per action for retry penalty (-15% per attempt)
   actionAttempts: Map<string, number> = new Map();
 
+  // Total attempts across all actions (max 3 before Mother dies)
+  totalAttempts: number = 0;
+  readonly maxAttempts: number = 3;
+
   // Hope bonus from helping actions (+10% each, max +20%)
   hopeBonus: number = 0;
 
@@ -66,7 +70,10 @@ export class CrisisStore {
   /**
    * Get success chance for an action
    * Base: calculateSuccessChance(skillLevel, difficulty)
-   * Modifiers: -15% per retry, +hopeBonus, -shadowPenalty
+   * Modifiers: -25% crisis panic, -15% per retry, +hopeBonus, -shadowPenalty
+   *
+   * Crisis is meant to be HARD - dying should be the most likely outcome
+   * without proper Social skill training beforehand
    */
   getActionSuccessChance(actionId: string): number {
     const action = CRISIS_ACTIONS.find(a => a.id === actionId);
@@ -78,6 +85,9 @@ export class CrisisStore {
 
     // Base chance from skill system
     let chance = calculateSuccessChance(skillLevel, action.baseDifficulty);
+
+    // Crisis panic penalty: Elling is panicking, everything is harder
+    chance -= 25;
 
     // Retry penalty: -15% per previous attempt
     const attempts = this.actionAttempts.get(actionId) ?? 0;
@@ -128,8 +138,16 @@ export class CrisisStore {
   }
 
   /**
+   * How many attempts remain before Mother dies
+   */
+  get attemptsRemaining(): number {
+    return this.maxAttempts - this.totalAttempts;
+  }
+
+  /**
    * Attempt a crisis action
    * Returns result and updates state
+   * After maxAttempts (3), Mother dies automatically
    */
   attemptAction(actionId: string): CrisisActionResult | null {
     const action = CRISIS_ACTIONS.find(a => a.id === actionId);
@@ -139,9 +157,10 @@ export class CrisisStore {
     const roll = Math.random() * 100;
     const succeeded = roll < chance;
 
-    // Track attempt
+    // Track attempt (both per-action and total)
     const attempts = this.actionAttempts.get(actionId) ?? 0;
     this.actionAttempts.set(actionId, attempts + 1);
+    this.totalAttempts++;
 
     // Apply hope bonus if this action gives it
     if (action.givesHopeBonus && succeeded) {
@@ -160,6 +179,9 @@ export class CrisisStore {
     // Check for resolution
     if (actionId === 'call-emergency' && succeeded) {
       this.resolveWith('saved');
+    } else if (this.totalAttempts >= this.maxAttempts) {
+      // Out of time - Mother dies
+      this.resolveWith('lost');
     }
 
     return result;
@@ -194,6 +216,7 @@ export class CrisisStore {
     this.crisisState = 'inactive';
     this.outcome = null;
     this.actionAttempts.clear();
+    this.totalAttempts = 0;
     this.hopeBonus = 0;
     this.lastActionResult = null;
   }
