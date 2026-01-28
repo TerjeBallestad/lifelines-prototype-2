@@ -3,11 +3,11 @@
 ## Current Status
 
 **Phase:** 3 of 5 (Activity Loop)
-**Plan:** 2 of 5 complete
+**Plan:** 3 of 5 complete
 **Status:** In progress
-**Last activity:** 2026-01-28 - Completed 03-02-PLAN.md (Skill Integration)
+**Last activity:** 2026-01-28 - Completed 03-03-PLAN.md (Visual Feedback System)
 
-**Progress:** [========--] 8/11 phase plans (~73%)
+**Progress:** [=========~] 9/11 phase plans (~82%)
 
 ## Project Reference
 
@@ -22,7 +22,7 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 |-------|--------|-------|----------|
 | 1 - Foundation | Complete | 3/3 | 100% |
 | 2 - Autonomous Behavior | Complete | 3/3 | 100% |
-| 3 - Activity Loop | In progress | 2/5 | 40% |
+| 3 - Activity Loop | In progress | 3/5 | 60% |
 | 4 - Quest System | Pending | 0/? | 0% |
 | 5 - Crisis Sequence | Pending | 0/? | 0% |
 
@@ -64,6 +64,10 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 | 03-02 | Failed = 50% output, 50% XP | Failure isn't total loss, learning from failure encouraged |
 | 03-02 | Critical: 5 + (level*5)% chance, 150% output | Higher skill = more crits, meaningful but not OP reward |
 | 03-02 | lastActivityResult on Character | Stores completion result for UI feedback display |
+| 03-03 | useMotionValue for animation performance | Avoids React re-renders during animation |
+| 03-03 | MobX reaction for cross-component observation | Watches all characters' lastActivityResult |
+| 03-03 | 100ms stagger for multiple outputs | Visual clarity when activity produces multiple resources |
+| 03-03 | Resource pulse 0.3s duration | Visible but not distracting feedback |
 
 ### Patterns Established
 
@@ -88,6 +92,10 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 - **SkillSystem pure functions:** Calculation functions exported for testability (calculateSuccessChance, calculateOutput, etc.)
 - **processActivityCompletion:** Pure orchestration function for activity result generation
 - **Activity completion integration:** completeActivity() calls SkillSystem, SkillStore, and ResourceStore
+- **FloatingNumber:** Motion values (useMotionValue + animate) for DOM-efficient animation
+- **Pool pattern:** Spawn/remove with crypto.randomUUID for unique keys
+- **Cross-component observation:** MobX reaction in useEffect with cleanup disposers
+- **Value-change detection:** useRef to track previous value for pulse trigger
 
 ### Open Questions
 
@@ -100,8 +108,8 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 ## Session Continuity
 
 **Last session:** 2026-01-28
-**Stopped at:** Completed 03-02-PLAN.md (Skill Integration)
-**Resume file:** .planning/phases/03-activity-loop/03-03-PLAN.md
+**Stopped at:** Completed 03-03-PLAN.md (Visual Feedback System)
+**Resume file:** .planning/phases/03-activity-loop/03-04-PLAN.md
 
 ---
 *Last updated: 2026-01-28*
