@@ -183,7 +183,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 06-01-PLAN.md — Fix first quest intro, collapse debug controls, generalize celebrations
+- [x] 06-01-PLAN.md — Fix first quest intro, collapse debug controls, generalize celebrations
 
 **Tech Debt Items:**
 - QuestIntroduction popup doesn't show for first quest on initial load/reset (Phase 4)
@@ -210,7 +210,7 @@ Plans:
 | 3 - Activity Loop | Complete | 100% |
 | 4 - Quest System | Complete | 100% |
 | 5 - Crisis Sequence | Complete | 100% |
-| 6 - Polish | Planned | 0% |
+| 6 - Polish | Complete | 100% |
 
 ---
 *Roadmap created: 2026-01-27*
@@ -219,4 +219,4 @@ Plans:
 *Phase 3 completed: 2026-01-28*
 *Phase 4 completed: 2026-01-28*
 *Phase 5 completed: 2026-01-28*
-*Phase 6 planned: 2026-01-28*
+*Phase 6 completed: 2026-01-28*
