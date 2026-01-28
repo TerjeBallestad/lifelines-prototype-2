@@ -7,17 +7,44 @@ import { useGameStore } from '../stores/RootStore';
 /**
  * Brief popup introducing the next quest after celebration dismissed
  * Auto-dismisses after a few seconds, doesn't pause game
+ *
+ * Also shows introduction for the first quest on initial load or after game reset.
  */
 export const QuestIntroduction = observer(function QuestIntroduction() {
   const { questStore, timeStore } = useGameStore();
   const [showIntro, setShowIntro] = useState(false);
   const previousQuestIndex = useRef(questStore.currentQuestIndex);
+  const hasShownFirst = useRef(false);
 
   const quest = questStore.currentQuest;
 
-  // Detect when quest index advances (after celebration dismissed)
+  // Detect when quest index advances (after celebration dismissed) or first quest on load
   useEffect(() => {
     const currentIndex = questStore.currentQuestIndex;
+
+    // Detect game reset: if currentIndex goes back to 0, reset our tracking
+    if (currentIndex === 0 && previousQuestIndex.current > 0) {
+      hasShownFirst.current = false;
+    }
+
+    // Show intro for first quest on initial load or after reset
+    if (currentIndex === 0 && !hasShownFirst.current && quest) {
+      // Small delay to let game UI render first
+      const firstQuestTimer = setTimeout(() => {
+        setShowIntro(true);
+        hasShownFirst.current = true;
+
+        // Auto-dismiss after 3 seconds
+        const dismissTimer = setTimeout(() => {
+          setShowIntro(false);
+        }, 3000);
+
+        return () => clearTimeout(dismissTimer);
+      }, 500);
+
+      previousQuestIndex.current = currentIndex;
+      return () => clearTimeout(firstQuestTimer);
+    }
 
     // If quest advanced and we have a new quest, show intro
     if (currentIndex > previousQuestIndex.current && quest) {
