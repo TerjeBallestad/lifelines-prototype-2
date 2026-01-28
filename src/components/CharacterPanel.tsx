@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from 'motion/react';
 import { useGameStore } from '../stores/RootStore';
 import { ColorBadge } from './ColorBadge';
 import { OverskuddMeter } from './OverskuddMeter';
+import { SkillProgress } from './SkillProgress';
+import type { SkillCategory } from '../types/game';
 
 /**
  * CharacterPanel displays full character information when selected
@@ -12,7 +14,7 @@ import { OverskuddMeter } from './OverskuddMeter';
  * CRITICAL: Uses observer() for MobX reactivity.
  */
 export const CharacterPanel = observer(function CharacterPanel() {
-  const { interactionStore } = useGameStore();
+  const { interactionStore, skillStore } = useGameStore();
   const character = interactionStore.selectedCharacter;
 
   return (
@@ -125,6 +127,19 @@ export const CharacterPanel = observer(function CharacterPanel() {
               <span className="text-sm font-medium">
                 {character.currentActivity?.name ?? 'Idle'}
               </span>
+            </div>
+
+            {/* Skills Section */}
+            <div className="mt-4 pt-4 border-t border-base-300">
+              <h4 className="text-sm font-medium text-base-content/70 mb-2">Skills</h4>
+              <div className="grid grid-cols-2 gap-2">
+                {(['Practical', 'Creative', 'Social', 'Technical'] as const).map(category => {
+                  const skill = skillStore.getSkill(character.id, category as SkillCategory);
+                  return skill ? (
+                    <SkillProgress key={category} skill={skill} compact />
+                  ) : null;
+                })}
+              </div>
             </div>
           </div>
         </motion.div>

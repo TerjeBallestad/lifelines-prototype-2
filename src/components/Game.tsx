@@ -7,6 +7,8 @@ import { CharacterSprite } from './CharacterSprite';
 import { CharacterPanel } from './CharacterPanel';
 import { ResourceBar } from './ResourceBar';
 import { FloatingNumberPool } from './FloatingNumberPool';
+import { LevelUpCelebration } from './LevelUpCelebration';
+import { ActivityModal } from './ActivityModal';
 
 /**
  * Activity location markers for visual hints in the game world
@@ -87,7 +89,7 @@ export const Game = observer(function Game() {
                   isSelected={
                     interactionStore.selectedCharacterId === character.id
                   }
-                  onClick={() => interactionStore.selectCharacter(character.id)}
+                  onClick={() => interactionStore.openActivityModal(character.id)}
                 />
               ))}
 
@@ -131,6 +133,12 @@ export const Game = observer(function Game() {
           </div>
         </div>
       </div>
+
+      {/* Level up celebration overlay */}
+      <LevelUpCelebration />
+
+      {/* Activity assignment modal */}
+      <ActivityModal />
     </div>
   );
 });
