@@ -74,4 +74,14 @@ export class TimeStore {
   resume(): void {
     this.isPaused = false;
   }
+
+  /**
+   * Reset for new game
+   */
+  reset(): void {
+    this.day = 1;
+    this.hour = 6;
+    this.minute = 0;
+    this.isPaused = true;
+  }
 }

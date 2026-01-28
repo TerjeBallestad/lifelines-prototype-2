@@ -588,4 +588,14 @@ export class CharacterStore {
       character.update(gameMinutes);
     }
   }
+
+  /**
+   * Reset for new game - reinitialize all characters from data
+   */
+  reset(): void {
+    this.characters.clear();
+    for (const data of CHARACTERS) {
+      this.characters.set(data.id, new Character(data, this));
+    }
+  }
 }

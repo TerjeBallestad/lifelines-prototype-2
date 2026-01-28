@@ -172,4 +172,11 @@ export class SkillStore {
       skill.clearLevelUp();
     }
   }
+
+  /**
+   * Reset for new game
+   */
+  reset(): void {
+    this.characterSkills.clear();
+  }
 }

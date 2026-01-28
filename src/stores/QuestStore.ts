@@ -137,4 +137,12 @@ export class QuestStore {
   get totalQuests(): number {
     return QUESTS.length;
   }
+
+  /**
+   * Reset for new game
+   */
+  reset(): void {
+    this.currentQuestIndex = 0;
+    this.pendingCompletion = null;
+  }
 }

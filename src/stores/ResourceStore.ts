@@ -64,4 +64,23 @@ export class ResourceStore {
       progress: this.getResource('progress'),
     };
   }
+
+  /**
+   * Reset for new game
+   */
+  reset(): void {
+    this.resources.clear();
+    // Reinitialize all resources to 0
+    const types: ResourceType[] = [
+      'creativity',
+      'food',
+      'cleanliness',
+      'comfort',
+      'connection',
+      'progress',
+    ];
+    for (const type of types) {
+      this.resources.set(type, 0);
+    }
+  }
 }

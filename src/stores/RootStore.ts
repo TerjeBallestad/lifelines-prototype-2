@@ -54,6 +54,33 @@ export class RootStore {
       this.characterStore.updateAll(gameMinutes);
     }
   }
+
+  /**
+   * Reset entire game to initial state
+   * Used for "Try Again" after crisis ending
+   */
+  resetGame(): void {
+    // Reset time to day 1
+    this.timeStore.reset();
+
+    // Reset crisis state
+    this.crisisStore.reset();
+
+    // Reset quest progress
+    this.questStore.reset();
+
+    // Reset resources
+    this.resourceStore.reset();
+
+    // Reset skills (reinitialize from character colors)
+    this.skillStore.reset();
+    for (const character of this.characterStore.allCharacters) {
+      this.skillStore.initializeCharacterSkills(character.id, character.colors);
+    }
+
+    // Reset characters (needs and state)
+    this.characterStore.reset();
+  }
 }
 
 // Singleton instance
