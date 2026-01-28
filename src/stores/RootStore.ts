@@ -2,6 +2,8 @@ import { createContext, useContext } from 'react';
 import { TimeStore } from './TimeStore';
 import { CharacterStore } from './CharacterStore';
 import { InteractionStore } from './InteractionStore';
+import { SkillStore } from './SkillStore';
+import { ResourceStore } from './ResourceStore';
 
 /**
  * RootStore is the central store that creates and connects all other stores
@@ -15,11 +17,20 @@ export class RootStore {
   timeStore: TimeStore;
   characterStore: CharacterStore;
   interactionStore: InteractionStore;
+  skillStore: SkillStore;
+  resourceStore: ResourceStore;
 
   constructor() {
     this.timeStore = new TimeStore(this);
     this.characterStore = new CharacterStore(this);
     this.interactionStore = new InteractionStore(this);
+    this.skillStore = new SkillStore(this);
+    this.resourceStore = new ResourceStore(this);
+
+    // Initialize skills for all characters based on their MTG colors
+    for (const character of this.characterStore.allCharacters) {
+      this.skillStore.initializeCharacterSkills(character.id, character.colors);
+    }
   }
 
   /**
