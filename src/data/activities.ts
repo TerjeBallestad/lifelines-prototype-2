@@ -39,6 +39,9 @@ const REGULAR_ACTIVITIES: Activity[] = [
       energy: -5,
       purpose: 15,
     },
+    skillCategory: 'Creative',
+    outputs: [{ resource: 'creativity', baseAmount: 15 }],
+    difficulty: 1,
   },
   {
     id: 'thinking',
@@ -51,6 +54,9 @@ const REGULAR_ACTIVITIES: Activity[] = [
       energy: -3,
       purpose: 10,
     },
+    skillCategory: 'Creative',
+    outputs: [{ resource: 'creativity', baseAmount: 10 }],
+    difficulty: 1,
   },
 
   // White activities - Mother's domain
@@ -65,6 +71,9 @@ const REGULAR_ACTIVITIES: Activity[] = [
       energy: -10,
       purpose: 20,
     },
+    skillCategory: 'Practical',
+    outputs: [{ resource: 'food', baseAmount: 20 }],
+    difficulty: 2,
   },
   {
     id: 'cleaning',
@@ -77,6 +86,9 @@ const REGULAR_ACTIVITIES: Activity[] = [
       energy: -8,
       purpose: 12,
     },
+    skillCategory: 'Practical',
+    outputs: [{ resource: 'cleanliness', baseAmount: 15 }],
+    difficulty: 1,
   },
   {
     id: 'check-elling',
@@ -90,6 +102,9 @@ const REGULAR_ACTIVITIES: Activity[] = [
       social: 5,
       purpose: 8,
     },
+    skillCategory: 'Social',
+    outputs: [{ resource: 'connection', baseAmount: 5 }],
+    difficulty: 1,
   },
 
   // Neutral activities - no strong color preference
@@ -104,6 +119,8 @@ const REGULAR_ACTIVITIES: Activity[] = [
       energy: 5,
       social: 3,
     },
+    // No skillCategory - passive activity
+    outputs: [{ resource: 'comfort', baseAmount: 5 }],
   },
   {
     id: 'phone',
@@ -116,6 +133,9 @@ const REGULAR_ACTIVITIES: Activity[] = [
       energy: 2,
       social: 8,
     },
+    skillCategory: 'Social',
+    outputs: [{ resource: 'connection', baseAmount: 10 }],
+    difficulty: 2,
   },
 
   // Green-influenced recovery activity
@@ -129,6 +149,8 @@ const REGULAR_ACTIVITIES: Activity[] = [
     effects: {
       energy: 15,
     },
+    // No skillCategory - recovery activity
+    outputs: [{ resource: 'comfort', baseAmount: 10 }],
   },
 ];
 
