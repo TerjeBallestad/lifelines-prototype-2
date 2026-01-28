@@ -102,3 +102,25 @@ export interface Quest {
     resources?: { type: ResourceType; amount: number }[];
   };
 }
+
+// Crisis system types
+export type CrisisState = 'inactive' | 'warning' | 'active' | 'resolved';
+export type CrisisOutcome = 'saved' | 'lost' | null;
+
+export interface CrisisAction {
+  id: string;
+  name: string;
+  icon: string;  // Emoji
+  description: string;
+  skillCategory: SkillCategory;
+  baseDifficulty: number;  // 1-3
+  // Non-phone actions give hope bonus to next phone attempt
+  givesHopeBonus?: boolean;
+}
+
+export interface CrisisActionResult {
+  action: CrisisAction;
+  succeeded: boolean;
+  roll: number;
+  chance: number;
+}
