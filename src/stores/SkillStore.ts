@@ -1,6 +1,10 @@
 import { makeAutoObservable } from 'mobx';
 import type { SkillCategory, MTGColorProfile } from '../types/game';
-import { getLevelFromXP, getXPToNextLevel, getLevelProgress } from '../data/skills';
+import {
+  getLevelFromXP,
+  getXPToNextLevel,
+  getLevelProgress,
+} from '../data/skills';
 import type { RootStore } from './RootStore';
 
 /**
@@ -89,9 +93,17 @@ export class SkillStore {
    * - Red primary: Social starts at level 2 (100 XP)
    * - Black primary: Technical starts at level 2 (100 XP)
    */
-  initializeCharacterSkills(characterId: string, colors: MTGColorProfile): void {
+  initializeCharacterSkills(
+    characterId: string,
+    colors: MTGColorProfile
+  ): void {
     const skills = new Map<SkillCategory, CharacterSkill>();
-    const categories: SkillCategory[] = ['Practical', 'Creative', 'Social', 'Technical'];
+    const categories: SkillCategory[] = [
+      'Practical',
+      'Creative',
+      'Social',
+      'Technical',
+    ];
 
     // Determine which category gets the bonus based on primary color
     let bonusCategory: SkillCategory | null = null;
@@ -123,14 +135,19 @@ export class SkillStore {
   /**
    * Get skill for a character
    */
-  getSkill(characterId: string, category: SkillCategory): CharacterSkill | undefined {
+  getSkill(
+    characterId: string,
+    category: SkillCategory
+  ): CharacterSkill | undefined {
     return this.characterSkills.get(characterId)?.get(category);
   }
 
   /**
    * Get all skills for a character
    */
-  getCharacterSkills(characterId: string): Map<SkillCategory, CharacterSkill> | undefined {
+  getCharacterSkills(
+    characterId: string
+  ): Map<SkillCategory, CharacterSkill> | undefined {
     return this.characterSkills.get(characterId);
   }
 
@@ -148,7 +165,11 @@ export class SkillStore {
    * Computed: check if any character has pending level-up
    * Returns first found level-up for UI to display
    */
-  get anyPendingLevelUp(): { characterId: string; skill: SkillCategory; newLevel: number } | null {
+  get anyPendingLevelUp(): {
+    characterId: string;
+    skill: SkillCategory;
+    newLevel: number;
+  } | null {
     for (const [characterId, skills] of this.characterSkills) {
       for (const [category, skill] of skills) {
         if (skill.pendingLevelUp) {

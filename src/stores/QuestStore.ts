@@ -61,7 +61,9 @@ export class QuestStore {
    */
   private getResourceQuestProgress(quest: Quest): number {
     if (!quest.resourceType || !quest.targetAmount) return 0;
-    const current = this.rootStore.resourceStore.getResource(quest.resourceType);
+    const current = this.rootStore.resourceStore.getResource(
+      quest.resourceType
+    );
     return Math.min(1, current / quest.targetAmount);
   }
 
@@ -69,8 +71,12 @@ export class QuestStore {
    * Progress for skill-based quests
    */
   private getSkillQuestProgress(quest: Quest): number {
-    if (!quest.characterId || !quest.skillCategory || !quest.targetLevel) return 0;
-    const skill = this.rootStore.skillStore.getSkill(quest.characterId, quest.skillCategory);
+    if (!quest.characterId || !quest.skillCategory || !quest.targetLevel)
+      return 0;
+    const skill = this.rootStore.skillStore.getSkill(
+      quest.characterId,
+      quest.skillCategory
+    );
     if (!skill) return 0;
 
     // If at or above target level, complete
@@ -110,7 +116,11 @@ export class QuestStore {
    * Does NOT trigger if already showing completion modal
    */
   get isQuestComplete(): boolean {
-    return this.currentQuestProgress >= 1 && !this.pendingCompletion && this.currentQuest !== null;
+    return (
+      this.currentQuestProgress >= 1 &&
+      !this.pendingCompletion &&
+      this.currentQuest !== null
+    );
   }
 
   /**

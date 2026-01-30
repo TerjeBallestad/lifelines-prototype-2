@@ -89,11 +89,13 @@ export const QuestIntroduction = observer(function QuestIntroduction() {
 
           {/* Content */}
           <div>
-            <div className="text-primary text-xs font-medium uppercase tracking-wide">
+            <div className="text-primary text-xs font-medium tracking-wide uppercase">
               New Quest
             </div>
             <div className="text-lg font-bold">{quest.title}</div>
-            <div className="text-base-content/70 text-sm">{quest.description}</div>
+            <div className="text-base-content/70 text-sm">
+              {quest.description}
+            </div>
           </div>
 
           {/* Progress indicator */}

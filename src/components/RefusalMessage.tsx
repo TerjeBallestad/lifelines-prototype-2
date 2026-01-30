@@ -16,7 +16,9 @@ interface RefusalMessageProps {
  *
  * Auto-clears after 3 seconds (controlled by Character class).
  */
-export const RefusalMessage = observer(function RefusalMessage({ character }: RefusalMessageProps) {
+export const RefusalMessage = observer(function RefusalMessage({
+  character,
+}: RefusalMessageProps) {
   if (!character.refusalMessage) return null;
 
   return (
@@ -25,9 +27,9 @@ export const RefusalMessage = observer(function RefusalMessage({ character }: Re
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -10 }}
-        className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap z-30"
+        className="absolute bottom-full left-1/2 z-30 mb-2 -translate-x-1/2 whitespace-nowrap"
       >
-        <div className="bg-base-100 rounded-lg px-3 py-2 shadow-lg border border-base-300">
+        <div className="bg-base-100 border-base-300 rounded-lg border px-3 py-2 shadow-lg">
           <span className="mr-2">{character.refusalIcon}</span>
           <span className="text-sm italic">{character.refusalMessage}</span>
         </div>

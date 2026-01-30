@@ -39,8 +39,8 @@ export const CrisisActionButton = observer(function CrisisActionButton({
       whileTap={{ scale: disabled ? 1 : 0.98 }}
       className={`flex h-auto min-h-[4rem] w-full items-center gap-3 rounded-lg border-2 p-3 text-left transition-colors ${
         disabled
-          ? 'cursor-not-allowed border-base-300 opacity-50'
-          : 'cursor-pointer border-error/50 hover:border-error hover:bg-error/10'
+          ? 'border-base-300 cursor-not-allowed opacity-50'
+          : 'border-error/50 hover:border-error hover:bg-error/10 cursor-pointer'
       }`}
       onClick={() => !disabled && onSelect(action)}
       disabled={disabled}

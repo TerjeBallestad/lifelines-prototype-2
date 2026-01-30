@@ -42,7 +42,7 @@ export const CrisisEpilogue = observer(function CrisisEpilogue() {
           initial={{ scale: 0.9, y: 20 }}
           animate={{ scale: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="mx-4 max-h-[90vh] w-full max-w-xl overflow-y-auto rounded-2xl bg-base-100 p-8 shadow-2xl"
+          className="bg-base-100 mx-4 max-h-[90vh] w-full max-w-xl overflow-y-auto rounded-2xl p-8 shadow-2xl"
         >
           {/* Outcome icon */}
           <motion.div
@@ -52,9 +52,9 @@ export const CrisisEpilogue = observer(function CrisisEpilogue() {
             className="mb-6 text-center"
           >
             {isSaved ? (
-              <Heart className={`mx-auto h-20 w-20 text-success`} />
+              <Heart className={`text-success mx-auto h-20 w-20`} />
             ) : (
-              <Skull className={`mx-auto h-20 w-20 text-error`} />
+              <Skull className={`text-error mx-auto h-20 w-20`} />
             )}
           </motion.div>
 
@@ -114,7 +114,7 @@ export const CrisisEpilogue = observer(function CrisisEpilogue() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.9 + epilogue.paragraphs.length * 0.3 + 1 }}
-              className="mt-6 text-center text-sm text-base-content/50"
+              className="text-base-content/50 mt-6 text-center text-sm"
             >
               Tip: Train Elling's Social skill to improve phone call success.
             </motion.div>

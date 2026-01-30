@@ -8,7 +8,12 @@ export interface MTGColorConfig {
 }
 
 export const MTG_COLORS: Record<MTGColor, MTGColorConfig> = {
-  white: { bg: 'bg-amber-50', text: 'text-amber-900', label: 'W', name: 'White' },
+  white: {
+    bg: 'bg-amber-50',
+    text: 'text-amber-900',
+    label: 'W',
+    name: 'White',
+  },
   blue: { bg: 'bg-blue-600', text: 'text-white', label: 'U', name: 'Blue' },
   black: { bg: 'bg-gray-900', text: 'text-white', label: 'B', name: 'Black' },
   red: { bg: 'bg-red-600', text: 'text-white', label: 'R', name: 'Red' },

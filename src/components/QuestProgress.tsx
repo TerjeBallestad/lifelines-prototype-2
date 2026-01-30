@@ -31,8 +31,9 @@ export const QuestProgress = observer(function QuestProgress({
     springProgress.set(progress);
   }, [progress, springProgress]);
 
-  const widthPercent = useTransform(springProgress, (v) =>
-    `${Math.min(100, v * 100)}%`
+  const widthPercent = useTransform(
+    springProgress,
+    (v) => `${Math.min(100, v * 100)}%`
   );
 
   const isNearComplete = progress >= 0.8;
@@ -41,7 +42,7 @@ export const QuestProgress = observer(function QuestProgress({
   if (compact) {
     return (
       <div className="flex items-center gap-2">
-        <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-base-300">
+        <div className="bg-base-300 h-1.5 flex-1 overflow-hidden rounded-full">
           <motion.div
             className={clsx(
               'h-full transition-colors',
@@ -64,15 +65,15 @@ export const QuestProgress = observer(function QuestProgress({
   return (
     <div className="space-y-1">
       {/* Progress bar */}
-      <div className="relative h-3 overflow-hidden rounded-full bg-base-300">
+      <div className="bg-base-300 relative h-3 overflow-hidden rounded-full">
         <motion.div
           className={clsx(
             'h-full transition-all',
             isComplete
               ? 'bg-success'
               : isNearComplete
-                ? 'bg-gradient-to-r from-warning to-success shadow-lg shadow-warning/30'
-                : 'bg-gradient-to-r from-primary to-secondary',
+                ? 'from-warning to-success shadow-warning/30 bg-gradient-to-r shadow-lg'
+                : 'from-primary to-secondary bg-gradient-to-r',
             isNearComplete && !isComplete && 'animate-pulse'
           )}
           style={{ width: widthPercent }}
@@ -95,7 +96,7 @@ export const QuestProgress = observer(function QuestProgress({
 
       {/* Percentage below for non-compact */}
       {(current === undefined || target === undefined) && (
-        <div className="text-right text-xs text-base-content/70">
+        <div className="text-base-content/70 text-right text-xs">
           {Math.floor(progress * 100)}%
         </div>
       )}

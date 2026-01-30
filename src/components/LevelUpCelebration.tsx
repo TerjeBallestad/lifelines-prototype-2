@@ -5,41 +5,44 @@ import { useGameStore } from '../stores/RootStore';
 import type { SkillCategory, MTGColor } from '../types/game';
 
 // Character celebration messages based on MTG color personality
-const CELEBRATION_MESSAGES: Record<MTGColor, Record<SkillCategory, string[]>> = {
+const CELEBRATION_MESSAGES: Record<
+  MTGColor,
+  Record<SkillCategory, string[]>
+> = {
   blue: {
     // Blue: Analytical, introverted, contemplative, self-doubting but insightful
-    Practical: ["I... I did it?", "Maybe I'm not so useless..."],
-    Creative: ["The patterns are clearer now.", "I understand more."],
+    Practical: ['I... I did it?', "Maybe I'm not so useless..."],
+    Creative: ['The patterns are clearer now.', 'I understand more.'],
     Social: ["That wasn't so bad...", "People aren't all terrible."],
-    Technical: ["Fascinating mechanism.", "I see how it works now."],
+    Technical: ['Fascinating mechanism.', 'I see how it works now.'],
   },
   white: {
     // White: Orderly, community-focused, encouraging
-    Practical: ["Practice makes perfect!", "Getting better every day."],
-    Creative: ["How delightful!", "The mind stays sharp."],
-    Social: ["Connection is important.", "We all need each other."],
-    Technical: ["These old hands still work!", "Learning new tricks."],
+    Practical: ['Practice makes perfect!', 'Getting better every day.'],
+    Creative: ['How delightful!', 'The mind stays sharp.'],
+    Social: ['Connection is important.', 'We all need each other.'],
+    Technical: ['These old hands still work!', 'Learning new tricks.'],
   },
   red: {
     // Red: Impulsive, passionate, excited, spontaneous
-    Practical: ["Yes! I knew I could do it!", "That felt amazing!"],
-    Creative: ["The passion flows through me!", "Pure inspiration!"],
-    Social: ["What a rush!", "That was exhilarating!"],
-    Technical: ["Ha! I figured it out!", "Nothing can stop me now!"],
+    Practical: ['Yes! I knew I could do it!', 'That felt amazing!'],
+    Creative: ['The passion flows through me!', 'Pure inspiration!'],
+    Social: ['What a rush!', 'That was exhilarating!'],
+    Technical: ['Ha! I figured it out!', 'Nothing can stop me now!'],
   },
   green: {
     // Green: Natural, growth-focused, accepting, patient
-    Practical: ["Everything in its time.", "Growth happens naturally."],
-    Creative: ["Life finds a way.", "Beauty in simplicity."],
-    Social: ["We're all connected.", "Part of something bigger."],
-    Technical: ["Working with nature.", "Harmony achieved."],
+    Practical: ['Everything in its time.', 'Growth happens naturally.'],
+    Creative: ['Life finds a way.', 'Beauty in simplicity.'],
+    Social: ["We're all connected.", 'Part of something bigger.'],
+    Technical: ['Working with nature.', 'Harmony achieved.'],
   },
   black: {
     // Black: Ambitious, self-focused, proud, determined
-    Practical: ["Another step toward greatness.", "Power through progress."],
-    Creative: ["My vision takes shape.", "Excellence demands sacrifice."],
-    Social: ["Useful connections made.", "They'll remember this."],
-    Technical: ["Knowledge is power.", "One more secret uncovered."],
+    Practical: ['Another step toward greatness.', 'Power through progress.'],
+    Creative: ['My vision takes shape.', 'Excellence demands sacrifice.'],
+    Social: ['Useful connections made.', "They'll remember this."],
+    Technical: ['Knowledge is power.', 'One more secret uncovered.'],
   },
 };
 
@@ -64,7 +67,9 @@ export const LevelUpCelebration = observer(function LevelUpCelebration() {
   if (!character) return null;
 
   const primaryColor = character.colors.primary.color;
-  const messages = CELEBRATION_MESSAGES[primaryColor]?.[levelUp.skill] ?? ["Level up!"];
+  const messages = CELEBRATION_MESSAGES[primaryColor]?.[levelUp.skill] ?? [
+    'Level up!',
+  ];
   const message = messages[Math.floor(Math.random() * messages.length)];
 
   return (
@@ -83,10 +88,10 @@ export const LevelUpCelebration = observer(function LevelUpCelebration() {
           initial={{ scale: 0.5, y: 50 }}
           animate={{ scale: 1, y: 0 }}
           exit={{ scale: 0.5, y: 50 }}
-          className="bg-base-100 rounded-2xl p-8 shadow-2xl text-center max-w-sm"
+          className="bg-base-100 max-w-sm rounded-2xl p-8 text-center shadow-2xl"
         >
           {/* Character avatar placeholder */}
-          <div className="text-6xl mb-4">
+          <div className="mb-4 text-6xl">
             {character.colors.primary.color === 'blue' ? '📘' : '🤍'}
           </div>
 
@@ -95,16 +100,16 @@ export const LevelUpCelebration = observer(function LevelUpCelebration() {
             initial={{ scale: 0 }}
             animate={{ scale: [0, 1.2, 1] }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="font-pixel text-2xl text-primary mb-2"
+            className="font-pixel text-primary mb-2 text-2xl"
           >
             LEVEL UP!
           </motion.div>
 
           {/* Skill info */}
-          <div className="text-lg font-bold mb-2">
+          <div className="mb-2 text-lg font-bold">
             {character.name}'s {levelUp.skill}
           </div>
-          <div className="text-3xl font-pixel text-secondary mb-4">
+          <div className="font-pixel text-secondary mb-4 text-3xl">
             Lv. {levelUp.newLevel}
           </div>
 
@@ -113,13 +118,13 @@ export const LevelUpCelebration = observer(function LevelUpCelebration() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="italic text-base-content/80"
+            className="text-base-content/80 italic"
           >
             "{message}"
           </motion.div>
 
           {/* Tap to dismiss hint */}
-          <div className="text-xs opacity-50 mt-4">
+          <div className="mt-4 text-xs opacity-50">
             Game paused - tap anywhere to continue
           </div>
         </motion.div>

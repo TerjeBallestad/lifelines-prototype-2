@@ -4,13 +4,28 @@ import type { ResourceType } from '../types/game';
 import { useState, useEffect, useRef } from 'react';
 
 // Resource display configuration
-const RESOURCE_CONFIG: Record<ResourceType, { icon: string; label: string; color: string }> = {
+const RESOURCE_CONFIG: Record<
+  ResourceType,
+  { icon: string; label: string; color: string }
+> = {
   creativity: { icon: '\u2728', label: 'Creativity', color: 'text-purple-400' },
   food: { icon: '\uD83C\uDF72', label: 'Food', color: 'text-orange-400' },
   cleanliness: { icon: '\uD83E\uDDFC', label: 'Clean', color: 'text-cyan-400' },
-  comfort: { icon: '\uD83D\uDECB\uFE0F', label: 'Comfort', color: 'text-green-400' },
-  connection: { icon: '\uD83D\uDCAC', label: 'Connection', color: 'text-pink-400' },
-  progress: { icon: '\uD83D\uDCC8', label: 'Progress', color: 'text-yellow-400' },
+  comfort: {
+    icon: '\uD83D\uDECB\uFE0F',
+    label: 'Comfort',
+    color: 'text-green-400',
+  },
+  connection: {
+    icon: '\uD83D\uDCAC',
+    label: 'Connection',
+    color: 'text-pink-400',
+  },
+  progress: {
+    icon: '\uD83D\uDCC8',
+    label: 'Progress',
+    color: 'text-yellow-400',
+  },
 };
 
 interface ResourceCounterProps {
@@ -18,7 +33,10 @@ interface ResourceCounterProps {
   value: number;
 }
 
-const ResourceCounter = observer(function ResourceCounter({ type, value }: ResourceCounterProps) {
+const ResourceCounter = observer(function ResourceCounter({
+  type,
+  value,
+}: ResourceCounterProps) {
   const config = RESOURCE_CONFIG[type];
   const [isPulsing, setIsPulsing] = useState(false);
   const prevValueRef = useRef(value);
@@ -36,7 +54,7 @@ const ResourceCounter = observer(function ResourceCounter({ type, value }: Resou
 
   return (
     <div
-      className={`flex items-center gap-1 px-2 py-1 rounded bg-base-300 ${isPulsing ? 'resource-pulse' : ''}`}
+      className={`bg-base-300 flex items-center gap-1 rounded px-2 py-1 ${isPulsing ? 'resource-pulse' : ''}`}
     >
       <span className="text-lg">{config.icon}</span>
       <span className={`font-pixel text-xs ${config.color}`}>{value}</span>
@@ -52,12 +70,17 @@ export const ResourceBar = observer(function ResourceBar() {
   const { resourceStore } = useGameStore();
 
   const resourceTypes: ResourceType[] = [
-    'creativity', 'food', 'cleanliness', 'comfort', 'connection', 'progress'
+    'creativity',
+    'food',
+    'cleanliness',
+    'comfort',
+    'connection',
+    'progress',
   ];
 
   return (
-    <div className="flex flex-wrap gap-2 p-2 bg-base-200 rounded-lg">
-      {resourceTypes.map(type => (
+    <div className="bg-base-200 flex flex-wrap gap-2 rounded-lg p-2">
+      {resourceTypes.map((type) => (
         <ResourceCounter
           key={type}
           type={type}

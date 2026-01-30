@@ -90,7 +90,7 @@ export const Game = observer(function Game() {
         </header>
 
         {/* Main game area with sidebar */}
-        <div className="flex gap-4 mb-6">
+        <div className="mb-6 flex gap-4">
           {/* Left sidebar - Character panels */}
           <aside className="w-56 flex-shrink-0 space-y-3">
             {characterStore.allCharacters.map((character) => (
@@ -131,7 +131,9 @@ export const Game = observer(function Game() {
                     isSelected={
                       interactionStore.selectedCharacterId === character.id
                     }
-                    onClick={() => interactionStore.openActivityModal(character.id)}
+                    onClick={() =>
+                      interactionStore.openActivityModal(character.id)
+                    }
                   />
                 ))}
 
@@ -146,16 +148,16 @@ export const Game = observer(function Game() {
         <div className="card bg-base-200 mt-6 shadow-xl">
           <div className="card-body py-3">
             <button
-              className="flex w-full items-center justify-between cursor-pointer"
+              className="flex w-full cursor-pointer items-center justify-between"
               onClick={() => setDebugOpen(!debugOpen)}
             >
               <h3 className="text-base-content/70 text-sm font-medium">
                 Debug Controls
               </h3>
               {debugOpen ? (
-                <ChevronUp className="h-4 w-4 text-base-content/50" />
+                <ChevronUp className="text-base-content/50 h-4 w-4" />
               ) : (
-                <ChevronDown className="h-4 w-4 text-base-content/50" />
+                <ChevronDown className="text-base-content/50 h-4 w-4" />
               )}
             </button>
             <AnimatePresence>
@@ -169,8 +171,13 @@ export const Game = observer(function Game() {
                 >
                   <div className="flex flex-wrap gap-2 pt-4">
                     {characterStore.allCharacters.map((character) => (
-                      <div key={character.id} className="flex items-center gap-2">
-                        <span className="text-sm font-medium">{character.name}:</span>
+                      <div
+                        key={character.id}
+                        className="flex items-center gap-2"
+                      >
+                        <span className="text-sm font-medium">
+                          {character.name}:
+                        </span>
                         <button
                           className="btn btn-xs btn-warning"
                           onClick={() => character.drainNeeds()}

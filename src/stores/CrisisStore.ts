@@ -1,5 +1,10 @@
 import { makeAutoObservable } from 'mobx';
-import type { CrisisState, CrisisOutcome, CrisisAction, CrisisActionResult } from '../types/game';
+import type {
+  CrisisState,
+  CrisisOutcome,
+  CrisisAction,
+  CrisisActionResult,
+} from '../types/game';
 import { CRISIS_ACTIONS } from '../data/crisis';
 import { calculateSuccessChance } from '../systems/SkillSystem';
 import type { RootStore } from './RootStore';
@@ -76,11 +81,14 @@ export class CrisisStore {
    * without proper Social skill training beforehand
    */
   getActionSuccessChance(actionId: string): number {
-    const action = CRISIS_ACTIONS.find(a => a.id === actionId);
+    const action = CRISIS_ACTIONS.find((a) => a.id === actionId);
     if (!action) return 0;
 
     // Get Elling's skill level
-    const skill = this.rootStore.skillStore.getSkill('elling', action.skillCategory);
+    const skill = this.rootStore.skillStore.getSkill(
+      'elling',
+      action.skillCategory
+    );
     const skillLevel = skill?.level ?? 1;
 
     // Base chance from skill system
@@ -150,7 +158,7 @@ export class CrisisStore {
    * After maxAttempts (3), Mother dies automatically
    */
   attemptAction(actionId: string): CrisisActionResult | null {
-    const action = CRISIS_ACTIONS.find(a => a.id === actionId);
+    const action = CRISIS_ACTIONS.find((a) => a.id === actionId);
     if (!action || this.crisisState !== 'active') return null;
 
     const chance = this.getActionSuccessChance(actionId);

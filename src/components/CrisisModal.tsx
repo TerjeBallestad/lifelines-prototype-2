@@ -13,7 +13,9 @@ import type { CrisisAction, CrisisActionResult } from '../types/game';
 export const CrisisModal = observer(function CrisisModal() {
   const { crisisStore, characterStore } = useGameStore();
   const [showingResult, setShowingResult] = useState(false);
-  const [currentResult, setCurrentResult] = useState<CrisisActionResult | null>(null);
+  const [currentResult, setCurrentResult] = useState<CrisisActionResult | null>(
+    null
+  );
 
   const elling = characterStore.getCharacter('elling');
   const inShadow = elling?.inShadowState ?? false;
@@ -52,14 +54,14 @@ export const CrisisModal = observer(function CrisisModal() {
         <motion.div
           animate={{ opacity: [0.1, 0.2, 0.1] }}
           transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute inset-0 bg-error/20"
+          className="bg-error/20 absolute inset-0"
         />
 
         {/* Main content */}
         <motion.div
           initial={{ scale: 0.9, y: 20 }}
           animate={{ scale: 1, y: 0 }}
-          className="relative z-10 mx-4 max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-base-100 p-6 shadow-2xl"
+          className="bg-base-100 relative z-10 mx-4 max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl p-6 shadow-2xl"
         >
           {/* Header with alert */}
           <div className="mb-4 text-center">
@@ -68,10 +70,10 @@ export const CrisisModal = observer(function CrisisModal() {
               transition={{ repeat: Infinity, duration: 1 }}
               className="mb-2 inline-block"
             >
-              <AlertTriangle className="h-12 w-12 text-error" />
+              <AlertTriangle className="text-error h-12 w-12" />
             </motion.div>
-            <h2 className="text-2xl font-bold text-error">CRISIS!</h2>
-            <p className="mt-1 text-sm text-base-content/80">
+            <h2 className="text-error text-2xl font-bold">CRISIS!</h2>
+            <p className="text-base-content/80 mt-1 text-sm">
               Mother has collapsed. She's not responding.
             </p>
           </div>
@@ -82,15 +84,20 @@ export const CrisisModal = observer(function CrisisModal() {
               <motion.div
                 key={i}
                 initial={{ scale: 1 }}
-                animate={i >= crisisStore.attemptsRemaining ? { scale: [1, 0.8], opacity: 0.3 } : {}}
+                animate={
+                  i >= crisisStore.attemptsRemaining
+                    ? { scale: [1, 0.8], opacity: 0.3 }
+                    : {}
+                }
                 className={`h-3 w-8 rounded-full ${
                   i < crisisStore.attemptsRemaining ? 'bg-error' : 'bg-base-300'
                 }`}
               />
             ))}
           </div>
-          <div className="mb-4 text-center text-xs text-error/80">
-            {crisisStore.attemptsRemaining} attempt{crisisStore.attemptsRemaining !== 1 ? 's' : ''} remaining
+          <div className="text-error/80 mb-4 text-center text-xs">
+            {crisisStore.attemptsRemaining} attempt
+            {crisisStore.attemptsRemaining !== 1 ? 's' : ''} remaining
           </div>
 
           {/* Shadow state warning */}
@@ -98,9 +105,9 @@ export const CrisisModal = observer(function CrisisModal() {
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
-              className="mb-4 rounded-lg bg-warning/20 p-3 text-center text-sm"
+              className="bg-warning/20 mb-4 rounded-lg p-3 text-center text-sm"
             >
-              <span className="font-medium text-warning">
+              <span className="text-warning font-medium">
                 Elling is paralyzed with anxiety. Actions are harder.
               </span>
             </motion.div>
@@ -108,7 +115,7 @@ export const CrisisModal = observer(function CrisisModal() {
 
           {/* Hope bonus indicator */}
           {crisisStore.hopeBonus > 0 && (
-            <div className="mb-4 flex items-center justify-center gap-2 text-sm text-info">
+            <div className="text-info mb-4 flex items-center justify-center gap-2 text-sm">
               <Heart className="h-4 w-4" />
               <span>+{crisisStore.hopeBonus}% hope bonus for phone call</span>
             </div>
@@ -134,7 +141,8 @@ export const CrisisModal = observer(function CrisisModal() {
                   {currentResult.succeeded ? 'Success!' : 'Failed...'}
                 </div>
                 <div className="text-sm opacity-80">
-                  Rolled {Math.floor(currentResult.roll)} vs {currentResult.chance}%
+                  Rolled {Math.floor(currentResult.roll)} vs{' '}
+                  {currentResult.chance}%
                 </div>
                 {!currentResult.succeeded && (
                   <div className="mt-1 text-xs">
@@ -169,8 +177,9 @@ export const CrisisModal = observer(function CrisisModal() {
           </div>
 
           {/* Instructions */}
-          <div className="mt-4 text-center text-xs text-base-content/50">
-            Call emergency services to save Mother. Other actions give hope bonus.
+          <div className="text-base-content/50 mt-4 text-center text-xs">
+            Call emergency services to save Mother. Other actions give hope
+            bonus.
           </div>
         </motion.div>
       </motion.div>

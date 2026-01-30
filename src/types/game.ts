@@ -5,12 +5,12 @@ export type SkillCategory = 'Practical' | 'Creative' | 'Social' | 'Technical';
 
 // Resources produced by activities
 export type ResourceType =
-  | 'creativity'   // Blue-adjacent, from reading/thinking
-  | 'food'         // Green/White, from cooking
-  | 'cleanliness'  // White, from cleaning
-  | 'comfort'      // Green, from resting
-  | 'connection'   // Social activities
-  | 'progress';    // General accomplishment feeling
+  | 'creativity' // Blue-adjacent, from reading/thinking
+  | 'food' // Green/White, from cooking
+  | 'cleanliness' // White, from cleaning
+  | 'comfort' // Green, from resting
+  | 'connection' // Social activities
+  | 'progress'; // General accomplishment feeling
 
 // Output produced when completing an activity
 export interface ActivityOutput {
@@ -37,9 +37,9 @@ export interface MTGColorProfile {
 }
 
 export interface Needs {
-  energy: number;    // 0-100
-  social: number;    // 0-100
-  purpose: number;   // 0-100
+  energy: number; // 0-100
+  social: number; // 0-100
+  purpose: number; // 0-100
 }
 
 export interface CharacterData {
@@ -59,26 +59,26 @@ export type CharacterState = 'idle' | 'deciding' | 'walking' | 'performing';
 export interface Activity {
   id: string;
   name: string;
-  icon?: string;                                    // Emoji or single char for thought bubble
+  icon?: string; // Emoji or single char for thought bubble
   colorAffinities: Partial<Record<MTGColor, number>>; // 0-1 per color
-  location: { x: number; y: number };               // Spatial position in game world
-  duration: number;                                 // Game hours to complete
+  location: { x: number; y: number }; // Spatial position in game world
+  duration: number; // Game hours to complete
   effects: {
-    energy?: number;                                // Positive = restore, negative = consume
+    energy?: number; // Positive = restore, negative = consume
     social?: number;
     purpose?: number;
   };
-  isComfortBehavior?: boolean;                      // For low-overskudd fallback
-  skillCategory?: SkillCategory;                    // Which skill this activity trains
-  outputs?: ActivityOutput[];                       // Resources produced on completion
-  difficulty?: number;                              // 1-3, default 1
+  isComfortBehavior?: boolean; // For low-overskudd fallback
+  skillCategory?: SkillCategory; // Which skill this activity trains
+  outputs?: ActivityOutput[]; // Resources produced on completion
+  difficulty?: number; // 1-3, default 1
 }
 
 // Result of scoring an activity for a character
 export interface ActivityScore {
   activity: Activity;
-  utility: number;      // 0-1 normalized total score
-  colorMatch: number;   // How well activity colors match character
+  utility: number; // 0-1 normalized total score
+  colorMatch: number; // How well activity colors match character
   needSatisfaction: number; // How much activity helps current needs
 }
 
@@ -110,10 +110,10 @@ export type CrisisOutcome = 'saved' | 'lost' | null;
 export interface CrisisAction {
   id: string;
   name: string;
-  icon: string;  // Emoji
+  icon: string; // Emoji
   description: string;
   skillCategory: SkillCategory;
-  baseDifficulty: number;  // 1-3
+  baseDifficulty: number; // 1-3
   // Non-phone actions give hope bonus to next phone attempt
   givesHopeBonus?: boolean;
 }

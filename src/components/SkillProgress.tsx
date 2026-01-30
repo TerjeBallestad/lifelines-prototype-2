@@ -28,16 +28,16 @@ export const SkillProgress = observer(function SkillProgress({
     stiffness: 100,
     damping: 20,
   });
-  const widthPercent = useTransform(springProgress, v => `${v * 100}%`);
+  const widthPercent = useTransform(springProgress, (v) => `${v * 100}%`);
 
   if (compact) {
     return (
       <div className="flex items-center gap-2">
         <span>{SKILL_ICONS[skill.category]}</span>
         <span className="text-xs font-medium">Lv.{skill.level}</span>
-        <div className="flex-1 h-1.5 bg-base-300 rounded-full overflow-hidden">
+        <div className="bg-base-300 h-1.5 flex-1 overflow-hidden rounded-full">
           <motion.div
-            className="h-full bg-primary"
+            className="bg-primary h-full"
             style={{ width: widthPercent }}
           />
         </div>
@@ -47,15 +47,15 @@ export const SkillProgress = observer(function SkillProgress({
 
   return (
     <div className="bg-base-200 rounded-lg p-3">
-      <div className="flex items-center justify-between mb-2">
+      <div className="mb-2 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="text-xl">{SKILL_ICONS[skill.category]}</span>
           <span className="font-medium">{skill.category}</span>
         </div>
         <div className="text-right">
-          <span className="font-bold text-lg">Lv.{skill.level}</span>
+          <span className="text-lg font-bold">Lv.{skill.level}</span>
           {skill.level < 5 && (
-            <span className="text-xs opacity-70 ml-2">
+            <span className="ml-2 text-xs opacity-70">
               {Math.floor(skill.xp)} XP
             </span>
           )}
@@ -64,16 +64,16 @@ export const SkillProgress = observer(function SkillProgress({
 
       {/* XP Progress bar */}
       {skill.level < 5 && (
-        <div className="h-2 bg-base-300 rounded-full overflow-hidden">
+        <div className="bg-base-300 h-2 overflow-hidden rounded-full">
           <motion.div
-            className="h-full bg-gradient-to-r from-primary to-secondary"
+            className="from-primary to-secondary h-full bg-gradient-to-r"
             style={{ width: widthPercent }}
           />
         </div>
       )}
 
       {skill.level >= 5 && (
-        <div className="text-center text-xs text-success font-medium">
+        <div className="text-success text-center text-xs font-medium">
           MASTERED
         </div>
       )}

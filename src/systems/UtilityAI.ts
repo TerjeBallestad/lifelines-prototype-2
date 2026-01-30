@@ -1,4 +1,10 @@
-import type { MTGColor, MTGColorProfile, Needs, Activity, ActivityScore } from '../types/game';
+import type {
+  MTGColor,
+  MTGColorProfile,
+  Needs,
+  Activity,
+  ActivityScore,
+} from '../types/game';
 import type { Character } from '../stores/CharacterStore';
 
 /**
@@ -44,7 +50,8 @@ export function calculateColorAffinity(
     [characterColors.primary.color]: characterColors.primary.intensity,
   };
   if (characterColors.secondary) {
-    characterIntensities[characterColors.secondary.color] = characterColors.secondary.intensity;
+    characterIntensities[characterColors.secondary.color] =
+      characterColors.secondary.intensity;
   }
 
   // Calculate weighted match
@@ -76,9 +83,9 @@ export function calculateNeedSatisfaction(
 ): number {
   // Normalization factors for effects (to get to 0-1 scale)
   const normFactors = {
-    energy: 20,    // Max expected energy gain per activity
-    social: 10,    // Max expected social gain
-    purpose: 20,   // Max expected purpose gain
+    energy: 20, // Max expected energy gain per activity
+    social: 10, // Max expected social gain
+    purpose: 20, // Max expected purpose gain
   };
 
   let totalSatisfaction = 0;
@@ -86,7 +93,7 @@ export function calculateNeedSatisfaction(
 
   // Energy
   if (effects.energy && effects.energy > 0) {
-    const needLevel = 1 - needs.energy / 100;  // How badly needed (0 = full, 1 = empty)
+    const needLevel = 1 - needs.energy / 100; // How badly needed (0 = full, 1 = empty)
     const effectStrength = effects.energy / normFactors.energy;
     totalSatisfaction += needLevel * effectStrength;
     totalWeight += effectStrength;
@@ -130,8 +137,14 @@ export function scoreActivities(
   const regularActivities = activities.filter((a) => !a.isComfortBehavior);
 
   const scores: ActivityScore[] = regularActivities.map((activity) => {
-    const colorMatch = calculateColorAffinity(character.colors, activity.colorAffinities);
-    const needSatisfaction = calculateNeedSatisfaction(character.needs, activity.effects);
+    const colorMatch = calculateColorAffinity(
+      character.colors,
+      activity.colorAffinities
+    );
+    const needSatisfaction = calculateNeedSatisfaction(
+      character.needs,
+      activity.effects
+    );
 
     // Combine with weights
     const utility = colorMatch * COLOR_WEIGHT + needSatisfaction * NEED_WEIGHT;
@@ -198,7 +211,10 @@ export function scoreComfortBehaviors(
   const comfortBehaviors = activities.filter((a) => a.isComfortBehavior);
 
   const scores: ActivityScore[] = comfortBehaviors.map((activity) => {
-    const colorMatch = calculateColorAffinity(character.colors, activity.colorAffinities);
+    const colorMatch = calculateColorAffinity(
+      character.colors,
+      activity.colorAffinities
+    );
     // Comfort behaviors don't need to satisfy needs, just match personality
     const utility = colorMatch;
 

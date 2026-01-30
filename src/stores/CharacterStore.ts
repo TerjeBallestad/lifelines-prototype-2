@@ -1,9 +1,19 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import type { MTGColorProfile, Needs, CharacterData, Activity, ActivityScore, CharacterState } from '../types/game';
+import type {
+  MTGColorProfile,
+  Needs,
+  CharacterData,
+  Activity,
+  ActivityScore,
+  CharacterState,
+} from '../types/game';
 import { CHARACTERS } from '../data/characters';
 import { ACTIVITIES } from '../data/activities';
 import { scoreActivities, selectActivity } from '../systems/UtilityAI';
-import { processActivityCompletion, type ActivityResult } from '../systems/SkillSystem';
+import {
+  processActivityCompletion,
+  type ActivityResult,
+} from '../systems/SkillSystem';
 import type { RootStore } from './RootStore';
 
 /**
@@ -63,13 +73,17 @@ export class Character {
     // Decision duration based on primary color: Blue = deliberate (2000ms), else quick (800ms)
     this.decisionDuration = data.colors.primary.color === 'blue' ? 2000 : 800;
 
-    makeAutoObservable(this, {
-      id: false,
-      name: false,
-      colors: false,
-      characterStore: false,
-      decisionDuration: false,
-    }, { autoBind: true });
+    makeAutoObservable(
+      this,
+      {
+        id: false,
+        name: false,
+        colors: false,
+        characterStore: false,
+        decisionDuration: false,
+      },
+      { autoBind: true }
+    );
   }
 
   /**
@@ -101,10 +115,12 @@ export class Character {
    */
   get comfortActivity(): Activity {
     const comfortId = this.id === 'elling' ? 'stare-window' : 'sit-quietly';
-    const activity = ACTIVITIES.find(a => a.isComfortBehavior && a.id === comfortId);
+    const activity = ACTIVITIES.find(
+      (a) => a.isComfortBehavior && a.id === comfortId
+    );
     if (!activity) {
       // Fallback to any comfort behavior
-      return ACTIVITIES.find(a => a.isComfortBehavior)!;
+      return ACTIVITIES.find((a) => a.isComfortBehavior)!;
     }
     return activity;
   }
@@ -400,13 +416,22 @@ export class Character {
     // Apply effects to needs (clamp 0-100)
     const effects = activity.effects;
     if (effects.energy) {
-      this.needs.energy = Math.max(0, Math.min(100, this.needs.energy + effects.energy));
+      this.needs.energy = Math.max(
+        0,
+        Math.min(100, this.needs.energy + effects.energy)
+      );
     }
     if (effects.social) {
-      this.needs.social = Math.max(0, Math.min(100, this.needs.social + effects.social));
+      this.needs.social = Math.max(
+        0,
+        Math.min(100, this.needs.social + effects.social)
+      );
     }
     if (effects.purpose) {
-      this.needs.purpose = Math.max(0, Math.min(100, this.needs.purpose + effects.purpose));
+      this.needs.purpose = Math.max(
+        0,
+        Math.min(100, this.needs.purpose + effects.purpose)
+      );
     }
 
     // Reset state
@@ -435,7 +460,9 @@ export class Character {
    * Returns: 'eager' | 'neutral' | 'reluctant' | 'refusing'
    * Note: Busy state no longer returns 'refusing' since activities can be queued
    */
-  getAttitudeToward(activity: Activity): 'eager' | 'neutral' | 'reluctant' | 'refusing' {
+  getAttitudeToward(
+    activity: Activity
+  ): 'eager' | 'neutral' | 'reluctant' | 'refusing' {
     // Low overskudd = reluctant or refusing
     if (this.overskudd < 20) return 'refusing';
     if (this.overskudd < 40) return 'reluctant';
@@ -506,7 +533,10 @@ export class Character {
   /**
    * Generate personality-flavored refusal/reluctance message
    */
-  private generateRefusalMessage(activity: Activity, _attitude: 'refusing' | 'reluctant'): void {
+  private generateRefusalMessage(
+    activity: Activity,
+    _attitude: 'refusing' | 'reluctant'
+  ): void {
     const isBlue = this.colors.primary.color === 'blue';
     const isWhite = this.colors.primary.color === 'white';
 
@@ -521,7 +551,7 @@ export class Character {
       this.refusalIcon = '😓';
       this.refusalMessage = isBlue
         ? "Must I? I'm not sure I have it in me..."
-        : "I suppose I can try...";
+        : 'I suppose I can try...';
     } else if (this.calculateColorMatch(activity) < 0.3) {
       // Personality mismatch
       this.refusalIcon = '😕';
@@ -579,9 +609,13 @@ export class CharacterStore {
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
-    makeAutoObservable(this, {
-      rootStore: false,
-    }, { autoBind: true });
+    makeAutoObservable(
+      this,
+      {
+        rootStore: false,
+      },
+      { autoBind: true }
+    );
 
     // Initialize characters from data
     for (const data of CHARACTERS) {

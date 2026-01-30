@@ -32,7 +32,10 @@ export const QuestPanel = observer(function QuestPanel() {
       case 'skill':
         if (!quest.characterId || !quest.skillCategory || !quest.targetLevel)
           return null;
-        const skill = skillStore.getSkill(quest.characterId, quest.skillCategory);
+        const skill = skillStore.getSkill(
+          quest.characterId,
+          quest.skillCategory
+        );
         if (!skill) return null;
         return {
           current: skill.level,
@@ -51,9 +54,9 @@ export const QuestPanel = observer(function QuestPanel() {
   // All quests complete state
   if (questStore.allQuestsComplete) {
     return (
-      <div className="fixed right-4 top-1/2 z-40 -translate-y-1/2">
-        <div className="rounded-lg bg-base-200 p-3 shadow-lg">
-          <div className="flex items-center gap-2 text-success">
+      <div className="fixed top-1/2 right-4 z-40 -translate-y-1/2">
+        <div className="bg-base-200 rounded-lg p-3 shadow-lg">
+          <div className="text-success flex items-center gap-2">
             <CheckCircle className="h-5 w-5" />
             <span className="text-sm font-medium">All quests complete!</span>
           </div>
@@ -66,11 +69,11 @@ export const QuestPanel = observer(function QuestPanel() {
   if (!quest) return null;
 
   return (
-    <div className="fixed right-4 top-1/2 z-40 -translate-y-1/2">
+    <div className="fixed top-1/2 right-4 z-40 -translate-y-1/2">
       <motion.div
         animate={{ width: isExpanded ? 288 : 64 }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-        className="overflow-hidden rounded-lg bg-base-200 shadow-lg"
+        className="bg-base-200 overflow-hidden rounded-lg shadow-lg"
       >
         {isExpanded ? (
           // Expanded view
@@ -78,9 +81,10 @@ export const QuestPanel = observer(function QuestPanel() {
             {/* Header with collapse button */}
             <div className="mb-3 flex items-start justify-between">
               <div className="flex items-center gap-2">
-                <Target className="h-5 w-5 text-primary" />
-                <span className="text-xs uppercase tracking-wide text-base-content/60">
-                  Quest {questStore.currentQuestIndex + 1}/{questStore.totalQuests}
+                <Target className="text-primary h-5 w-5" />
+                <span className="text-base-content/60 text-xs tracking-wide uppercase">
+                  Quest {questStore.currentQuestIndex + 1}/
+                  {questStore.totalQuests}
                 </span>
               </div>
               <button
@@ -93,7 +97,9 @@ export const QuestPanel = observer(function QuestPanel() {
 
             {/* Quest title and description */}
             <h3 className="mb-1 text-lg font-bold">{quest.title}</h3>
-            <p className="mb-4 text-sm text-base-content/70">{quest.description}</p>
+            <p className="text-base-content/70 mb-4 text-sm">
+              {quest.description}
+            </p>
 
             {/* Progress bar */}
             <QuestProgress
@@ -110,7 +116,7 @@ export const QuestPanel = observer(function QuestPanel() {
             onClick={() => setIsExpanded(true)}
           >
             {/* Quest icon */}
-            <Target className="h-6 w-6 text-primary" />
+            <Target className="text-primary h-6 w-6" />
 
             {/* Mini progress */}
             <div className="w-full">
@@ -118,7 +124,7 @@ export const QuestPanel = observer(function QuestPanel() {
             </div>
 
             {/* Expand hint */}
-            <ChevronLeft className="h-4 w-4 text-base-content/40" />
+            <ChevronLeft className="text-base-content/40 h-4 w-4" />
           </div>
         )}
       </motion.div>

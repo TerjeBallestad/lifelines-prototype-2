@@ -113,12 +113,12 @@ export function getOutputModifier(level: number): number {
  * Get skill definition by ID
  */
 export function getSkillById(id: string): SkillData | undefined {
-  return SKILLS.find(s => s.id === id);
+  return SKILLS.find((s) => s.id === id);
 }
 
 /**
  * Get skills by category
  */
 export function getSkillsByCategory(category: SkillCategory): SkillData[] {
-  return SKILLS.filter(s => s.category === category);
+  return SKILLS.filter((s) => s.category === category);
 }

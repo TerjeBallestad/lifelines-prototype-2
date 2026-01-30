@@ -11,8 +11,8 @@ export const CRISIS_ACTIONS: CrisisAction[] = [
     name: 'Call Emergency',
     icon: '📞',
     description: 'Dial 113 for help',
-    skillCategory: 'Social',  // Phone skill is Social category
-    baseDifficulty: 3,  // Highest difficulty - this is the critical action
+    skillCategory: 'Social', // Phone skill is Social category
+    baseDifficulty: 3, // Highest difficulty - this is the critical action
   },
   {
     id: 'help-mother',
@@ -20,7 +20,7 @@ export const CRISIS_ACTIONS: CrisisAction[] = [
     icon: '🤲',
     description: 'Make her comfortable',
     skillCategory: 'Practical',
-    baseDifficulty: 2,  // Moderate difficulty
+    baseDifficulty: 2, // Moderate difficulty
     givesHopeBonus: true,
   },
   {
@@ -29,7 +29,7 @@ export const CRISIS_ACTIONS: CrisisAction[] = [
     icon: '🏃',
     description: 'Run for help next door',
     skillCategory: 'Social',
-    baseDifficulty: 2,  // Moderate difficulty
+    baseDifficulty: 2, // Moderate difficulty
     givesHopeBonus: true,
   },
 ];
@@ -51,7 +51,7 @@ export const EPILOGUE_TEXT = {
     title: 'Mother Lost',
     paragraphs: [
       'By the time help arrived, it was too late. Mother had slipped away quietly, lying on the floor where she had fallen.',
-      'Elling sat beside her, frozen. He had tried to call, but his hands wouldn\'t stop shaking. The numbers blurred together. His voice wouldn\'t come.',
+      "Elling sat beside her, frozen. He had tried to call, but his hands wouldn't stop shaking. The numbers blurred together. His voice wouldn't come.",
       'The phone skill he had neglected, the calls he had avoided - they had mattered more than he ever knew.',
       'Now he was alone, in the apartment that had been their whole world. And he would have to learn to survive in a world that had always terrified him.',
     ],

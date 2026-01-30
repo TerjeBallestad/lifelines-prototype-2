@@ -24,8 +24,11 @@ export interface ActivityResult {
  * - Level 3 vs Difficulty 2 = 65%
  * - Level 1 vs Difficulty 3 = 30%
  */
-export function calculateSuccessChance(skillLevel: number, difficulty: number): number {
-  const baseChance = 50 + (skillLevel * 10) - ((difficulty - 1) * 15);
+export function calculateSuccessChance(
+  skillLevel: number,
+  difficulty: number
+): number {
+  const baseChance = 50 + skillLevel * 10 - (difficulty - 1) * 15;
   return Math.max(10, Math.min(95, baseChance));
 }
 
@@ -58,7 +61,10 @@ export function calculateOutput(
  * Failed: 50% (still learn from failure)
  * Succeeded: full amount
  */
-export function calculateXPGain(difficulty: number, succeeded: boolean): number {
+export function calculateXPGain(
+  difficulty: number,
+  succeeded: boolean
+): number {
   const baseXP = 10 * difficulty;
   if (!succeeded) {
     return Math.floor(baseXP * 0.5);
@@ -79,7 +85,7 @@ export function rollForSuccess(successChance: number): boolean {
  * Critical chance: 5 + (skillLevel * 5)%
  */
 export function rollForCritical(skillLevel: number): boolean {
-  const criticalChance = 5 + (skillLevel * 5);
+  const criticalChance = 5 + skillLevel * 5;
   return Math.random() * 100 < criticalChance;
 }
 
@@ -98,7 +104,7 @@ export function processActivityCompletion(
   const succeeded = rollForSuccess(successChance);
   const critical = succeeded && rollForCritical(skillLevel);
 
-  const outputs = (activity.outputs ?? []).map(output => ({
+  const outputs = (activity.outputs ?? []).map((output) => ({
     resource: output.resource,
     amount: calculateOutput(output.baseAmount, skillLevel, succeeded, critical),
   }));
