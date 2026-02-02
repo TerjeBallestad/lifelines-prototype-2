@@ -19,7 +19,10 @@
       "Bash(git diff:*)",
       "Bash(git tag:*)",
       "Bash(npx tsc:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(tree:*)",
+      "Bash(git -C:*)",
+      "Bash(find:*)"
     ]
   }
 }
