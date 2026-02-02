@@ -18,14 +18,21 @@ export class InteractionStore {
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
-    makeAutoObservable(this, {
-      rootStore: false,
-    }, { autoBind: true });
+    makeAutoObservable(
+      this,
+      {
+        rootStore: false,
+      },
+      { autoBind: true }
+    );
   }
 
   get selectedCharacter(): Character | null {
     if (!this.selectedCharacterId) return null;
-    return this.rootStore.characterStore.getCharacter(this.selectedCharacterId) ?? null;
+    return (
+      this.rootStore.characterStore.getCharacter(this.selectedCharacterId) ??
+      null
+    );
   }
 
   selectCharacter(id: string): void {
@@ -62,11 +69,13 @@ export class InteractionStore {
   forceAssignActivity(activityId: string): boolean {
     if (!this.assigningCharacterId) return false;
 
-    const character = this.rootStore.characterStore.getCharacter(this.assigningCharacterId);
+    const character = this.rootStore.characterStore.getCharacter(
+      this.assigningCharacterId
+    );
     if (!character) return false;
 
     // Find activity
-    const activity = ACTIVITIES.find(a => a.id === activityId);
+    const activity = ACTIVITIES.find((a) => a.id === activityId);
     if (!activity) return false;
 
     // Force the activity (will queue if busy)

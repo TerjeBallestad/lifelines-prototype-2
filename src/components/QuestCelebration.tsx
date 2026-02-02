@@ -75,7 +75,7 @@ export const QuestCelebration = observer(function QuestCelebration() {
             transition={{ delay: 0.1, type: 'spring', stiffness: 200 }}
             className="mb-4 inline-block text-6xl"
           >
-            <Trophy className="h-16 w-16 text-warning" />
+            <Trophy className="text-warning h-16 w-16" />
           </motion.div>
 
           {/* Quest complete banner */}

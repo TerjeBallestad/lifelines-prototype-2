@@ -26,7 +26,7 @@ export const CharacterPanel = observer(function CharacterPanel({
 
   return (
     <div
-      className="card bg-base-100 shadow-lg cursor-pointer hover:bg-base-200 transition-colors"
+      className="card bg-base-100 hover:bg-base-200 cursor-pointer shadow-lg transition-colors"
       onClick={onClick}
     >
       <div className="card-body p-3">
@@ -49,7 +49,7 @@ export const CharacterPanel = observer(function CharacterPanel({
 
         {/* Overskudd Meter */}
         <div className="mt-2">
-          <div className="flex items-center justify-between text-xs mb-1">
+          <div className="mb-1 flex items-center justify-between text-xs">
             <span className="text-base-content/70">Overskudd</span>
             <span className="font-mono">{Math.round(character.overskudd)}</span>
           </div>
@@ -60,49 +60,49 @@ export const CharacterPanel = observer(function CharacterPanel({
         <div className="mt-2 space-y-1">
           {/* Energy */}
           <div className="flex items-center gap-2">
-            <span className="text-xs w-12 text-base-content/70">Energy</span>
-            <div className="flex-1 h-1.5 bg-base-300 rounded-full overflow-hidden">
+            <span className="text-base-content/70 w-12 text-xs">Energy</span>
+            <div className="bg-base-300 h-1.5 flex-1 overflow-hidden rounded-full">
               <div
-                className="h-full bg-info rounded-full transition-all duration-300"
+                className="bg-info h-full rounded-full transition-all duration-300"
                 style={{ width: `${character.needs.energy}%` }}
               />
             </div>
-            <span className="text-xs w-6 text-right font-mono">
+            <span className="w-6 text-right font-mono text-xs">
               {Math.round(character.needs.energy)}
             </span>
           </div>
 
           {/* Social */}
           <div className="flex items-center gap-2">
-            <span className="text-xs w-12 text-base-content/70">Social</span>
-            <div className="flex-1 h-1.5 bg-base-300 rounded-full overflow-hidden">
+            <span className="text-base-content/70 w-12 text-xs">Social</span>
+            <div className="bg-base-300 h-1.5 flex-1 overflow-hidden rounded-full">
               <div
-                className="h-full bg-secondary rounded-full transition-all duration-300"
+                className="bg-secondary h-full rounded-full transition-all duration-300"
                 style={{ width: `${character.needs.social}%` }}
               />
             </div>
-            <span className="text-xs w-6 text-right font-mono">
+            <span className="w-6 text-right font-mono text-xs">
               {Math.round(character.needs.social)}
             </span>
           </div>
 
           {/* Purpose */}
           <div className="flex items-center gap-2">
-            <span className="text-xs w-12 text-base-content/70">Purpose</span>
-            <div className="flex-1 h-1.5 bg-base-300 rounded-full overflow-hidden">
+            <span className="text-base-content/70 w-12 text-xs">Purpose</span>
+            <div className="bg-base-300 h-1.5 flex-1 overflow-hidden rounded-full">
               <div
-                className="h-full bg-accent rounded-full transition-all duration-300"
+                className="bg-accent h-full rounded-full transition-all duration-300"
                 style={{ width: `${character.needs.purpose}%` }}
               />
             </div>
-            <span className="text-xs w-6 text-right font-mono">
+            <span className="w-6 text-right font-mono text-xs">
               {Math.round(character.needs.purpose)}
             </span>
           </div>
         </div>
 
         {/* Current Activity */}
-        <div className="mt-2 pt-2 border-t border-base-300 text-xs">
+        <div className="border-base-300 mt-2 border-t pt-2 text-xs">
           <span className="text-base-content/70">Activity: </span>
           <span className="font-medium">
             {character.currentActivity?.name ?? 'Idle'}
@@ -110,15 +110,22 @@ export const CharacterPanel = observer(function CharacterPanel({
         </div>
 
         {/* Skills Section */}
-        <div className="mt-2 pt-2 border-t border-base-300">
-          <h4 className="text-xs font-medium text-base-content/70 mb-1">Skills</h4>
+        <div className="border-base-300 mt-2 border-t pt-2">
+          <h4 className="text-base-content/70 mb-1 text-xs font-medium">
+            Skills
+          </h4>
           <div className="space-y-1">
-            {(['Practical', 'Creative', 'Social', 'Technical'] as const).map(category => {
-              const skill = skillStore.getSkill(character.id, category as SkillCategory);
-              return skill ? (
-                <SkillProgress key={category} skill={skill} compact />
-              ) : null;
-            })}
+            {(['Practical', 'Creative', 'Social', 'Technical'] as const).map(
+              (category) => {
+                const skill = skillStore.getSkill(
+                  character.id,
+                  category as SkillCategory
+                );
+                return skill ? (
+                  <SkillProgress key={category} skill={skill} compact />
+                ) : null;
+              }
+            )}
           </div>
         </div>
       </div>

@@ -1,9 +1,19 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import type { MTGColorProfile, Needs, CharacterData, Activity, ActivityScore, CharacterState } from '../types/game';
+import type {
+  MTGColorProfile,
+  Needs,
+  CharacterData,
+  Activity,
+  ActivityScore,
+  CharacterState,
+} from '../types/game';
 import { CHARACTERS } from '../data/characters';
 import { ACTIVITIES } from '../data/activities';
 import { scoreActivities, selectActivity } from '../systems/UtilityAI';
-import { processActivityCompletion, type ActivityResult } from '../systems/SkillSystem';
+import {
+  processActivityCompletion,
+  type ActivityResult,
+} from '../systems/SkillSystem';
 import type { RootStore } from './RootStore';
 
 /**
@@ -63,13 +73,17 @@ export class Character {
     // Decision duration based on primary color: Blue = deliberate (2000ms), else quick (800ms)
     this.decisionDuration = data.colors.primary.color === 'blue' ? 2000 : 800;
 
-    makeAutoObservable(this, {
-      id: false,
-      name: false,
-      colors: false,
-      characterStore: false,
-      decisionDuration: false,
-    }, { autoBind: true });
+    makeAutoObservable(
+      this,
+      {
+        id: false,
+        name: false,
+        colors: false,
+        characterStore: false,
+        decisionDuration: false,
+      },
+      { autoBind: true }
+    );
   }
 
   /**
@@ -101,12 +115,64 @@ export class Character {
    */
   get comfortActivity(): Activity {
     const comfortId = this.id === 'elling' ? 'stare-window' : 'sit-quietly';
-    const activity = ACTIVITIES.find(a => a.isComfortBehavior && a.id === comfortId);
+    const activity = ACTIVITIES.find(
+      (a) => a.isComfortBehavior && a.id === comfortId
+    );
     if (!activity) {
       // Fallback to any comfort behavior
-      return ACTIVITIES.find(a => a.isComfortBehavior)!;
+      return ACTIVITIES.find((a) => a.isComfortBehavior)!;
     }
     return activity;
+  }
+
+  /**
+   * Is character in shadow state?
+   * Blue shadow = paralysis under extreme stress
+   * Triggers when: Blue primary color + crisis active + overskudd < 30
+   */
+  get inShadowState(): boolean {
+    // Only Blue primary characters have shadow state
+    if (this.colors.primary.color !== 'blue') return false;
+
+    // Only during active crisis
+    const crisisState = this.characterStore.rootStore.crisisStore?.crisisState;
+    if (crisisState !== 'active') return false;
+
+    // Shadow threshold: overskudd below 30
+    return this.overskudd < 30;
+  }
+
+  /**
+   * Shadow state penalty applied to crisis action success
+   * -20% when in shadow state
+   */
+  get shadowPenalty(): number {
+    return this.inShadowState ? 20 : 0;
+  }
+
+  /**
+   * Should Elling show concern about Mother?
+   * On Day 10 warning phase, occasionally true for thought bubble
+   */
+  get isWorriedAboutMother(): boolean {
+    if (this.id !== 'elling') return false;
+
+    const crisisState = this.characterStore.rootStore.crisisStore?.crisisState;
+    if (crisisState !== 'warning') return false;
+
+    // During warning phase, check if Mother is moving slowly
+    const mother = this.characterStore.getCharacter('mother');
+    if (!mother) return false;
+
+    // Worried when Mother's speed modifier is below 70%
+    const timeStore = this.characterStore.rootStore.timeStore;
+    if (timeStore.day === 10) {
+      const hour = timeStore.hour;
+      // Elling notices something is wrong when Mother is visibly slower
+      return hour >= 11;
+    }
+
+    return false;
   }
 
   /**
@@ -118,12 +184,55 @@ export class Character {
   }
 
   /**
+   * Current walking speed with modifiers
+   * On Day 10, Mother progressively slows dramatically as warning sign
+   */
+  get currentWalkSpeed(): number {
+    let speed = this.baseWalkSpeed;
+
+    // Warning sign: Mother slows down dramatically on Day 10
+    if (this.id === 'mother') {
+      const timeStore = this.characterStore.rootStore.timeStore;
+      if (timeStore.day === 10) {
+        const hour = timeStore.hour;
+        // Progressive slowdown: 40% at 8am, 20% at 11am, barely moving at 13pm
+        if (hour >= 13) {
+          speed *= 0.05;
+        } else if (hour >= 11) {
+          speed *= 0.2;
+        } else if (hour >= 8) {
+          speed *= 0.4;
+        }
+      }
+    }
+
+    return speed;
+  }
+
+  /**
    * Update needs based on time passing
    * Needs decay slowly over time (base rate: 1 point per game-hour)
+   * On Day 10, Mother's needs decay rapidly as she deteriorates
    */
   updateNeeds(gameMinutes: number): void {
     const decayPerMinute = 1 / 60; // 1 point per hour = 1/60 per minute
-    const decay = gameMinutes * decayPerMinute;
+    let decay = gameMinutes * decayPerMinute;
+
+    // Mother deteriorates rapidly on Day 10
+    if (this.id === 'mother') {
+      const timeStore = this.characterStore.rootStore.timeStore;
+      if (timeStore.day === 10) {
+        const hour = timeStore.hour;
+        // Accelerating decay: 3x at 8am, 6x at 11am, 10x at 13pm
+        if (hour >= 13) {
+          decay *= 10;
+        } else if (hour >= 11) {
+          decay *= 6;
+        } else if (hour >= 8) {
+          decay *= 3;
+        }
+      }
+    }
 
     this.needs.energy = Math.max(0, this.needs.energy - decay);
     this.needs.social = Math.max(0, this.needs.social - decay * 0.5); // Social decays slower
@@ -229,7 +338,7 @@ export class Character {
 
     // Move toward target
     // Speed scales with overskudd (low overskudd = slower)
-    const speed = (this.overskudd / 100) * this.baseWalkSpeed * gameMinutes;
+    const speed = (this.overskudd / 100) * this.currentWalkSpeed * gameMinutes;
 
     // Normalize direction and move
     const dirX = dx / distance;
@@ -307,13 +416,22 @@ export class Character {
     // Apply effects to needs (clamp 0-100)
     const effects = activity.effects;
     if (effects.energy) {
-      this.needs.energy = Math.max(0, Math.min(100, this.needs.energy + effects.energy));
+      this.needs.energy = Math.max(
+        0,
+        Math.min(100, this.needs.energy + effects.energy)
+      );
     }
     if (effects.social) {
-      this.needs.social = Math.max(0, Math.min(100, this.needs.social + effects.social));
+      this.needs.social = Math.max(
+        0,
+        Math.min(100, this.needs.social + effects.social)
+      );
     }
     if (effects.purpose) {
-      this.needs.purpose = Math.max(0, Math.min(100, this.needs.purpose + effects.purpose));
+      this.needs.purpose = Math.max(
+        0,
+        Math.min(100, this.needs.purpose + effects.purpose)
+      );
     }
 
     // Reset state
@@ -342,7 +460,9 @@ export class Character {
    * Returns: 'eager' | 'neutral' | 'reluctant' | 'refusing'
    * Note: Busy state no longer returns 'refusing' since activities can be queued
    */
-  getAttitudeToward(activity: Activity): 'eager' | 'neutral' | 'reluctant' | 'refusing' {
+  getAttitudeToward(
+    activity: Activity
+  ): 'eager' | 'neutral' | 'reluctant' | 'refusing' {
     // Low overskudd = reluctant or refusing
     if (this.overskudd < 20) return 'refusing';
     if (this.overskudd < 40) return 'reluctant';
@@ -413,7 +533,10 @@ export class Character {
   /**
    * Generate personality-flavored refusal/reluctance message
    */
-  private generateRefusalMessage(activity: Activity, _attitude: 'refusing' | 'reluctant'): void {
+  private generateRefusalMessage(
+    activity: Activity,
+    _attitude: 'refusing' | 'reluctant'
+  ): void {
     const isBlue = this.colors.primary.color === 'blue';
     const isWhite = this.colors.primary.color === 'white';
 
@@ -428,7 +551,7 @@ export class Character {
       this.refusalIcon = '😓';
       this.refusalMessage = isBlue
         ? "Must I? I'm not sure I have it in me..."
-        : "I suppose I can try...";
+        : 'I suppose I can try...';
     } else if (this.calculateColorMatch(activity) < 0.3) {
       // Personality mismatch
       this.refusalIcon = '😕';
@@ -486,9 +609,13 @@ export class CharacterStore {
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
-    makeAutoObservable(this, {
-      rootStore: false,
-    }, { autoBind: true });
+    makeAutoObservable(
+      this,
+      {
+        rootStore: false,
+      },
+      { autoBind: true }
+    );
 
     // Initialize characters from data
     for (const data of CHARACTERS) {
@@ -510,6 +637,16 @@ export class CharacterStore {
   updateAll(gameMinutes: number): void {
     for (const character of this.characters.values()) {
       character.update(gameMinutes);
+    }
+  }
+
+  /**
+   * Reset for new game - reinitialize all characters from data
+   */
+  reset(): void {
+    this.characters.clear();
+    for (const data of CHARACTERS) {
+      this.characters.set(data.id, new Character(data, this));
     }
   }
 }

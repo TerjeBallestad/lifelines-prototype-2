@@ -30,9 +30,11 @@ function getPrimaryColor(
   const entries = Object.entries(colorAffinities) as [MTGColor, number][];
   if (entries.length === 0) return null;
 
-  return entries.reduce((max, [color, value]) =>
-    value > (colorAffinities[max] ?? 0) ? color : max
-  , entries[0][0]);
+  return entries.reduce(
+    (max, [color, value]) =>
+      value > (colorAffinities[max] ?? 0) ? color : max,
+    entries[0][0]
+  );
 }
 
 /**
@@ -89,15 +91,18 @@ export function ThoughtBubble({
       transition={{ type: 'spring', stiffness: 300, damping: 25 }}
     >
       {/* Bubble container */}
-      <div className="bg-base-100 rounded-2xl shadow-lg px-3 py-2 min-w-20">
+      <div className="bg-base-100 min-w-20 rounded-2xl px-3 py-2 shadow-lg">
         {/* Activity options */}
         <div className="flex items-center justify-center gap-2">
           {topScores.map((score, index) => {
             const isWinner = index === 0 && showWinner;
-            const primaryColor = getPrimaryColor(score.activity.colorAffinities);
-            const bgColor = isWinner && primaryColor
-              ? MTG_COLOR_MAP[primaryColor]
-              : undefined;
+            const primaryColor = getPrimaryColor(
+              score.activity.colorAffinities
+            );
+            const bgColor =
+              isWinner && primaryColor
+                ? MTG_COLOR_MAP[primaryColor]
+                : undefined;
 
             return (
               <motion.div
@@ -123,17 +128,14 @@ export function ThoughtBubble({
                 }
               >
                 {/* Activity icon or first letter */}
-                <span
-                  className="text-lg"
-                  title={score.activity.name}
-                >
+                <span className="text-lg" title={score.activity.name}>
                   {score.activity.icon || score.activity.name.charAt(0)}
                 </span>
 
                 {/* Faded appearance for non-winners once winner is shown */}
                 {showWinner && index > 0 && (
                   <motion.div
-                    className="absolute inset-0 bg-base-100/60 rounded-lg"
+                    className="bg-base-100/60 absolute inset-0 rounded-lg"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.2 }}
@@ -148,7 +150,7 @@ export function ThoughtBubble({
       {/* Bubble tail pointing down */}
       <div className="flex justify-center">
         <div
-          className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent"
+          className="h-0 w-0 border-t-8 border-r-8 border-l-8 border-r-transparent border-l-transparent"
           style={{ borderTopColor: 'oklch(var(--b1))' }}
         />
       </div>

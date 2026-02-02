@@ -15,12 +15,12 @@ import type { Activity } from '../types/game';
 
 // Location constants for spatial layout
 const LOCATIONS = {
-  desk: { x: 100, y: 150 },      // Reading/thinking area
-  window: { x: 200, y: 100 },    // Window for gazing
-  kitchen: { x: 300, y: 200 },   // Cooking/cleaning
-  living: { x: 200, y: 180 },    // TV/phone area
-  rest: { x: 180, y: 220 },      // Resting spot
-  hallway: { x: 250, y: 150 },   // Check on Elling path
+  desk: { x: 100, y: 150 }, // Reading/thinking area
+  window: { x: 200, y: 100 }, // Window for gazing
+  kitchen: { x: 300, y: 200 }, // Cooking/cleaning
+  living: { x: 200, y: 180 }, // TV/phone area
+  rest: { x: 180, y: 220 }, // Resting spot
+  hallway: { x: 250, y: 150 }, // Check on Elling path
 } as const;
 
 /**

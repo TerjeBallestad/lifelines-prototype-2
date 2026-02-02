@@ -22,24 +22,27 @@ export const FloatingNumberPool = observer(function FloatingNumberPool() {
   const { characterStore } = useGameStore();
   const [numbers, setNumbers] = useState<FloatingNumberData[]>([]);
 
-  const spawnNumber = useCallback((
-    value: number,
-    x: number,
-    y: number,
-    resource: ResourceType,
-    critical: boolean = false
-  ) => {
-    const id = crypto.randomUUID();
-    setNumbers(prev => [...prev, { id, value, x, y, resource, critical }]);
-  }, []);
+  const spawnNumber = useCallback(
+    (
+      value: number,
+      x: number,
+      y: number,
+      resource: ResourceType,
+      critical: boolean = false
+    ) => {
+      const id = crypto.randomUUID();
+      setNumbers((prev) => [...prev, { id, value, x, y, resource, critical }]);
+    },
+    []
+  );
 
   const removeNumber = useCallback((id: string) => {
-    setNumbers(prev => prev.filter(n => n.id !== id));
+    setNumbers((prev) => prev.filter((n) => n.id !== id));
   }, []);
 
   // Watch all characters for activity completion
   useEffect(() => {
-    const disposers = characterStore.allCharacters.map(character =>
+    const disposers = characterStore.allCharacters.map((character) =>
       reaction(
         () => character.lastActivityResult,
         (result) => {
@@ -52,7 +55,7 @@ export const FloatingNumberPool = observer(function FloatingNumberPool() {
               spawnNumber(
                 output.amount,
                 character.position.x + 20,
-                character.position.y - 20 - (index * 25),
+                character.position.y - 20 - index * 25,
                 output.resource,
                 result.critical
               );
@@ -65,12 +68,12 @@ export const FloatingNumberPool = observer(function FloatingNumberPool() {
       )
     );
 
-    return () => disposers.forEach(d => d());
+    return () => disposers.forEach((d) => d());
   }, [characterStore.allCharacters, spawnNumber]);
 
   return (
     <>
-      {numbers.map(num => (
+      {numbers.map((num) => (
         <FloatingNumber
           key={num.id}
           value={num.value}

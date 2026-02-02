@@ -41,5 +41,5 @@ export const QUESTS: Quest[] = [
 ];
 
 export function getQuestById(id: string): Quest | undefined {
-  return QUESTS.find(q => q.id === id);
+  return QUESTS.find((q) => q.id === id);
 }

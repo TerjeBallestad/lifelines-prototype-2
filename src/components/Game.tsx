@@ -1,5 +1,7 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
+import { motion, AnimatePresence } from 'motion/react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useGameStore } from '../stores/RootStore';
 import { useGameLoop } from '../hooks/useGameLoop';
 import { TimeDisplay } from './TimeDisplay';
@@ -12,6 +14,8 @@ import { QuestCelebration } from './QuestCelebration';
 import { QuestIntroduction } from './QuestIntroduction';
 import { QuestPanel } from './QuestPanel';
 import { ActivityModal } from './ActivityModal';
+import { CrisisModal } from './CrisisModal';
+import { CrisisEpilogue } from './CrisisEpilogue';
 
 /**
  * Activity location markers for visual hints in the game world
@@ -36,6 +40,7 @@ const LOCATION_MARKERS = [
 export const Game = observer(function Game() {
   const store = useGameStore();
   const { timeStore, characterStore, interactionStore } = store;
+  const [debugOpen, setDebugOpen] = useState(false);
 
   // Memoize tick handler to prevent useGameLoop effect from re-running
   const handleTick = useCallback(
@@ -58,6 +63,20 @@ export const Game = observer(function Game() {
     }
   }, [store.questStore.isQuestComplete, store]);
 
+  // Crisis detection - warning phase
+  useEffect(() => {
+    if (store.crisisStore.shouldStartWarning) {
+      store.crisisStore.startWarning();
+    }
+  }, [store.crisisStore.shouldStartWarning, store]);
+
+  // Crisis detection - active phase (Mother collapses)
+  useEffect(() => {
+    if (store.crisisStore.shouldTrigger) {
+      store.crisisStore.triggerCrisis();
+    }
+  }, [store.crisisStore.shouldTrigger, store]);
+
   return (
     <div className="bg-base-100 min-h-screen p-4">
       <div className="mx-auto max-w-4xl">
@@ -71,7 +90,7 @@ export const Game = observer(function Game() {
         </header>
 
         {/* Main game area with sidebar */}
-        <div className="flex gap-4 mb-6">
+        <div className="mb-6 flex gap-4">
           {/* Left sidebar - Character panels */}
           <aside className="w-56 flex-shrink-0 space-y-3">
             {characterStore.allCharacters.map((character) => (
@@ -112,7 +131,9 @@ export const Game = observer(function Game() {
                     isSelected={
                       interactionStore.selectedCharacterId === character.id
                     }
-                    onClick={() => interactionStore.openActivityModal(character.id)}
+                    onClick={() =>
+                      interactionStore.openActivityModal(character.id)
+                    }
                   />
                 ))}
 
@@ -123,34 +144,61 @@ export const Game = observer(function Game() {
           </main>
         </div>
 
-        {/* Debug panel for testing */}
+        {/* Debug panel for testing - collapsible by default */}
         <div className="card bg-base-200 mt-6 shadow-xl">
-          <div className="card-body">
-            <h3 className="text-base-content/70 mb-4 text-sm font-medium">
-              Debug Controls
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {characterStore.allCharacters.map((character) => (
-                <div key={character.id} className="flex items-center gap-2">
-                  <span className="text-sm font-medium">{character.name}:</span>
-                  <button
-                    className="btn btn-xs btn-warning"
-                    onClick={() => character.drainNeeds()}
-                  >
-                    Drain Needs
-                  </button>
-                  <button
-                    className="btn btn-xs btn-success"
-                    onClick={() => character.restoreNeeds()}
-                  >
-                    Restore
-                  </button>
-                </div>
-              ))}
-            </div>
-            <p className="text-base-content/50 mt-2 text-xs">
-              Use "Drain Needs" to test low overskudd comfort behaviors
-            </p>
+          <div className="card-body py-3">
+            <button
+              className="flex w-full cursor-pointer items-center justify-between"
+              onClick={() => setDebugOpen(!debugOpen)}
+            >
+              <h3 className="text-base-content/70 text-sm font-medium">
+                Debug Controls
+              </h3>
+              {debugOpen ? (
+                <ChevronUp className="text-base-content/50 h-4 w-4" />
+              ) : (
+                <ChevronDown className="text-base-content/50 h-4 w-4" />
+              )}
+            </button>
+            <AnimatePresence>
+              {debugOpen && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="overflow-hidden"
+                >
+                  <div className="flex flex-wrap gap-2 pt-4">
+                    {characterStore.allCharacters.map((character) => (
+                      <div
+                        key={character.id}
+                        className="flex items-center gap-2"
+                      >
+                        <span className="text-sm font-medium">
+                          {character.name}:
+                        </span>
+                        <button
+                          className="btn btn-xs btn-warning"
+                          onClick={() => character.drainNeeds()}
+                        >
+                          Drain Needs
+                        </button>
+                        <button
+                          className="btn btn-xs btn-success"
+                          onClick={() => character.restoreNeeds()}
+                        >
+                          Restore
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-base-content/50 mt-2 text-xs">
+                    Use "Drain Needs" to test low overskudd comfort behaviors
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </div>
@@ -169,6 +217,12 @@ export const Game = observer(function Game() {
 
       {/* Quest panel (right side) */}
       <QuestPanel />
+
+      {/* Crisis modal */}
+      <CrisisModal />
+
+      {/* Crisis epilogue (ending screen) */}
+      <CrisisEpilogue />
     </div>
   );
 });

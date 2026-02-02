@@ -5,6 +5,7 @@ import { InteractionStore } from './InteractionStore';
 import { SkillStore } from './SkillStore';
 import { ResourceStore } from './ResourceStore';
 import { QuestStore } from './QuestStore';
+import { CrisisStore } from './CrisisStore';
 
 /**
  * RootStore is the central store that creates and connects all other stores
@@ -21,6 +22,7 @@ export class RootStore {
   skillStore: SkillStore;
   resourceStore: ResourceStore;
   questStore: QuestStore;
+  crisisStore: CrisisStore;
 
   constructor() {
     this.timeStore = new TimeStore(this);
@@ -29,6 +31,7 @@ export class RootStore {
     this.skillStore = new SkillStore(this);
     this.resourceStore = new ResourceStore(this);
     this.questStore = new QuestStore(this);
+    this.crisisStore = new CrisisStore(this);
 
     // Initialize skills for all characters based on their MTG colors
     for (const character of this.characterStore.allCharacters) {
@@ -50,6 +53,33 @@ export class RootStore {
       const gameMinutes = realSeconds * this.timeStore.gameSpeed;
       this.characterStore.updateAll(gameMinutes);
     }
+  }
+
+  /**
+   * Reset entire game to initial state
+   * Used for "Try Again" after crisis ending
+   */
+  resetGame(): void {
+    // Reset time to day 1
+    this.timeStore.reset();
+
+    // Reset crisis state
+    this.crisisStore.reset();
+
+    // Reset quest progress
+    this.questStore.reset();
+
+    // Reset resources
+    this.resourceStore.reset();
+
+    // Reset skills (reinitialize from character colors)
+    this.skillStore.reset();
+    for (const character of this.characterStore.allCharacters) {
+      this.skillStore.initializeCharacterSkills(character.id, character.colors);
+    }
+
+    // Reset characters (needs and state)
+    this.characterStore.reset();
   }
 }
 
