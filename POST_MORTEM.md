@@ -142,27 +142,22 @@
 
 ---
 
----
-
-> **📌 BOOKMARK: Evaluation paused here (2026-02-02)**
-> Resume with Feature 8: Skill Progression System
-
----
-
 ### 8. Skill Progression System
 **Description:** 6 skills with XP thresholds [0, 100, 300, 600, 1000]. Higher skills improve success chance and output.
 
 **What Worked:**
-- Exponential XP curve feels natural
-- Failure still grants 50% XP (learning from failure)
-- Output modifiers create visible progression
-- Level-up celebration pauses game appropriately
+- XP thresholds and exponential curve feel natural
+- Failure granting 50% XP removes frustration
+- Level-up celebration creates a real moment (game pauses)
 
 **What Didn't Work:**
-- No skill specialization/branching
-- Critical hits feel underutilized
+- Passive auto-leveling felt like "so what?" - no player investment
+- No decision-making in progression
+- Unclear which skills matter for the crisis
 
-**Evaluation:** `[ PENDING ]`
+**Evaluation:** `🔄 REDESIGN`
+
+**Reasoning:** Shift from passive auto-leveling to active skill point spending. Activities generate fungible XP into a shared pool; player chooses which skills to level. Creates meaningful decisions ("phone or cooking?") and makes level-ups feel earned. Fun over simulationism - don't worry about narrative logic of how XP transfers between domains.
 
 ---
 
@@ -170,15 +165,18 @@
 **Description:** Success chance: 50% + (level×10%) - ((difficulty-1)×15%). Failed activities produce 50% output.
 
 **What Worked:**
-- Clear formula creates predictable progression
-- Failure isn't devastating (partial rewards)
-- Difficulty tiers matter
+- Formula is clean and learnable (50% + level bonus - difficulty penalty)
+- Partial rewards on failure (50% output) removes frustration
+- Difficulty tiers create meaningful risk/reward choices
 
 **What Didn't Work:**
-- No visual distinction between failure and success (just lower numbers)
-- Critical hits don't feel special
+- No visual distinction between success and failure
+- Couldn't tell when Elling succeeded vs failed
+- Critical hits invisible/unfelt
 
-**Evaluation:** `[ PENDING ]`
+**Evaluation:** `⚠️ SIMPLIFY`
+
+**Reasoning:** The math is fine - keep the formula. The problem is feedback. Redesign floating numbers to communicate character state: slow/wobbly when struggling, burst/rapid when in flow. Resources land on floor for player pickup. Flow state becomes visually obvious through resource accumulation. Success/failure becomes "how smoothly" rather than binary pass/fail.
 
 ---
 
@@ -186,15 +184,18 @@
 **Description:** Click character to open modal, force any activity. Character responds with personality-flavored refusal/acceptance.
 
 **What Worked:**
-- Refusal messages have distinct character voice
-- Color-match affects willingness (high affinity = eager)
-- 3-second auto-clear prevents UI clutter
+- Personality-flavored refusal messages establish character voice
+- Color-match affecting willingness creates learnable patterns
+- 3-second auto-clear keeps UI clean
 
 **What Didn't Work:**
-- No consequence for forcing unwilling characters
-- Can always force, even when refusing
+- Forcing felt flat - no comedy or drama in the resistance/compliance cycle
+- No visible struggle or reluctant compliance animations
+- Refusals have no teeth - player quickly learns to ignore them
 
-**Evaluation:** `[ PENDING ]`
+**Evaluation:** `🔄 REDESIGN`
+
+**Reasoning:** The Elling movie dynamic (Frank forcing Elling to practice phone calls) is the creative vision - caretaker pushing reluctant character outside comfort zone. The tension between "I don't want to" and "you need to anyway" is the core experience. Current implementation lacks texture: no comedic reactions, no visible struggle, no triumphant "that wasn't so bad" moments. Redesign to make forcing emotionally resonant and funny - reluctant compliance animations, grumbling thought bubbles, occasional real refusals at very low overskudd. Nice-to-have feature, not high priority; requires design work to manufacture comedic moments.
 
 ---
 
@@ -202,15 +203,18 @@
 **Description:** Animated numbers rise from activity location showing resource gains. Color-coded by type, uses object pooling.
 
 **What Worked:**
-- Immediate visual feedback for every activity
-- Motion values prevent React re-renders
-- Staggered appearance for multiple resources
+- Immediate visual feedback feels satisfying
+- Color-coding by resource type creates learnable visual language
+- Object pooling and motion values are solid technical foundation
+- Staggered appearance for multiple resources avoids clutter
 
 **What Didn't Work:**
-- No particle effects or screen shake
-- Numbers disappear quickly, easy to miss
+- Numbers rise and fade quickly - easy to miss if not watching
+- Basic implementation - lots of room for more juice
 
-**Evaluation:** `[ PENDING ]`
+**Evaluation:** `✅ INCLUDE`
+
+**Reasoning:** Core feedback loop is working and feels satisfying. Solid technical foundation ready for enhancement. Future ideas: clickable resource drops for incremental game engagement, particle effects, screen shake on crits. Lots of juice potential built on this base.
 
 ---
 
@@ -218,16 +222,18 @@
 **Description:** 3-quest chain: Morning Routine → Creative Output → Stay Connected. Teaches mechanics implicitly.
 
 **What Worked:**
-- Quests guide early gameplay naturally
-- Computed progress updates reactively
-- Celebration flow feels rewarding
+- Quest chain creates natural tutorial without explicit instructions
+- Computed progress updates reactively (MobX doing its job)
+- Provides welcome direction and "todo list" satisfaction
 
 **What Didn't Work:**
-- Only 3 quests; no late-game objectives
-- No optional/side quests
-- Quest completed = no more direction
+- Only 3 quests - no late-game direction
+- No rewards for completion - quests feel like checkboxes
+- Gap after completion feels aimless (crisis is a surprise, so no implicit goal to work toward)
 
-**Evaluation:** `[ PENDING ]`
+**Evaluation:** `🔄 REDESIGN`
+
+**Reasoning:** Quest system should be the "progression spine" of the game - continuous direction throughout play, not just tutorial. Add meaningful rewards (talent/facility unlocks) for completing quests. Creates organic skill-building and meaningful player choices without knowing why they'll need certain skills. Current 3 quests are proof of concept for a larger system with rewards that drive the whole session.
 
 ---
 
@@ -240,10 +246,12 @@
 - Auto-dismiss popup (3s) doesn't block play
 
 **What Didn't Work:**
+- Fanfare feels excessive because player wasn't aware they had a quest (weak quest introduction)
 - Same celebration for all quests regardless of difficulty
-- No fanfare escalation
 
-**Evaluation:** `[ PENDING ]`
+**Evaluation:** `✅ INCLUDE`
+
+**Reasoning:** Celebration concept is right - quest completion should feel like an event. Current "too much fanfare" feeling is caused by weak quest introduction, not excessive celebration. When player consciously knows they're working toward a quest, the celebration becomes earned payoff. Becomes essential when reward/upgrade selection is added to quest system.
 
 ---
 
@@ -251,34 +259,36 @@
 **Description:** Mother collapses on Day 10. Player directs Elling through skill-checked crisis actions. Two endings based on phone skill.
 
 **What Worked:**
-- Consequence emerges from player's training choices
 - Warning signs build tension (slower movement, worry bubbles)
-- Real skill checks with failure possibility
-- Hope bonus system allows strategic preparation
+- Real skill checks with failure possibility - stakes feel real
+- Hope bonus system rewards preparation
+- Designed as "boss fight you're meant to lose" - failure is the intended first-playthrough experience
 
 **What Didn't Work:**
-- Single crisis point (no earlier tests)
-- Success requires specific skill (phone) - feels prescribed
-- Limited replay value once solution known
+- Single crisis point (no earlier tests to foreshadow)
+- Warning signs may be too subtle for players to notice
 
-**Evaluation:** `[ PENDING ]`
+**Evaluation:** `✅ INCLUDE`
+
+**Reasoning:** Crisis is working exactly as designed. Player is meant to fail - Elling isn't ready for independence, and that's the narrative truth. Failure creates the hook: "what happens to Elling?" leads to buying the full game to see the institution/redemption arc. The "unfairness" of not knowing to level phone is intentional - it mirrors Elling's unpreparedness. Demo ends at the right emotional beat.
 
 ---
 
-### 15. Shadow State
+### 15. Shadow State (Crisis Penalty)
 **Description:** Elling enters shadow state when overskudd <30 during crisis. Manifests as -20% penalty to crisis actions.
 
 **What Worked:**
-- Clear mode switch (not gradual degradation)
-- Creates observable behavior change
-- Ties personal state to crisis outcome
+- Concept of tying personal state to crisis outcome is sound
 
 **What Didn't Work:**
-- Only visible during crisis, not normal gameplay
-- No visual indicator beyond warning signs
-- -20% penalty feels arbitrary
+- Completely invisible to player - no visual indicator
+- Only affects crisis, which is designed to fail anyway
+- Hidden complexity that doesn't change outcomes
+- Confused with "comfort behaviors" (Feature 6) which serve similar purpose more visibly
 
-**Evaluation:** `[ PENDING ]`
+**Evaluation:** `❌ CUT`
+
+**Reasoning:** This is invisible complexity. The -20% penalty during crisis has no visual feedback and doesn't meaningfully change outcomes since the crisis is designed to be failed. Comfort behaviors (Feature 6) already handle the "low overskudd = different behavior" concept more visibly during normal gameplay. If color-flavored shadow states are wanted, they should be a visible system throughout gameplay, not a hidden crisis modifier.
 
 ---
 
@@ -286,16 +296,18 @@
 **Description:** Mother Saved (phone skill ≥2 + success) vs Mother Lost. Epilogue text differs based on outcome.
 
 **What Worked:**
-- Endings reflect actual mechanical decisions
+- Endings reflect actual mechanical decisions (phone skill level)
+- "Mother Lost" is the intended demo ending - clean emotional hook
+- "Mother Saved" works as secret ending for replayers
 - Distinct emotional tone per ending
-- Clear "Try Again" option for replay
 
 **What Didn't Work:**
-- Binary outcome (no middle ground)
 - Epilogue is text-only, no visual variation
-- Only 2 endings feels limited
+- Secret ending might be too hidden (no hints that it's possible)
 
-**Evaluation:** `[ PENDING ]`
+**Evaluation:** `✅ INCLUDE`
+
+**Reasoning:** Binary ending structure works for the demo. "Mother Lost" provides the intended emotional hook leading to the full game. "Mother Saved" as a secret ending rewards players who replay or figure out the phone skill importance - adds replay value without undermining the demo's purpose. Very unlikely to discover on first playthrough, which is the desired behavior.
 
 ---
 
@@ -305,13 +317,16 @@
 **What Worked:**
 - Essential for testing/development
 - Collapsed by default (non-intrusive)
-- Time manipulation useful for players too
+- Time speed adjustment is useful for players (fast-forward slow moments)
 
 **What Didn't Work:**
-- Breaks immersion if discovered
-- No way to disable for "release" builds
+- Debug cheats (overskudd manipulation) break immersion if discovered
+- No separation between player features and dev tools
+- No way to disable debug stuff for release builds
 
-**Evaluation:** `[ PENDING ]`
+**Evaluation:** `⚠️ SIMPLIFY`
+
+**Reasoning:** Split into two distinct features: (1) Time speed controls as a proper player-facing UI element - many sim games have this and it improves QoL. (2) Debug/cheat tools hidden behind dev flag or removed entirely for release builds. Don't bundle legitimate player features with dev cheats.
 
 ---
 
@@ -319,15 +334,19 @@
 **Description:** Click character to open detailed stats panel showing color profile, overskudd meter, current activity.
 
 **What Worked:**
-- Clean DaisyUI styling
-- Spring animations on expand/collapse
-- Always-visible sidebar for quick reference
+- Clean DaisyUI styling looks polished
+- Spring animations on expand/collapse feel good
+- Quick access to character info
 
 **What Didn't Work:**
-- All stats visible from start (no discovery)
-- No history/log of recent activities
+- Most info is debug data dressed as UI - not designed for player needs
+- All stats visible from start - no progressive revelation
+- No activity history or behavioral context
+- Risk of cognitive overload showing everything at once
 
-**Evaluation:** `[ PENDING ]`
+**Evaluation:** `🔄 REDESIGN`
+
+**Reasoning:** Current panel is prototype debugging info, not a designed player experience. Needs redesign with clear purpose: what does the player actually need to know, and when? Balance "gamey" information display with cognitive load management. Consider: progressive stat reveal, activity history, mood indicators, hiding debug-only data. Show the right information at the right time rather than everything always.
 
 ---
 
@@ -338,7 +357,9 @@
 
 **Status:** Type defined (TimeOfDay), never integrated into Utility AI
 
-**Evaluation:** `[ PENDING ]`
+**Evaluation:** `📋 DEFER`
+
+**Reasoning:** Realism polish, not core to the game's thesis. MTG colors driving behavior is the main differentiator - time-of-day is secondary texture. Could add believable daily rhythms in the full game for longer play sessions, but not needed for the demo.
 
 ---
 
@@ -347,7 +368,9 @@
 
 **Status:** Not implemented. Characters operate independently.
 
-**Evaluation:** `[ PENDING ]`
+**Evaluation:** `📋 DEFER`
+
+**Reasoning:** The isolation is narratively appropriate for the demo. Mother and Elling existing in the same space but not truly connecting is part of why he's underdeveloped - they're both isolated people. Inter-character dynamics belong in the institution arc (full game) where Elling is forced to learn to relate to others. Save this feature for when it's thematically relevant.
 
 ---
 
@@ -356,7 +379,9 @@
 
 **Status:** Not implemented for testing convenience. All stats visible from start.
 
-**Evaluation:** `[ PENDING ]`
+**Evaluation:** `❌ CUT` (as separate feature)
+
+**Reasoning:** Not a distinct feature - fold into existing redesigns. Character Panel REDESIGN covers what stats to show and when. Quest/Upgrade System REDESIGN covers how to unlock them (e.g., hire a psychiatrist to see purpose stat). Discoverable stats is the *intersection* of these systems, not its own thing. Upgrades unlocking understanding (not just stat boosts) is a thematic win.
 
 ---
 
@@ -365,16 +390,20 @@
 
 **Status:** Entirely deferred. Visual feedback only.
 
-**Evaluation:** `[ PENDING ]`
+**Evaluation:** `✅ INCLUDE`
+
+**Reasoning:** High impact-to-effort ratio for game feel. Key moments need audio: level-up fanfare, quest complete chime, crisis urgency. Sound during the crisis is especially important - transition from cozy ambient to tense audio would sell the emotional moment. Needed for demo to feel polished.
 
 ---
 
 ### E. Character Animations
 **Description:** Walk animations, facial expressions, pose changes based on emotional state.
 
-**Status:** Static sprites only. Characters slide between positions.
+**Status:** Static sprites only. Characters slide between positions. Some animations already created.
 
-**Evaluation:** `[ PENDING ]`
+**Evaluation:** `✅ INCLUDE`
+
+**Reasoning:** Animations already exist and are ready to integrate - the effort is integration, not creation. Walk animations would replace the "sliding" prototype jank. Facial expressions and poses could communicate emotional state visually. High impact for making characters feel alive. Include for demo.
 
 ---
 
@@ -383,7 +412,9 @@
 
 **Status:** Basic floating numbers only. Advanced effects deferred.
 
-**Evaluation:** `[ PENDING ]`
+**Evaluation:** `✅ INCLUDE`
+
+**Reasoning:** Design principle: "Every interaction should have a reaction." The game should feel responsive and alive. Key juice moments: crisis tension effects (red tint, urgency pulse), level-up celebration (particles, flash), activity completion feedback, critical hit impact. Combined with Sound Effects (Feature D), audio + visual juice together make moments land. Don't hold back on game feel.
 
 ---
 
@@ -392,7 +423,9 @@
 
 **Status:** Intentionally omitted. 30-45 minute single-session design.
 
-**Evaluation:** `[ PENDING ]`
+**Evaluation:** `✅ INCLUDE` (dev-only)
+
+**Reasoning:** Demo is single-session (30-45 min) so player-facing save/load isn't needed. However, a simple dev-only save system (localStorage dump) would speed up testing - jump to pre-crisis, test different skill levels, verify edge cases. Quick to build, high testing utility. No polish burden of player-facing UI. Full save/load with proper UI can wait for full game.
 
 ---
 
@@ -401,7 +434,9 @@
 
 **Status:** Explicitly declared out-of-scope. Actions over dialogue philosophy.
 
-**Evaluation:** `[ PENDING ]`
+**Evaluation:** `🔄 REDESIGN`
+
+**Reasoning:** Full dialogue system is still out of scope, but reframe as "story prompts with reactions." Player can trigger story beats ("ask about dad") and get character reactions - visual/behavioral responses, not dialogue trees. Mom gets sad, changes behavior, shows a thought bubble. Reveals backstory through reactions, not exposition. Minimal writing, maximum flavor. Maintains "actions over dialogue" philosophy while adding narrative spice.
 
 ---
 
@@ -416,42 +451,57 @@
 | 5 | Character State Machine | Yes | `✅ INCLUDE` |
 | 6 | Comfort Behaviors | Yes | `⚠️ SIMPLIFY` |
 | 7 | Resource Production System | Yes | `✅ INCLUDE` |
-| 8 | Skill Progression System | Yes | `[ PENDING ]` |
-| 9 | Activity Success/Failure System | Yes | `[ PENDING ]` |
-| 10 | Player Intervention | Yes | `[ PENDING ]` |
-| 11 | Floating Number Feedback | Yes | `[ PENDING ]` |
-| 12 | Quest System | Yes | `[ PENDING ]` |
-| 13 | Quest Celebration UI | Yes | `[ PENDING ]` |
-| 14 | Crisis Sequence | Yes | `[ PENDING ]` |
-| 15 | Shadow State | Yes | `[ PENDING ]` |
-| 16 | Two-Ending System | Yes | `[ PENDING ]` |
-| 17 | Debug Controls | Yes | `[ PENDING ]` |
-| 18 | Character Panel UI | Yes | `[ PENDING ]` |
-| A | Time-of-Day Preferences | No | `[ PENDING ]` |
-| B | Inter-Character Dynamics | No | `[ PENDING ]` |
-| C | Discoverable Stats | No | `[ PENDING ]` |
-| D | Sound Effects | No | `[ PENDING ]` |
-| E | Character Animations | No | `[ PENDING ]` |
-| F | Screen Effects (Juice) | No | `[ PENDING ]` |
-| G | Save/Load System | No | `[ PENDING ]` |
-| H | Conversation System | No | `[ PENDING ]` |
+| 8 | Skill Progression System | Yes | `🔄 REDESIGN` |
+| 9 | Activity Success/Failure System | Yes | `⚠️ SIMPLIFY` |
+| 10 | Player Intervention | Yes | `🔄 REDESIGN` |
+| 11 | Floating Number Feedback | Yes | `✅ INCLUDE` |
+| 12 | Quest System | Yes | `🔄 REDESIGN` |
+| 13 | Quest Celebration UI | Yes | `✅ INCLUDE` |
+| 14 | Crisis Sequence | Yes | `✅ INCLUDE` |
+| 15 | Shadow State (Crisis Penalty) | Yes | `❌ CUT` |
+| 16 | Two-Ending System | Yes | `✅ INCLUDE` |
+| 17 | Debug Controls | Yes | `⚠️ SIMPLIFY` |
+| 18 | Character Panel UI | Yes | `🔄 REDESIGN` |
+| A | Time-of-Day Preferences | No | `📋 DEFER` |
+| B | Inter-Character Dynamics | No | `📋 DEFER` |
+| C | Discoverable Stats | No | `❌ CUT` |
+| D | Sound Effects | No | `✅ INCLUDE` |
+| E | Character Animations | No | `✅ INCLUDE` |
+| F | Screen Effects (Juice) | No | `✅ INCLUDE` |
+| G | Save/Load System | No | `✅ INCLUDE` |
+| H | Conversation System | No | `🔄 REDESIGN` |
 
 ## Key Decisions Needed
 
-*(To be filled during evaluation)*
+1. **Skill System Pivot:** Shift from passive auto-leveling to active skill point spending. Activities generate XP into shared pool; player chooses which skills to level. Creates meaningful decisions.
+
+2. **Quest Reward System:** Quests should unlock talents/facility upgrades, not just be checkboxes. Makes progression purposeful and drives the whole session.
+
+3. **Utility AI Hierarchy:** Replace weighted average with tiered priorities: basic needs first → color preferences → activity difficulty. Progressive refinement up the hierarchy.
+
+4. **Demo Narrative:** Crisis is designed to fail. "Mother Lost" is the intended ending that hooks players into buying the full game (institution arc). Secret "Mother Saved" ending rewards replayers.
+
+5. **Forcing Mechanic:** Keep forcing but make it emotionally resonant. Frank/Elling dynamic - humor in reluctant compliance, visible struggle, occasional triumph.
+
+6. **Information Architecture:** Upgrades unlock understanding (hire psychiatrist → see purpose stat). Tie discoverable stats to the talent/upgrade system.
+
+7. **Juice Philosophy:** "Every interaction should have a reaction." Don't hold back on audio/visual feedback.
+
+8. **Character Isolation:** Isolation between Mother and Elling is narratively intentional - explains Elling's underdevelopment. Inter-character dynamics belong in the institution arc.
 
 ## Summary Counts
 
 | Evaluation | Count |
 |------------|-------|
-| ✅ INCLUDE | 5 |
-| ⚠️ SIMPLIFY | 2 |
-| 🔄 REDESIGN | 1 |
-| ❌ CUT | 0 |
-| 📋 DEFER | 0 |
-| **Evaluated** | 7 |
-| **Remaining** | 19 |
+| ✅ INCLUDE | 13 |
+| ⚠️ SIMPLIFY | 4 |
+| 🔄 REDESIGN | 6 |
+| ❌ CUT | 2 |
+| 📋 DEFER | 2 |
+| **Evaluated** | 26 |
+| **Remaining** | 0 |
 
 ---
 
 *Post-mortem created: 2026-02-02*
+*Evaluation completed: 2026-02-03*
